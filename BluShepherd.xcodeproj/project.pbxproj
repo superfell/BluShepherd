@@ -17,6 +17,8 @@
 		F4D56FAF1DEA6A4500E81BA4 /* Player.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D56FAD1DEA6A4500E81BA4 /* Player.xib */; };
 		F4D56FB31DEAB62E00E81BA4 /* NowPlayingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D56FB11DEAB62E00E81BA4 /* NowPlayingView.m */; };
 		F4D56FB41DEAB62E00E81BA4 /* NowPlayingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D56FB21DEAB62E00E81BA4 /* NowPlayingView.xib */; };
+		F4D56FB91DEB71D800E81BA4 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D56FB51DEB71D800E81BA4 /* pause.png */; };
+		F4D56FBA1DEB71D800E81BA4 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D56FB71DEB71D800E81BA4 /* play.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		F4D56FB01DEAB62E00E81BA4 /* NowPlayingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NowPlayingView.h; sourceTree = "<group>"; };
 		F4D56FB11DEAB62E00E81BA4 /* NowPlayingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowPlayingView.m; sourceTree = "<group>"; };
 		F4D56FB21DEAB62E00E81BA4 /* NowPlayingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NowPlayingView.xib; sourceTree = "<group>"; };
+		F4D56FB61DEB71D800E81BA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/pause.png; sourceTree = "<group>"; };
+		F4D56FB81DEB71D800E81BA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/play.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 		F4D56F931DEA47DF00E81BA4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F4D56FB51DEB71D800E81BA4 /* pause.png */,
+				F4D56FB71DEB71D800E81BA4 /* play.png */,
 				F4D56FA71DEA5FE900E81BA4 /* blushepherd.pch */,
 				F4D56F941DEA47DF00E81BA4 /* main.m */,
 			);
@@ -180,8 +186,10 @@
 			files = (
 				F4D56FAF1DEA6A4500E81BA4 /* Player.xib in Resources */,
 				F4D56F971DEA47DF00E81BA4 /* Assets.xcassets in Resources */,
+				F4D56FB91DEB71D800E81BA4 /* pause.png in Resources */,
 				F4D56FB41DEAB62E00E81BA4 /* NowPlayingView.xib in Resources */,
 				F4D56F9A1DEA47DF00E81BA4 /* MainMenu.xib in Resources */,
+				F4D56FBA1DEB71D800E81BA4 /* play.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +273,22 @@
 				F4D56FAE1DEA6A4500E81BA4 /* Base */,
 			);
 			name = Player.xib;
+			sourceTree = "<group>";
+		};
+		F4D56FB51DEB71D800E81BA4 /* pause.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4D56FB61DEB71D800E81BA4 /* Base */,
+			);
+			name = pause.png;
+			sourceTree = "<group>";
+		};
+		F4D56FB71DEB71D800E81BA4 /* play.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4D56FB81DEB71D800E81BA4 /* Base */,
+			);
+			name = play.png;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

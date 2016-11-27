@@ -19,10 +19,18 @@ extern NSString *notificationPlayerSelection;
 @property (retain) NSArray *toUpdate;
 @property (retain) NSMutableArray *onResolved;
 
+@property (retain) NSDictionary *lastStatus;
+@property (retain) NSDictionary *lastSyncStatus;
+
 -(NSURL *)urlWithPath:(NSString *)path;
 
 -(void)fetchSyncStatus;
 -(void)fetchStatus:(void(^)(NSDictionary *s))block;
+
+-(void)play:(void(^)(NSString *state))block;
+-(void)pause:(void(^)(NSString *state))block;
+
+@property (assign) BOOL playing;
 
 @end
 

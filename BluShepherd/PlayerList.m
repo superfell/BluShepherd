@@ -97,9 +97,38 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
     NSURLSessionTask *t = [[NSURLSession sharedSession] dataTaskWithURL:url
                                                       completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                                           NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
+                                                          BOOL playing = [[d objectForKey:@"state"] isEqual:@"play"];
+                                                          dispatch_async(dispatch_get_main_queue(), ^() {
+                                                              self.lastStatus = d;
+                                                              self.playing = playing;
+                                                          });
                                                           block(d);
                                                       }];
     [t resume];
+}
+
+-(void)playPause:(NSString *)newState block:(void(^)(NSString *state))block {
+    NSURL *url = [self urlWithPath:newState];
+    NSURLSessionTask *t = [[NSURLSession sharedSession] dataTaskWithURL:url
+                                                      completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                          NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
+                                                          NSLog(@"%@", d);
+                                                          NSString *state =[d objectForKey:@"__text"];
+                                                          BOOL playing = [state isEqualToString:@"play"];
+                                                          dispatch_async(dispatch_get_main_queue(), ^() {
+                                                              self.playing = playing;
+                                                          });
+                                                          block(state);
+                                                      }];
+    [t resume];
+}
+
+-(void)play:(void(^)(NSString *state))block {
+    [self playPause:@"Play" block:block];
+}
+
+-(void)pause:(void(^)(NSString *state))block {
+    [self playPause:@"Pause" block:block];
 }
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {

@@ -682,19 +682,63 @@
                 <rect key="frame" x="0.0" y="0.0" width="864" height="697"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="Ayc-Ou-78e">
+                    <splitView misplaced="YES" arrangesAllSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ayc-Ou-78e">
                         <rect key="frame" x="0.0" y="-5" width="864" height="702"/>
                         <subviews>
-                            <customView fixedFrame="YES" id="O6H-wM-dRR">
+                            <customView misplaced="YES" id="O6H-wM-dRR">
                                 <rect key="frame" x="0.0" y="0.0" width="864" height="96"/>
                                 <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zN6-WE-VaY">
+                                        <rect key="frame" x="20" y="24" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="g4x-u7-QOT"/>
+                                            <constraint firstAttribute="height" constant="48" id="ziQ-CC-Jxu"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="VVb-r2-YXl">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="play:" target="-1" id="fH8-sU-ZBo"/>
+                                            <binding destination="Voe-Tx-rLC" name="hidden" keyPath="selectedPlayer.playing" id="QfG-qw-ULb"/>
+                                        </connections>
+                                    </button>
+                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMe-OP-Nxw">
+                                        <rect key="frame" x="78" y="24" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="fUU-x8-Th2"/>
+                                            <constraint firstAttribute="height" constant="48" id="gZI-el-k0Z"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="pause" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="pqF-b7-3M4">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="pause:" target="-1" id="MWS-Y5-zKA"/>
+                                            <binding destination="Voe-Tx-rLC" name="hidden" keyPath="selectedPlayer.playing" id="xbn-cQ-6kp">
+                                                <dictionary key="options">
+                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                </dictionary>
+                                            </binding>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="nMe-OP-Nxw" firstAttribute="top" secondItem="zN6-WE-VaY" secondAttribute="top" id="QZL-Ge-ndk"/>
+                                    <constraint firstItem="zN6-WE-VaY" firstAttribute="centerY" secondItem="O6H-wM-dRR" secondAttribute="centerY" id="ZXb-C4-8xw"/>
+                                    <constraint firstItem="nMe-OP-Nxw" firstAttribute="width" secondItem="zN6-WE-VaY" secondAttribute="width" id="ed2-hB-8aq"/>
+                                    <constraint firstItem="nMe-OP-Nxw" firstAttribute="height" secondItem="zN6-WE-VaY" secondAttribute="height" id="goY-CE-0DG"/>
+                                    <constraint firstItem="nMe-OP-Nxw" firstAttribute="leading" secondItem="zN6-WE-VaY" secondAttribute="leading" id="oeR-3R-iWq"/>
+                                    <constraint firstItem="nMe-OP-Nxw" firstAttribute="centerY" secondItem="O6H-wM-dRR" secondAttribute="centerY" id="pzh-Lj-rBf"/>
+                                </constraints>
                             </customView>
                             <customView misplaced="YES" id="XpD-Ss-5Q8">
-                                <rect key="frame" x="0.0" y="106" width="864" height="596"/>
+                                <rect key="frame" x="0.0" y="105" width="864" height="597"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVc-5A-06w">
-                                        <rect key="frame" x="0.0" y="3" width="864" height="593"/>
+                                        <rect key="frame" x="0.0" y="4" width="864" height="593"/>
                                         <subviews>
                                             <customView fixedFrame="YES" id="fs9-ye-YkK">
                                                 <rect key="frame" x="0.0" y="0.0" width="473.5" height="593"/>
@@ -807,4 +851,8 @@
             <point key="canvasLocation" x="426" y="547.5"/>
         </window>
     </objects>
+    <resources>
+        <image name="pause" width="128" height="128"/>
+        <image name="play" width="128" height="128"/>
+    </resources>
 </document>

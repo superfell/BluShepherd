@@ -8,8 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class Player;
+
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+@property (retain) Player *selectedPlayer;
+
+-(IBAction)play:(id)sender;
+-(IBAction)pause:(id)sender;
 
 @end
 

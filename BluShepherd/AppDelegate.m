@@ -27,6 +27,7 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:notificationPlayerSelection object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *n) {
         Player *p = [n object];
         npv.selectedPlayer = p;
+        self.selectedPlayer = p;
         [p fetchStatus:^(NSDictionary *s) {
             NSLog(@"Player Status %@", s);
             npv.nowPlaying = s;
@@ -36,6 +37,18 @@
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+}
+
+-(IBAction)play:(id)sender {
+    [self.selectedPlayer play:^(NSString *s) {
+        NSLog(@"new state: %@", s);
+    }];
+}
+
+-(IBAction)pause:(id)sender {
+    [self.selectedPlayer pause:^(NSString *s) {
+        NSLog(@"new state: %@", s);
+    }];
 }
 
 @end
