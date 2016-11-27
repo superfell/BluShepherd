@@ -10,12 +10,21 @@
 #import "NSNetService-Util.h"
 #import <XMLDictionary/XMLDictionary.h>
 
+NSString *notificationPlayerSelection = @"PlayerSelection";
+
+static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
+
 @implementation Player
 
 @synthesize icon, name, type, service;
 
 -(id)initWithService:(NSNetService *)s {
     self = [super init];
+    Player *p = self;
+    self.onResolved = [NSMutableArray arrayWithCapacity:4];
+    [self.onResolved addObject:^(void) {
+        [p fetchSyncStatus];
+    }];
     self.name = s.name;
     self.service = s;
     self.service.delegate = self;
@@ -40,17 +49,21 @@
     return c;
 }
 
--(void)fetchSyncStatus {
+-(NSURL *)urlWithPath:(NSString *)path {
     NSArray *addr = [self.service addressesAndPorts];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%ld/SyncStatus", [addr[0] address], (long)self.service.port]];
-    NSLog(@"starting request for %@", url);
-    NSURLSessionTask *t = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        NSLog(@"result %@ %@", error, response);
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%ld/%@", [addr[0] address], (long)self.service.port, path]];
+    return url;
+}
+
+-(void)fetchSyncStatus {
+    NSURL *url = [self urlWithPath:@"SyncStatus"];
+    NSURLSessionTask *t = [[NSURLSession sharedSession] dataTaskWithURL:url
+                                                      completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error == nil) {
             NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
-            NSLog (@"icon %@ type %@", [d objectForKey:@"_icon"], [d objectForKey:@"_modelName"]);
             NSURL *iconUrl = [NSURL URLWithString:[d objectForKey:@"_icon"] relativeToURL:url];
-            NSURLSessionTask *ticon = [[NSURLSession sharedSession] dataTaskWithURL:iconUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            NSURLSessionTask *ticon = [[NSURLSession sharedSession] dataTaskWithURL:iconUrl
+                                                                  completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                 NSImage *i = [[NSImage alloc] initWithData:data];
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     self.type = [d objectForKey:@"_modelName"];
@@ -66,15 +79,36 @@
                 });
             }];
             [ticon resume];
+        } else {
+            NSLog(@"result %@ %@", error, response);
         }
     }];
     [t resume];
 }
 
+-(void)fetchStatus:(void(^)(NSDictionary *s))block {
+    if (self.service.addresses.count == 0) {
+        [self.onResolved addObject:^() {
+            [self fetchStatus:block];
+        }];
+        return;
+    }
+    NSURL *url = [self urlWithPath:@"Status"];
+    NSURLSessionTask *t = [[NSURLSession sharedSession] dataTaskWithURL:url
+                                                      completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                          NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
+                                                          block(d);
+                                                      }];
+    [t resume];
+}
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
     NSLog(@"didResolve %@ %ld %@ %@", sender, sender.port, sender.hostName, sender.addresses);
-    [self fetchSyncStatus];
+    void (^b)();
+    for (b in self.onResolved) {
+        b();
+    }
+    [self.onResolved removeAllObjects];
 }
 
 /* Sent to the NSNetService instance's delegate when an error in resolving the instance occurs. The error dictionary will contain two key/value pairs representing the error domain and code (see the NSNetServicesError enumeration above for error code constants).
@@ -97,6 +131,7 @@
     NSNib *player = [[NSNib alloc] initWithNibNamed:@"Player" bundle:nil];
     [self.collectionView registerNib:player forItemWithIdentifier:@"Player"];
     self.collectionView.dataSource = self;
+    [self.collectionView addObserver:self forKeyPath:selectionIndexPathsKey options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
 }
 
 - (void)netServiceBrowserWillSearch:(NSNetServiceBrowser *)browser {
@@ -133,6 +168,9 @@
         self.players = [self.players arrayByAddingObject:p];
     }
     [self.collectionView reloadData];
+    if (self.players.count == 1) {
+        [self.collectionView setSelectionIndexes:[NSIndexSet indexSetWithIndex:0]];
+    }
 }
 
 /* Sent to the NSNetServiceBrowser instance's delegate when a previously discovered domain is no longer available.
@@ -159,6 +197,20 @@
     
     NSLog(@"collectionView item:%@ %@ %@", indexPath, p, item);
     return item;
+}
+
+- (void)observeValueForKeyPath:(nullable NSString *)keyPath
+                      ofObject:(nullable id)object
+                        change:(nullable NSDictionary<NSString*, id> *)change
+                       context:(nullable void *)context {
+    NSLog(@"Selection update %@ %@", keyPath, change);
+    if ([selectionIndexPathsKey isEqualToString:keyPath]) {
+        NSIndexPath *path =[[change objectForKey:NSKeyValueChangeNewKey] anyObject];
+        NSLog(@"path %@", path);
+        NSInteger idx = [path item];
+        Player *p = self.players[idx];
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationPlayerSelection object:p];
+    }
 }
 
 @end

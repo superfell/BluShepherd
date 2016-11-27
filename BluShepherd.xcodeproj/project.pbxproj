@@ -15,6 +15,8 @@
 		F4D56FA31DEA48FD00E81BA4 /* PlayerList.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D56FA21DEA48FD00E81BA4 /* PlayerList.m */; };
 		F4D56FA61DEA59AF00E81BA4 /* NSNetService-Util.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D56FA51DEA59AF00E81BA4 /* NSNetService-Util.m */; };
 		F4D56FAF1DEA6A4500E81BA4 /* Player.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D56FAD1DEA6A4500E81BA4 /* Player.xib */; };
+		F4D56FB31DEAB62E00E81BA4 /* NowPlayingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D56FB11DEAB62E00E81BA4 /* NowPlayingView.m */; };
+		F4D56FB41DEAB62E00E81BA4 /* NowPlayingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D56FB21DEAB62E00E81BA4 /* NowPlayingView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,9 @@
 		F4D56FA51DEA59AF00E81BA4 /* NSNetService-Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNetService-Util.m"; sourceTree = "<group>"; };
 		F4D56FA71DEA5FE900E81BA4 /* blushepherd.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blushepherd.pch; sourceTree = "<group>"; };
 		F4D56FAE1DEA6A4500E81BA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Player.xib; sourceTree = "<group>"; };
+		F4D56FB01DEAB62E00E81BA4 /* NowPlayingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NowPlayingView.h; sourceTree = "<group>"; };
+		F4D56FB11DEAB62E00E81BA4 /* NowPlayingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NowPlayingView.m; sourceTree = "<group>"; };
+		F4D56FB21DEAB62E00E81BA4 /* NowPlayingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NowPlayingView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +96,9 @@
 				F4D56FA11DEA48FD00E81BA4 /* PlayerList.h */,
 				F4D56FA21DEA48FD00E81BA4 /* PlayerList.m */,
 				F4D56FAD1DEA6A4500E81BA4 /* Player.xib */,
+				F4D56FB01DEAB62E00E81BA4 /* NowPlayingView.h */,
+				F4D56FB11DEAB62E00E81BA4 /* NowPlayingView.m */,
+				F4D56FB21DEAB62E00E81BA4 /* NowPlayingView.xib */,
 				F4D56FA41DEA59AF00E81BA4 /* NSNetService-Util.h */,
 				F4D56FA51DEA59AF00E81BA4 /* NSNetService-Util.m */,
 				F4D56F961DEA47DF00E81BA4 /* Assets.xcassets */,
@@ -172,6 +180,7 @@
 			files = (
 				F4D56FAF1DEA6A4500E81BA4 /* Player.xib in Resources */,
 				F4D56F971DEA47DF00E81BA4 /* Assets.xcassets in Resources */,
+				F4D56FB41DEAB62E00E81BA4 /* NowPlayingView.xib in Resources */,
 				F4D56F9A1DEA47DF00E81BA4 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +242,7 @@
 			files = (
 				F4D56FA31DEA48FD00E81BA4 /* PlayerList.m in Sources */,
 				F4D56F951DEA47DF00E81BA4 /* main.m in Sources */,
+				F4D56FB31DEAB62E00E81BA4 /* NowPlayingView.m in Sources */,
 				F4D56FA61DEA59AF00E81BA4 /* NSNetService-Util.m in Sources */,
 				F4D56F921DEA47DF00E81BA4 /* AppDelegate.m in Sources */,
 			);

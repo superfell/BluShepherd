@@ -19,6 +19,7 @@
         </customObject>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
+                <outlet property="nowPlayingView" destination="CaO-in-2SV" id="Pju-Tp-uNv"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -696,27 +697,28 @@
                                         <rect key="frame" x="0.0" y="3" width="864" height="593"/>
                                         <subviews>
                                             <customView fixedFrame="YES" id="fs9-ye-YkK">
-                                                <rect key="frame" x="0.0" y="0.0" width="620.5" height="593"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="473.5" height="593"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </customView>
                                             <customView ambiguous="YES" misplaced="YES" id="h9I-7C-J4Z">
-                                                <rect key="frame" x="630.5" y="0.0" width="233.5" height="593"/>
+                                                <rect key="frame" x="483.5" y="0.0" width="380.5" height="593"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <splitView ambiguous="YES" misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="oXC-8N-WnG">
-                                                        <rect key="frame" x="0.0" y="0.0" width="234.5" height="593"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="380.5" height="593"/>
                                                         <subviews>
-                                                            <customView ambiguous="YES" id="5CK-P2-Zfw">
-                                                                <rect key="frame" x="0.0" y="0.0" width="234.5" height="343.5"/>
+                                                            <customView ambiguous="YES" misplaced="YES" id="5CK-P2-Zfw">
+                                                                <rect key="frame" x="0.0" y="0.0" width="380.5" height="314"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <scrollView ambiguous="YES" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbi-yI-Okv">
-                                                                        <rect key="frame" x="0.0" y="-0.5" width="235" height="344"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="380.5" height="314"/>
                                                                         <clipView key="contentView" ambiguous="YES" id="HpM-Nv-SeH">
-                                                                            <rect key="frame" x="1" y="1" width="233" height="342"/>
+                                                                            <rect key="frame" x="1" y="1" width="378.5" height="312"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <collectionView ambiguous="YES" selectable="YES" id="yp5-S9-lAp">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="378.5" height="312"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="p1O-24-btW">
                                                                                         <size key="itemSize" width="200" height="90"/>
@@ -737,13 +739,17 @@
                                                                 </subviews>
                                                                 <constraints>
                                                                     <constraint firstAttribute="bottom" secondItem="tbi-yI-Okv" secondAttribute="bottom" id="7Fz-fA-kGj"/>
+                                                                    <constraint firstItem="tbi-yI-Okv" firstAttribute="leading" secondItem="5CK-P2-Zfw" secondAttribute="leading" id="89P-ad-7uQ"/>
+                                                                    <constraint firstItem="tbi-yI-Okv" firstAttribute="top" secondItem="5CK-P2-Zfw" secondAttribute="top" id="A4L-kb-g87"/>
                                                                     <constraint firstAttribute="trailing" secondItem="tbi-yI-Okv" secondAttribute="trailing" id="C3x-nc-7nQ"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="tbi-yI-Okv" secondAttribute="trailing" id="EsB-AK-9JC"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="tbi-yI-Okv" secondAttribute="bottom" id="FAT-h0-3j4"/>
                                                                     <constraint firstItem="tbi-yI-Okv" firstAttribute="leading" secondItem="5CK-P2-Zfw" secondAttribute="leading" id="Shs-f7-7Fa"/>
                                                                     <constraint firstItem="tbi-yI-Okv" firstAttribute="top" secondItem="5CK-P2-Zfw" secondAttribute="top" id="u5f-Fp-lv0"/>
                                                                 </constraints>
                                                             </customView>
                                                             <customView fixedFrame="YES" id="CaO-in-2SV">
-                                                                <rect key="frame" x="0.0" y="353.5" width="234.5" height="239.5"/>
+                                                                <rect key="frame" x="0.0" y="324" width="380.5" height="269"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </customView>
                                                         </subviews>
@@ -756,8 +762,12 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="27f-wO-JD9"/>
                                                     <constraint firstAttribute="trailing" secondItem="oXC-8N-WnG" secondAttribute="trailing" id="5pv-pr-MuW"/>
+                                                    <constraint firstAttribute="bottom" secondItem="oXC-8N-WnG" secondAttribute="bottom" id="6CT-sl-Afb"/>
                                                     <constraint firstAttribute="bottom" secondItem="oXC-8N-WnG" secondAttribute="bottom" id="KDy-S5-paG"/>
+                                                    <constraint firstAttribute="trailing" secondItem="oXC-8N-WnG" secondAttribute="trailing" id="Z4R-NS-gcB"/>
                                                     <constraint firstItem="oXC-8N-WnG" firstAttribute="leading" secondItem="h9I-7C-J4Z" secondAttribute="leading" id="n4O-ZZ-QbS"/>
+                                                    <constraint firstItem="oXC-8N-WnG" firstAttribute="top" secondItem="h9I-7C-J4Z" secondAttribute="top" id="noA-CJ-rDT"/>
+                                                    <constraint firstItem="oXC-8N-WnG" firstAttribute="leading" secondItem="h9I-7C-J4Z" secondAttribute="leading" id="tHM-zQ-2vV"/>
                                                     <constraint firstItem="oXC-8N-WnG" firstAttribute="top" secondItem="h9I-7C-J4Z" secondAttribute="top" id="x7T-VO-62S"/>
                                                 </constraints>
                                             </customView>

@@ -4,3 +4,5 @@ Podfile.lock
 BluShepherd.xcworkspace/xcuserdata/simon.xcuserdatad/UserInterfaceState.xcuserstate
 
 BluShepherd.xcodeproj/xcuserdata/simon.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+
+*.xcbkptlist
