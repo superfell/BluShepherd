@@ -1,0 +1,16 @@
+//
+//  blushepherd_pch.pch
+//  BluShepherd
+//
+//  Created by Simon Fell on 11/26/16.
+//  Copyright © 2016 Simon Fell. All rights reserved.
+//
+
+#ifndef blushepherd_pch_pch
+#define blushepherd_pch_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <Cocoa/Cocoa.h>
+
+#endif /* blushepherd_pch_pch */

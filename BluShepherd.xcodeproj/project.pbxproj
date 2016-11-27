@@ -1,0 +1,318 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F4D56F921DEA47DF00E81BA4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D56F911DEA47DF00E81BA4 /* AppDelegate.m */; };
+		F4D56F951DEA47DF00E81BA4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D56F941DEA47DF00E81BA4 /* main.m */; };
+		F4D56F971DEA47DF00E81BA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4D56F961DEA47DF00E81BA4 /* Assets.xcassets */; };
+		F4D56F9A1DEA47DF00E81BA4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D56F981DEA47DF00E81BA4 /* MainMenu.xib */; };
+		F4D56FA31DEA48FD00E81BA4 /* PlayerList.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D56FA21DEA48FD00E81BA4 /* PlayerList.m */; };
+		F4D56FA61DEA59AF00E81BA4 /* NSNetService-Util.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D56FA51DEA59AF00E81BA4 /* NSNetService-Util.m */; };
+		F4D56FAF1DEA6A4500E81BA4 /* Player.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D56FAD1DEA6A4500E81BA4 /* Player.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F4D56F8D1DEA47DF00E81BA4 /* BluShepherd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluShepherd.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4D56F901DEA47DF00E81BA4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F4D56F911DEA47DF00E81BA4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F4D56F941DEA47DF00E81BA4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F4D56F961DEA47DF00E81BA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F4D56F991DEA47DF00E81BA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F4D56F9B1DEA47DF00E81BA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4D56FA11DEA48FD00E81BA4 /* PlayerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerList.h; sourceTree = "<group>"; };
+		F4D56FA21DEA48FD00E81BA4 /* PlayerList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerList.m; sourceTree = "<group>"; };
+		F4D56FA41DEA59AF00E81BA4 /* NSNetService-Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNetService-Util.h"; sourceTree = "<group>"; };
+		F4D56FA51DEA59AF00E81BA4 /* NSNetService-Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNetService-Util.m"; sourceTree = "<group>"; };
+		F4D56FA71DEA5FE900E81BA4 /* blushepherd.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blushepherd.pch; sourceTree = "<group>"; };
+		F4D56FAE1DEA6A4500E81BA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Player.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F4D56F8A1DEA47DF00E81BA4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F4D56F841DEA47DF00E81BA4 = {
+			isa = PBXGroup;
+			children = (
+				F4D56F8F1DEA47DF00E81BA4 /* BluShepherd */,
+				F4D56F8E1DEA47DF00E81BA4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F4D56F8E1DEA47DF00E81BA4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F4D56F8D1DEA47DF00E81BA4 /* BluShepherd.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F4D56F8F1DEA47DF00E81BA4 /* BluShepherd */ = {
+			isa = PBXGroup;
+			children = (
+				F4D56F901DEA47DF00E81BA4 /* AppDelegate.h */,
+				F4D56F911DEA47DF00E81BA4 /* AppDelegate.m */,
+				F4D56FA11DEA48FD00E81BA4 /* PlayerList.h */,
+				F4D56FA21DEA48FD00E81BA4 /* PlayerList.m */,
+				F4D56FAD1DEA6A4500E81BA4 /* Player.xib */,
+				F4D56FA41DEA59AF00E81BA4 /* NSNetService-Util.h */,
+				F4D56FA51DEA59AF00E81BA4 /* NSNetService-Util.m */,
+				F4D56F961DEA47DF00E81BA4 /* Assets.xcassets */,
+				F4D56F981DEA47DF00E81BA4 /* MainMenu.xib */,
+				F4D56F9B1DEA47DF00E81BA4 /* Info.plist */,
+				F4D56F931DEA47DF00E81BA4 /* Supporting Files */,
+			);
+			path = BluShepherd;
+			sourceTree = "<group>";
+		};
+		F4D56F931DEA47DF00E81BA4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F4D56FA71DEA5FE900E81BA4 /* blushepherd.pch */,
+				F4D56F941DEA47DF00E81BA4 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F4D56F8C1DEA47DF00E81BA4 /* BluShepherd */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4D56F9E1DEA47DF00E81BA4 /* Build configuration list for PBXNativeTarget "BluShepherd" */;
+			buildPhases = (
+				F4D56F891DEA47DF00E81BA4 /* Sources */,
+				F4D56F8A1DEA47DF00E81BA4 /* Frameworks */,
+				F4D56F8B1DEA47DF00E81BA4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BluShepherd;
+			productName = BluShepherd;
+			productReference = F4D56F8D1DEA47DF00E81BA4 /* BluShepherd.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F4D56F851DEA47DF00E81BA4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Simon Fell";
+				TargetAttributes = {
+					F4D56F8C1DEA47DF00E81BA4 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = F4D56F881DEA47DF00E81BA4 /* Build configuration list for PBXProject "BluShepherd" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F4D56F841DEA47DF00E81BA4;
+			productRefGroup = F4D56F8E1DEA47DF00E81BA4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F4D56F8C1DEA47DF00E81BA4 /* BluShepherd */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F4D56F8B1DEA47DF00E81BA4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4D56FAF1DEA6A4500E81BA4 /* Player.xib in Resources */,
+				F4D56F971DEA47DF00E81BA4 /* Assets.xcassets in Resources */,
+				F4D56F9A1DEA47DF00E81BA4 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F4D56F891DEA47DF00E81BA4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4D56FA31DEA48FD00E81BA4 /* PlayerList.m in Sources */,
+				F4D56F951DEA47DF00E81BA4 /* main.m in Sources */,
+				F4D56FA61DEA59AF00E81BA4 /* NSNetService-Util.m in Sources */,
+				F4D56F921DEA47DF00E81BA4 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F4D56F981DEA47DF00E81BA4 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4D56F991DEA47DF00E81BA4 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		F4D56FAD1DEA6A4500E81BA4 /* Player.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4D56FAE1DEA6A4500E81BA4 /* Base */,
+			);
+			name = Player.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F4D56F9C1DEA47DF00E81BA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F4D56F9D1DEA47DF00E81BA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F4D56F9F1DEA47DF00E81BA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = BluShepherd/blushepherd.pch;
+				INFOPLIST_FILE = BluShepherd/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pocketsoap.BluShepherd;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F4D56FA01DEA47DF00E81BA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = BluShepherd/blushepherd.pch;
+				INFOPLIST_FILE = BluShepherd/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pocketsoap.BluShepherd;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F4D56F881DEA47DF00E81BA4 /* Build configuration list for PBXProject "BluShepherd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4D56F9C1DEA47DF00E81BA4 /* Debug */,
+				F4D56F9D1DEA47DF00E81BA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F4D56F9E1DEA47DF00E81BA4 /* Build configuration list for PBXNativeTarget "BluShepherd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4D56F9F1DEA47DF00E81BA4 /* Debug */,
+				F4D56FA01DEA47DF00E81BA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F4D56F851DEA47DF00E81BA4 /* Project object */;
+}
