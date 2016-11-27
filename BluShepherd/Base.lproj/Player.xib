@@ -8,41 +8,41 @@
         <customObject id="-2" userLabel="File's Owner"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="103"/>
+        <customView wantsLayer="YES" id="c22-O7-iKe" customClass="PlayerView">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="75"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iGd-oL-chV">
-                    <rect key="frame" x="65" y="65" width="135" height="27"/>
+                    <rect key="frame" x="65" y="48" width="135" height="27"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="OJw-jR-tkI">
                         <font key="font" metaFont="systemBold" size="14"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
                         <binding destination="Uvt-bm-1M1" name="value" keyPath="representedObject.name" id="eAy-iD-nC4"/>
                     </connections>
                 </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n3d-rc-cjJ">
+                    <rect key="frame" x="3" y="12" width="73" height="63"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="AAm-rw-tsJ"/>
+                    <connections>
+                        <binding destination="Uvt-bm-1M1" name="value" keyPath="representedObject.icon" id="C4C-55-XFA"/>
+                    </connections>
+                </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oYe-2u-Vjd">
-                    <rect key="frame" x="65" y="39" width="135" height="27"/>
+                    <rect key="frame" x="65" y="20" width="135" height="27"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="xJL-yE-QKY">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" red="0.91643488219895286" green="0.91643488219895286" blue="0.91643488219895286" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
                         <binding destination="Uvt-bm-1M1" name="value" keyPath="representedObject.type" id="9rh-Nk-jPc"/>
                     </connections>
                 </textField>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n3d-rc-cjJ">
-                    <rect key="frame" x="6" y="20" width="85" height="77"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="AAm-rw-tsJ"/>
-                    <connections>
-                        <binding destination="Uvt-bm-1M1" name="value" keyPath="representedObject.icon" id="C4C-55-XFA"/>
-                    </connections>
-                </imageView>
             </subviews>
-            <point key="canvasLocation" x="356" y="410.5"/>
+            <point key="canvasLocation" x="356" y="399.5"/>
         </customView>
         <collectionViewItem id="Uvt-bm-1M1">
             <connections>

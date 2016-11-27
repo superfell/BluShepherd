@@ -8,6 +8,7 @@
 
 #import "PlayerList.h"
 #import "NSNetService-Util.h"
+#import <XMLDictionary/XMLDictionary.h>
 
 @implementation Player
 
@@ -26,7 +27,7 @@
     Player *c = [[Player alloc] init];
     c.name = self.name;
     c.service = self.service;
-    if (self.type == nil) {
+    if (self.icon == nil) {
         if (self.toUpdate == nil) {
             self.toUpdate = [NSArray arrayWithObject:c];
         } else {
@@ -45,6 +46,27 @@
     NSLog(@"starting request for %@", url);
     NSURLSessionTask *t = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSLog(@"result %@ %@", error, response);
+        if (error == nil) {
+            NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
+            NSLog (@"icon %@ type %@", [d objectForKey:@"_icon"], [d objectForKey:@"_modelName"]);
+            NSURL *iconUrl = [NSURL URLWithString:[d objectForKey:@"_icon"] relativeToURL:url];
+            NSURLSessionTask *ticon = [[NSURLSession sharedSession] dataTaskWithURL:iconUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                NSImage *i = [[NSImage alloc] initWithData:data];
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    self.type = [d objectForKey:@"_modelName"];
+                    self.icon = i;
+                    if (self.toUpdate != nil) {
+                        for (Player *c in self.toUpdate) {
+                            c.type = self.type;
+                            c.icon = self.icon;
+                       }
+                    }
+                    self.toUpdate = nil;
+                    NSLog(@"Loaded icon %@", self.icon);
+                });
+            }];
+            [ticon resume];
+        }
     }];
     [t resume];
 }
@@ -134,8 +156,18 @@
     NSCollectionViewItem *item = [collectionView makeItemWithIdentifier:@"Player" forIndexPath:indexPath];
     Player *p = self.players[[indexPath item]];
     [item setRepresentedObject:p];
+    
     NSLog(@"collectionView item:%@ %@ %@", indexPath, p, item);
     return item;
+}
+
+@end
+
+@implementation PlayerView
+
+-(void)awakeFromNib {
+    self.wantsLayer = true;
+    self.layer.backgroundColor = CGColorGetConstantColor(kCGColorBlack);
 }
 
 @end

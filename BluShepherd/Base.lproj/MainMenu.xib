@@ -681,46 +681,45 @@
                 <rect key="frame" x="0.0" y="0.0" width="864" height="697"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <splitView fixedFrame="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="Ayc-Ou-78e">
+                    <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="Ayc-Ou-78e">
                         <rect key="frame" x="0.0" y="-5" width="864" height="702"/>
                         <subviews>
                             <customView fixedFrame="YES" id="O6H-wM-dRR">
-                                <rect key="frame" x="0.0" y="0.0" width="864" height="99"/>
+                                <rect key="frame" x="0.0" y="0.0" width="864" height="96"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </customView>
-                            <customView fixedFrame="YES" id="XpD-Ss-5Q8">
-                                <rect key="frame" x="0.0" y="109" width="864" height="593"/>
+                            <customView misplaced="YES" id="XpD-Ss-5Q8">
+                                <rect key="frame" x="0.0" y="106" width="864" height="596"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <splitView fixedFrame="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVc-5A-06w">
-                                        <rect key="frame" x="0.0" y="0.0" width="864" height="593"/>
+                                    <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVc-5A-06w">
+                                        <rect key="frame" x="0.0" y="3" width="864" height="593"/>
                                         <subviews>
                                             <customView fixedFrame="YES" id="fs9-ye-YkK">
-                                                <rect key="frame" x="0.0" y="0.0" width="619.5" height="593"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="620.5" height="593"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </customView>
-                                            <customView fixedFrame="YES" id="h9I-7C-J4Z">
-                                                <rect key="frame" x="629.5" y="0.0" width="234.5" height="593"/>
+                                            <customView ambiguous="YES" misplaced="YES" id="h9I-7C-J4Z">
+                                                <rect key="frame" x="630.5" y="0.0" width="233.5" height="593"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
-                                                    <splitView fixedFrame="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="oXC-8N-WnG">
+                                                    <splitView ambiguous="YES" misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="oXC-8N-WnG">
                                                         <rect key="frame" x="0.0" y="0.0" width="234.5" height="593"/>
                                                         <subviews>
-                                                            <customView fixedFrame="YES" id="5CK-P2-Zfw">
+                                                            <customView ambiguous="YES" id="5CK-P2-Zfw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="234.5" height="343.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbi-yI-Okv">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="234.5" height="343.5"/>
+                                                                    <scrollView ambiguous="YES" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbi-yI-Okv">
+                                                                        <rect key="frame" x="0.0" y="-0.5" width="235" height="344"/>
                                                                         <clipView key="contentView" ambiguous="YES" id="HpM-Nv-SeH">
-                                                                            <rect key="frame" x="1" y="1" width="232.5" height="341.5"/>
+                                                                            <rect key="frame" x="1" y="1" width="233" height="342"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <collectionView ambiguous="YES" selectable="YES" id="yp5-S9-lAp">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="232.5" height="341.5"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="p1O-24-btW">
-                                                                                        <size key="itemSize" width="200" height="120"/>
+                                                                                        <size key="itemSize" width="200" height="90"/>
                                                                                     </collectionViewFlowLayout>
                                                                                     <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                 </collectionView>
@@ -736,6 +735,12 @@
                                                                         </scroller>
                                                                     </scrollView>
                                                                 </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="tbi-yI-Okv" secondAttribute="bottom" id="7Fz-fA-kGj"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="tbi-yI-Okv" secondAttribute="trailing" id="C3x-nc-7nQ"/>
+                                                                    <constraint firstItem="tbi-yI-Okv" firstAttribute="leading" secondItem="5CK-P2-Zfw" secondAttribute="leading" id="Shs-f7-7Fa"/>
+                                                                    <constraint firstItem="tbi-yI-Okv" firstAttribute="top" secondItem="5CK-P2-Zfw" secondAttribute="top" id="u5f-Fp-lv0"/>
+                                                                </constraints>
                                                             </customView>
                                                             <customView fixedFrame="YES" id="CaO-in-2SV">
                                                                 <rect key="frame" x="0.0" y="353.5" width="234.5" height="239.5"/>
@@ -748,6 +753,13 @@
                                                         </holdingPriorities>
                                                     </splitView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="27f-wO-JD9"/>
+                                                    <constraint firstAttribute="trailing" secondItem="oXC-8N-WnG" secondAttribute="trailing" id="5pv-pr-MuW"/>
+                                                    <constraint firstAttribute="bottom" secondItem="oXC-8N-WnG" secondAttribute="bottom" id="KDy-S5-paG"/>
+                                                    <constraint firstItem="oXC-8N-WnG" firstAttribute="leading" secondItem="h9I-7C-J4Z" secondAttribute="leading" id="n4O-ZZ-QbS"/>
+                                                    <constraint firstItem="oXC-8N-WnG" firstAttribute="top" secondItem="h9I-7C-J4Z" secondAttribute="top" id="x7T-VO-62S"/>
+                                                </constraints>
                                             </customView>
                                         </subviews>
                                         <holdingPriorities>
@@ -756,6 +768,12 @@
                                         </holdingPriorities>
                                     </splitView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="WVc-5A-06w" secondAttribute="bottom" id="9vk-r9-Hy3"/>
+                                    <constraint firstItem="WVc-5A-06w" firstAttribute="top" secondItem="XpD-Ss-5Q8" secondAttribute="top" id="HdC-0d-yZR"/>
+                                    <constraint firstItem="WVc-5A-06w" firstAttribute="leading" secondItem="XpD-Ss-5Q8" secondAttribute="leading" id="cFI-XM-iLl"/>
+                                    <constraint firstAttribute="trailing" secondItem="WVc-5A-06w" secondAttribute="trailing" id="jcg-ZK-zmH"/>
+                                </constraints>
                             </customView>
                         </subviews>
                         <holdingPriorities>
@@ -764,7 +782,18 @@
                         </holdingPriorities>
                     </splitView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="Ayc-Ou-78e" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="4Mp-Ml-RDw"/>
+                    <constraint firstItem="Ayc-Ou-78e" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="6H0-4W-wRU"/>
+                    <constraint firstItem="Ayc-Ou-78e" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="6OY-gg-5lx"/>
+                    <constraint firstItem="Ayc-Ou-78e" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="GCP-ZC-Tcq"/>
+                    <constraint firstAttribute="trailing" secondItem="Ayc-Ou-78e" secondAttribute="trailing" id="VaX-0x-nEg"/>
+                    <constraint firstAttribute="trailing" secondItem="Ayc-Ou-78e" secondAttribute="trailing" id="cBL-Uf-Aid"/>
+                    <constraint firstAttribute="bottom" secondItem="Ayc-Ou-78e" secondAttribute="bottom" constant="20" symbolic="YES" id="ku1-Nd-OVT"/>
+                    <constraint firstAttribute="bottom" secondItem="Ayc-Ou-78e" secondAttribute="bottom" constant="20" symbolic="YES" id="z20-nV-kZO"/>
+                </constraints>
             </view>
+            <contentBorderThickness minY="22"/>
             <point key="canvasLocation" x="426" y="547.5"/>
         </window>
     </objects>

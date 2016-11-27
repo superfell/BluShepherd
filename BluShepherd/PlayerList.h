@@ -24,3 +24,6 @@
 @property (weak) IBOutlet NSCollectionView *collectionView;
 
 @end
+
+@interface PlayerView : NSView 
+@end
