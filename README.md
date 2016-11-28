@@ -15,4 +15,6 @@ BluShepherd is an exploration by me to see if its possible to build a companion 
  
 The Node exposes a HTTP based API, details of my exploration of that are in [api.md](api.md)
  
- 
+Well, made some decent progress, have a albums by artist view, with some amount of caching of the covers. [but NSURLCache is weird].
+
+![albums by artist](albums_by_artist.png)
