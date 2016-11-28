@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15G1108" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -672,6 +673,7 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="125" y="-2"/>
         </menu>
         <window title="BluShepherd" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
@@ -682,14 +684,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="864" height="697"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <splitView misplaced="YES" arrangesAllSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ayc-Ou-78e">
+                    <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="Ayc-Ou-78e">
                         <rect key="frame" x="0.0" y="-5" width="864" height="702"/>
                         <subviews>
                             <customView misplaced="YES" id="O6H-wM-dRR">
                                 <rect key="frame" x="0.0" y="0.0" width="864" height="96"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zN6-WE-VaY">
+                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zN6-WE-VaY">
                                         <rect key="frame" x="20" y="24" width="48" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="g4x-u7-QOT"/>
@@ -704,7 +706,7 @@
                                             <binding destination="Voe-Tx-rLC" name="hidden" keyPath="selectedPlayer.playing" id="QfG-qw-ULb"/>
                                         </connections>
                                     </button>
-                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMe-OP-Nxw">
+                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMe-OP-Nxw">
                                         <rect key="frame" x="78" y="24" width="48" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="48" id="fUU-x8-Th2"/>
@@ -725,6 +727,8 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="zN6-WE-VaY" firstAttribute="leading" secondItem="O6H-wM-dRR" secondAttribute="leading" constant="20" symbolic="YES" id="JLK-ax-dvH"/>
+                                    <constraint firstAttribute="height" constant="98" id="Nqm-Xj-dUo"/>
                                     <constraint firstItem="nMe-OP-Nxw" firstAttribute="top" secondItem="zN6-WE-VaY" secondAttribute="top" id="QZL-Ge-ndk"/>
                                     <constraint firstItem="zN6-WE-VaY" firstAttribute="centerY" secondItem="O6H-wM-dRR" secondAttribute="centerY" id="ZXb-C4-8xw"/>
                                     <constraint firstItem="nMe-OP-Nxw" firstAttribute="width" secondItem="zN6-WE-VaY" secondAttribute="width" id="ed2-hB-8aq"/>
@@ -734,29 +738,29 @@
                                 </constraints>
                             </customView>
                             <customView misplaced="YES" id="XpD-Ss-5Q8">
-                                <rect key="frame" x="0.0" y="105" width="864" height="597"/>
+                                <rect key="frame" x="0.0" y="97" width="864" height="605"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVc-5A-06w">
-                                        <rect key="frame" x="0.0" y="4" width="864" height="593"/>
+                                    <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVc-5A-06w">
+                                        <rect key="frame" x="0.0" y="12" width="864" height="593"/>
                                         <subviews>
                                             <customView fixedFrame="YES" id="fs9-ye-YkK">
-                                                <rect key="frame" x="0.0" y="0.0" width="473.5" height="593"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="478.5" height="593"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             </customView>
                                             <customView ambiguous="YES" misplaced="YES" id="h9I-7C-J4Z">
-                                                <rect key="frame" x="483.5" y="0.0" width="380.5" height="593"/>
+                                                <rect key="frame" x="479.5" y="0.0" width="384.5" height="593"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
-                                                    <splitView ambiguous="YES" misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="oXC-8N-WnG">
+                                                    <splitView ambiguous="YES" misplaced="YES" arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="oXC-8N-WnG">
                                                         <rect key="frame" x="0.0" y="0.0" width="380.5" height="593"/>
                                                         <subviews>
                                                             <customView ambiguous="YES" misplaced="YES" id="5CK-P2-Zfw">
-                                                                <rect key="frame" x="0.0" y="0.0" width="380.5" height="314"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="380.5" height="319"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <scrollView ambiguous="YES" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbi-yI-Okv">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="380.5" height="314"/>
+                                                                        <rect key="frame" x="0.0" y="5" width="380.5" height="314"/>
                                                                         <clipView key="contentView" ambiguous="YES" id="HpM-Nv-SeH">
                                                                             <rect key="frame" x="1" y="1" width="378.5" height="312"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -792,9 +796,12 @@
                                                                     <constraint firstItem="tbi-yI-Okv" firstAttribute="top" secondItem="5CK-P2-Zfw" secondAttribute="top" id="u5f-Fp-lv0"/>
                                                                 </constraints>
                                                             </customView>
-                                                            <customView fixedFrame="YES" id="CaO-in-2SV">
-                                                                <rect key="frame" x="0.0" y="324" width="380.5" height="269"/>
+                                                            <customView ambiguous="YES" misplaced="YES" id="CaO-in-2SV">
+                                                                <rect key="frame" x="0.0" y="320" width="380.5" height="273"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="272" id="1hR-MK-6MA"/>
+                                                                </constraints>
                                                             </customView>
                                                         </subviews>
                                                         <holdingPriorities>
@@ -804,7 +811,7 @@
                                                     </splitView>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="27f-wO-JD9"/>
+                                                    <constraint firstAttribute="width" constant="320" id="27f-wO-JD9"/>
                                                     <constraint firstAttribute="trailing" secondItem="oXC-8N-WnG" secondAttribute="trailing" id="5pv-pr-MuW"/>
                                                     <constraint firstAttribute="bottom" secondItem="oXC-8N-WnG" secondAttribute="bottom" id="6CT-sl-Afb"/>
                                                     <constraint firstAttribute="bottom" secondItem="oXC-8N-WnG" secondAttribute="bottom" id="KDy-S5-paG"/>
@@ -832,23 +839,19 @@
                         </subviews>
                         <holdingPriorities>
                             <real value="250"/>
-                            <real value="250"/>
+                            <real value="1"/>
                         </holdingPriorities>
                     </splitView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Ayc-Ou-78e" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="4Mp-Ml-RDw"/>
                     <constraint firstItem="Ayc-Ou-78e" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="6H0-4W-wRU"/>
-                    <constraint firstItem="Ayc-Ou-78e" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="6OY-gg-5lx"/>
-                    <constraint firstItem="Ayc-Ou-78e" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="GCP-ZC-Tcq"/>
                     <constraint firstAttribute="trailing" secondItem="Ayc-Ou-78e" secondAttribute="trailing" id="VaX-0x-nEg"/>
-                    <constraint firstAttribute="trailing" secondItem="Ayc-Ou-78e" secondAttribute="trailing" id="cBL-Uf-Aid"/>
                     <constraint firstAttribute="bottom" secondItem="Ayc-Ou-78e" secondAttribute="bottom" constant="20" symbolic="YES" id="ku1-Nd-OVT"/>
-                    <constraint firstAttribute="bottom" secondItem="Ayc-Ou-78e" secondAttribute="bottom" constant="20" symbolic="YES" id="z20-nV-kZO"/>
                 </constraints>
             </view>
             <contentBorderThickness minY="22"/>
-            <point key="canvasLocation" x="426" y="547.5"/>
+            <point key="canvasLocation" x="380" y="499"/>
         </window>
     </objects>
     <resources>
