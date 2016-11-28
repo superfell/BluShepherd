@@ -33,17 +33,21 @@
     if (self.needsArt) {
         self.needsArt = NO;
         [p urlWithPath:[NSString stringWithFormat:@"Artwork?service=LocalMusic&album=%@&artist=%@",
-                        [self.title stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding],
-                        [self.artist stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]
+                        [self.title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]],
+                        [self.artist stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]
                  block:^(NSURL *url) {
                      NSURLSession *s = [NSURLSession sharedSession];
-                     NSURLSessionTask *t = [[NSURLSession sharedSession] dataTaskWithURL:url
-                                                                       completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                                           NSImage *i = [[NSImage alloc] initWithData:data];
-                                                                           dispatch_async(dispatch_get_main_queue(), ^() {
-                                                                               self.coverArt = i;
-                                                                           });
-                                                                       }];
+                     NSURLSessionTask *t = [s dataTaskWithURL:url
+                                            completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                NSHTTPURLResponse *r = (NSHTTPURLResponse *)response;
+                                                if ([r statusCode] != 200) {
+                                                    NSLog(@"Got error reading artwork %ld \\ %@", [r statusCode], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                                                }
+                                                NSImage *i = [[NSImage alloc] initWithData:data];
+                                                dispatch_async(dispatch_get_main_queue(), ^() {
+                                                    self.coverArt = i;
+                                                });
+                                            }];
                      [t resume];
                  }];
     }
@@ -81,7 +85,7 @@
     [a fetchCoverArt:selectedPlayer];
     [item setRepresentedObject:a];
     
-    NSLog(@"itemForObject at %ld returning %@/%@ %@", [indexPath item], a.artist, a.title, item);
+//    NSLog(@"itemForObject at %ld returning %@/%@ %@", [indexPath item], a.artist, a.title, item);
     return item;
 }
 
@@ -121,4 +125,15 @@
         [t resume];
     }];
 }
+@end
+
+@implementation LibraryAlbumView
+
+-(void)awakeFromNib {
+    self.wantsLayer = true;
+    self.layer.backgroundColor = CGColorCreateGenericGray(0.92f, 1.0f);
+    self.layer.borderWidth = 1.5f;
+    self.layer.borderColor = CGColorCreateGenericGray(0.78f, 1.0f);
+}
+
 @end

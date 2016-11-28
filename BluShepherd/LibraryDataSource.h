@@ -30,3 +30,6 @@
 @property (retain) NSArray *albums;
 
 @end
+
+@interface LibraryAlbumView : NSView
+@end
