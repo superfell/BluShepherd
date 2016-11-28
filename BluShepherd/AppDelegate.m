@@ -16,11 +16,13 @@
 @property (weak) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSView *nowPlayingView;
 
+-(NSURLSession *)createCachingSession;
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    self.cachingSession = [self createCachingSession];
     // Insert code here to initialize your application
     NowPlayingView *npv = [[NowPlayingView alloc] initWithNibName:nil bundle:nil];
     [self.nowPlayingView addSubview:[npv view]];
@@ -51,6 +53,24 @@
     [self.selectedPlayer pause:^(NSString *s) {
         NSLog(@"new state: %@", s);
     }];
+}
+
+-(NSURLSession *)createCachingSession {
+    // Configuring caching behavior
+    NSString *cachesDirectory = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+    NSString *cachePath = [[cachesDirectory stringByAppendingPathComponent:@"ArtworkCache"] stringByStandardizingPath];
+    NSInteger oneMB = 1024 * 1024;
+    NSURLCache *cache = [[NSURLCache alloc] initWithMemoryCapacity:16 * oneMB  diskCapacity:2048 * oneMB diskPath:cachePath];
+    NSLog(@"Cache is at %@", cachePath);
+    
+    NSURLSessionConfiguration *cfg = [[NSURLSessionConfiguration defaultSessionConfiguration] copy];
+    cfg.URLCache = cache;
+    cfg.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    cfg.HTTPMaximumConnectionsPerHost = 4;
+    cfg.HTTPShouldSetCookies = NO;
+    
+    NSURLSession *s = [NSURLSession sessionWithConfiguration:cfg];
+    return s;
 }
 
 @end

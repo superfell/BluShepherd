@@ -8,6 +8,7 @@
 
 #import "LibraryDataSource.h"
 #import "PlayerList.h"
+#import "AppDelegate.h"
 #import <XMLDictionary/XMLDictionary.h>
 
 @interface LibraryAlbum()
@@ -36,7 +37,7 @@
                         [self.title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]],
                         [self.artist stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]
                  block:^(NSURL *url) {
-                     NSURLSession *s = [NSURLSession sharedSession];
+                     NSURLSession *s = ((AppDelegate *)(NSApp.delegate)).cachingSession;
                      NSURLSessionTask *t = [s dataTaskWithURL:url
                                             completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                                 NSHTTPURLResponse *r = (NSHTTPURLResponse *)response;

@@ -14,6 +14,7 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+@property (retain) NSURLSession *cachingSession;
 @property (retain) Player *selectedPlayer;
 @property (retain) IBOutlet LibraryDataSource *library;
 
