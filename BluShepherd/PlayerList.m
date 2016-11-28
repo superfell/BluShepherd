@@ -14,6 +14,10 @@ NSString *notificationPlayerSelection = @"PlayerSelection";
 
 static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 
+@interface Player()
+-(NSURL *)urlWithPath:(NSString *)path;
+@end
+
 @implementation Player
 
 @synthesize icon, name, type, service;
@@ -53,6 +57,16 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
     NSArray *addr = [self.service addressesAndPorts];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%ld/%@", [addr[0] address], (long)self.service.port, path]];
     return url;
+}
+
+-(void)urlWithPath:(NSString *)path block:(void(^)(NSURL *url))block {
+    if ([[self.service addressesAndPorts] count] == 0) {
+        [self.onResolved addObject:^() {
+            block([self urlWithPath:path]);
+        }];
+        return;
+    }
+    block([self urlWithPath:path]);
 }
 
 -(void)fetchSyncStatus {
@@ -157,8 +171,6 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
     self.disco = [NSNetServiceBrowser new];
     self.disco.delegate = self;
     [self.disco searchForServicesOfType:@"_musc._tcp." inDomain:@""];
-    NSNib *player = [[NSNib alloc] initWithNibNamed:@"Player" bundle:nil];
-    [self.collectionView registerNib:player forItemWithIdentifier:@"Player"];
     self.collectionView.dataSource = self;
     [self.collectionView addObserver:self forKeyPath:selectionIndexPathsKey options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
 }
@@ -219,12 +231,9 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 }
 
 - (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"item %@ %@ %@", collectionView, self.collectionView, indexPath);
     NSCollectionViewItem *item = [collectionView makeItemWithIdentifier:@"Player" forIndexPath:indexPath];
     Player *p = self.players[[indexPath item]];
     [item setRepresentedObject:p];
-    
-    NSLog(@"collectionView item:%@ %@ %@", indexPath, p, item);
     return item;
 }
 
@@ -248,7 +257,7 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 
 -(void)awakeFromNib {
     self.wantsLayer = true;
-    self.layer.backgroundColor = CGColorGetConstantColor(kCGColorBlack);
+//    self.layer.backgroundColor = CGColorGetConstantColor(kCGColorBlack);
 }
 
 @end

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		EFAE8D44689888A45F64C954 /* libPods-BluShepherd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4B00C2B18922CD4A98B00D /* libPods-BluShepherd.a */; };
+		F4821AE51DEBC13300B322B9 /* LibraryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = F4821AE41DEBC13300B322B9 /* LibraryDataSource.m */; };
+		F4821AE81DEBC2B500B322B9 /* Album.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4821AE61DEBC2B500B322B9 /* Album.xib */; };
 		F4D56F921DEA47DF00E81BA4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D56F911DEA47DF00E81BA4 /* AppDelegate.m */; };
 		F4D56F951DEA47DF00E81BA4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D56F941DEA47DF00E81BA4 /* main.m */; };
 		F4D56F971DEA47DF00E81BA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4D56F961DEA47DF00E81BA4 /* Assets.xcassets */; };
@@ -25,6 +27,9 @@
 		20C352302C60A4D8E37E3CB2 /* Pods-BluShepherd.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluShepherd.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BluShepherd/Pods-BluShepherd.debug.xcconfig"; sourceTree = "<group>"; };
 		8763B75C1E79B4B4997CCAEF /* Pods-BluShepherd.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluShepherd.release.xcconfig"; path = "Pods/Target Support Files/Pods-BluShepherd/Pods-BluShepherd.release.xcconfig"; sourceTree = "<group>"; };
 		BD4B00C2B18922CD4A98B00D /* libPods-BluShepherd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BluShepherd.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4821AE31DEBC13300B322B9 /* LibraryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryDataSource.h; sourceTree = "<group>"; };
+		F4821AE41DEBC13300B322B9 /* LibraryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryDataSource.m; sourceTree = "<group>"; };
+		F4821AE71DEBC2B500B322B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Album.xib; sourceTree = "<group>"; };
 		F4D56F8D1DEA47DF00E81BA4 /* BluShepherd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluShepherd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4D56F901DEA47DF00E81BA4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F4D56F911DEA47DF00E81BA4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -109,6 +114,9 @@
 				F4D56F981DEA47DF00E81BA4 /* MainMenu.xib */,
 				F4D56F9B1DEA47DF00E81BA4 /* Info.plist */,
 				F4D56F931DEA47DF00E81BA4 /* Supporting Files */,
+				F4821AE31DEBC13300B322B9 /* LibraryDataSource.h */,
+				F4821AE41DEBC13300B322B9 /* LibraryDataSource.m */,
+				F4821AE61DEBC2B500B322B9 /* Album.xib */,
 			);
 			path = BluShepherd;
 			sourceTree = "<group>";
@@ -186,6 +194,7 @@
 			files = (
 				F4D56FAF1DEA6A4500E81BA4 /* Player.xib in Resources */,
 				F4D56F971DEA47DF00E81BA4 /* Assets.xcassets in Resources */,
+				F4821AE81DEBC2B500B322B9 /* Album.xib in Resources */,
 				F4D56FB91DEB71D800E81BA4 /* pause.png in Resources */,
 				F4D56FB41DEAB62E00E81BA4 /* NowPlayingView.xib in Resources */,
 				F4D56F9A1DEA47DF00E81BA4 /* MainMenu.xib in Resources */,
@@ -248,6 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4821AE51DEBC13300B322B9 /* LibraryDataSource.m in Sources */,
 				F4D56FA31DEA48FD00E81BA4 /* PlayerList.m in Sources */,
 				F4D56F951DEA47DF00E81BA4 /* main.m in Sources */,
 				F4D56FB31DEAB62E00E81BA4 /* NowPlayingView.m in Sources */,
@@ -259,6 +269,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		F4821AE61DEBC2B500B322B9 /* Album.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4821AE71DEBC2B500B322B9 /* Base */,
+			);
+			name = Album.xib;
+			sourceTree = "<group>";
+		};
 		F4D56F981DEA47DF00E81BA4 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

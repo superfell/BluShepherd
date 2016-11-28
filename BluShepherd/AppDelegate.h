@@ -9,10 +9,13 @@
 #import <Cocoa/Cocoa.h>
 
 @class Player;
+@class LibraryDataSource;
+
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (retain) Player *selectedPlayer;
+@property (retain) IBOutlet LibraryDataSource *library;
 
 -(IBAction)play:(id)sender;
 -(IBAction)pause:(id)sender;

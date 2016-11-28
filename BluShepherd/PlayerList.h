@@ -22,7 +22,7 @@ extern NSString *notificationPlayerSelection;
 @property (retain) NSDictionary *lastStatus;
 @property (retain) NSDictionary *lastSyncStatus;
 
--(NSURL *)urlWithPath:(NSString *)path;
+-(void)urlWithPath:(NSString *)path block:(void(^)(NSURL *url))block;
 
 -(void)fetchSyncStatus;
 -(void)fetchStatus:(void(^)(NSDictionary *s))block;

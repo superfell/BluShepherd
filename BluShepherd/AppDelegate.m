@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "PlayerList.h"
 #import "NowPlayingView.h"
+#import "LibraryDataSource.h"
 
 @interface AppDelegate ()
 
@@ -28,6 +29,7 @@
         Player *p = [n object];
         npv.selectedPlayer = p;
         self.selectedPlayer = p;
+        self.library.selectedPlayer = p;
         [p fetchStatus:^(NSDictionary *s) {
             NSLog(@"Player Status %@", s);
             npv.nowPlaying = s;

@@ -27,19 +27,8 @@
     return [NSSet setWithObject:@"nowPlaying"];
 }
 
-+ (NSSet *)keyPathsForValuesAffectingCoverArtUrl {
-    return [NSSet setWithObjects:@"selectedPlayer", @"nowPlaying", nil];
-}
-
-+ (NSSet *)keyPathsForValuesAffectingCoverArt {
-    return [NSSet setWithObjects:@"selectedPlayer", @"nowPlaying", nil];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.view.wantsLayer = true;
-  //  self.view.layer.backgroundColor = CGColorGetConstantColor(kCGColorBlack);
-    // Do view setup here.
 }
 
 -(NSString *)title1 {
@@ -54,33 +43,29 @@
     return [self.nowPlaying objectForKey:@"title3"];
 }
 
--(NSURL *)coverArtUrl {
-    if (self.selectedPlayer == nil || self.nowPlaying == nil) {
-        return nil;
-    }
-    NSURL *res = [NSURL URLWithString:[self.nowPlaying objectForKey:@"image"] relativeToURL:[self.selectedPlayer urlWithPath:@""]];
-    return res;
-}
-
 -(NSDictionary *)nowPlaying {
     return self->nowPlaying;
 }
 
 -(void)setNowPlaying:(NSDictionary *)np {
     self->nowPlaying = np;
-    NSURL *art = self.coverArtUrl;
-    if ([art isEqual:lastURL]) {
-        return;
+    if (self.selectedPlayer != nil && np != nil) {
+        [self.selectedPlayer urlWithPath:@"" block:^(NSURL *url) {
+            NSURL *art = [NSURL URLWithString:[self.nowPlaying objectForKey:@"image"] relativeToURL:url];
+            if (![art isEqual:lastURL]) {
+                NSURLSession *s =[NSURLSession sharedSession];
+                NSURLSessionTask *t = [s dataTaskWithURL:art
+                                       completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                           NSImage *i = [[NSImage alloc] initWithData:data];
+                                           dispatch_async(dispatch_get_main_queue(), ^() {
+                                               lastURL = art;
+                                               self.coverArt = i;
+                                           });
+                                       }];
+                [t resume];
+            }
+        }];
     }
-    NSURLSessionTask *t = [[NSURLSession sharedSession] dataTaskWithURL:art
-                                                      completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                          NSImage *i = [[NSImage alloc] initWithData:data];
-                                                          dispatch_async(dispatch_get_main_queue(), ^() {
-                                                              lastURL = art;
-                                                              self.coverArt = i;
-                                                          });
-                                                      }];
-    [t resume];
 }
 
 @end
