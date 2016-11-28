@@ -11,7 +11,6 @@
 @class Player;
 
 @interface LibraryAlbum : NSObject {
-    NSDictionary *value;
 }
 
 -(id)initWithDictionary:(NSDictionary *)v;

@@ -42,6 +42,9 @@
                         <constraint firstAttribute="width" constant="220" id="Qfe-Zk-ous"/>
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="8X4-W6-OSP"/>
+                    <connections>
+                        <binding destination="Ewi-tv-Bar" name="value" keyPath="representedObject.coverArt" id="X0J-gN-Mx2"/>
+                    </connections>
                 </imageView>
             </subviews>
             <constraints>

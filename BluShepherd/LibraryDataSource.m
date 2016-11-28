@@ -10,6 +10,12 @@
 #import "PlayerList.h"
 #import <XMLDictionary/XMLDictionary.h>
 
+@interface LibraryAlbum()
+-(void)fetchCoverArt:(Player *)p;
+
+@property (assign) BOOL needsArt;
+@end
+
 @implementation LibraryAlbum
 
 -(id)initWithDictionary:(NSDictionary *)v {
@@ -19,7 +25,28 @@
     }
     self.title = [v objectForKey:@"title"];
     self.artist = [v objectForKey:@"art"];
+    self.needsArt = YES;
     return self;
+}
+
+-(void)fetchCoverArt:(Player *)p {
+    if (self.needsArt) {
+        self.needsArt = NO;
+        [p urlWithPath:[NSString stringWithFormat:@"Artwork?service=LocalMusic&album=%@&artist=%@",
+                        [self.title stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding],
+                        [self.artist stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]
+                 block:^(NSURL *url) {
+                     NSURLSession *s = [NSURLSession sharedSession];
+                     NSURLSessionTask *t = [[NSURLSession sharedSession] dataTaskWithURL:url
+                                                                       completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                                                           NSImage *i = [[NSImage alloc] initWithData:data];
+                                                                           dispatch_async(dispatch_get_main_queue(), ^() {
+                                                                               self.coverArt = i;
+                                                                           });
+                                                                       }];
+                     [t resume];
+                 }];
+    }
 }
 
 @end
@@ -51,7 +78,9 @@
 - (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath {
     NSCollectionViewItem *item = [collectionView makeItemWithIdentifier:@"Album" forIndexPath:indexPath];
     LibraryAlbum *a = self.albums[[indexPath item]];
+    [a fetchCoverArt:selectedPlayer];
     [item setRepresentedObject:a];
+    
     NSLog(@"itemForObject at %ld returning %@/%@ %@", [indexPath item], a.artist, a.title, item);
     return item;
 }
