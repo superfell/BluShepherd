@@ -88,6 +88,15 @@ Discovery returns a service on port 11100, a look at the node 2 diagnostic outpu
  
  * /Playlist returns the Play Queue 
  
+ * /Clear deletes all the play queue entries
+ 
+ * /Delete?id=x deletes an entry from the play queue, id is the zero offset into the play queue.
+ 
+ * /Add adds items to the play queue and starts them, e.g.
+ 	
+	     /Add?playnow=1&where=nextAlbum&service=LocalMusic&album=%2A%2A%2Ak%20the%20Millenium&artist=The%20KLF
+ 
+ 
  * /Artwork returns the cover artwork for a specified album/artist,
  
 		 GET /Artwork?service=LocalMusic&album=10%20Years%20%5BDisc%202%5D&artist=Banco%20De%20Gaia HTTP/1.1
