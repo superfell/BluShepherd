@@ -63,7 +63,7 @@ static NSString *keyLength = @"len";
     self.lock = [[NSLock alloc] init];
     NSArray *cacheDirs = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *bundleName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-    self.dir = [[cacheDirs firstObject] stringByAppendingPathComponent:bundleName];
+    self.dir = [[[cacheDirs firstObject] stringByAppendingPathComponent:bundleName] stringByAppendingPathComponent:@"coverArt"];
     NSLog(@"Initializing coverArt cache at %@", self.dir);
     [[NSFileManager defaultManager] createDirectoryAtPath:self.dir withIntermediateDirectories:YES attributes:nil error:nil];
     NSDictionary *d = [NSDictionary dictionaryWithContentsOfFile:[self.dir stringByAppendingPathComponent:metaFilename]];
