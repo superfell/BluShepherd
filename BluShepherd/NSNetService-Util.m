@@ -38,7 +38,7 @@
             
             if (addressStr && port) {
                 AddressAndPort *aAndP = [[AddressAndPort alloc] init];
-                aAndP.address = [NSString stringWithCString:addressStr encoding:kCFStringEncodingUTF8];
+                aAndP.address = [NSString stringWithCString:addressStr encoding:NSUTF8StringEncoding];
                 aAndP.port = port;
                 [retVal addObject:aAndP];
             }
