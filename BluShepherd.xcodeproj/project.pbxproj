@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		EFAE8D44689888A45F64C954 /* libPods-BluShepherd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4B00C2B18922CD4A98B00D /* libPods-BluShepherd.a */; };
+		F4296DDE1DF538B10073834A /* play_album m.png in Resources */ = {isa = PBXBuildFile; fileRef = F4296DDC1DF538B10073834A /* play_album m.png */; };
 		F43FB8311DF4C5BD002BBCAC /* CoverArtCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F43FB8301DF4C5BD002BBCAC /* CoverArtCache.m */; };
 		F43FB8361DF50CEA002BBCAC /* play_album_h.png in Resources */ = {isa = PBXBuildFile; fileRef = F43FB8321DF50CEA002BBCAC /* play_album_h.png */; };
 		F43FB8371DF50CEA002BBCAC /* play_album.png in Resources */ = {isa = PBXBuildFile; fileRef = F43FB8341DF50CEA002BBCAC /* play_album.png */; };
 		F4821AE51DEBC13300B322B9 /* LibraryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = F4821AE41DEBC13300B322B9 /* LibraryDataSource.m */; };
 		F4821AE81DEBC2B500B322B9 /* Album.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4821AE61DEBC2B500B322B9 /* Album.xib */; };
+		F4C601071DF52F4B00CA2177 /* HighlightButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C601061DF52F4B00CA2177 /* HighlightButton.m */; };
 		F4D56F921DEA47DF00E81BA4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D56F911DEA47DF00E81BA4 /* AppDelegate.m */; };
 		F4D56F951DEA47DF00E81BA4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D56F941DEA47DF00E81BA4 /* main.m */; };
 		F4D56F971DEA47DF00E81BA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4D56F961DEA47DF00E81BA4 /* Assets.xcassets */; };
@@ -30,6 +32,7 @@
 		20C352302C60A4D8E37E3CB2 /* Pods-BluShepherd.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluShepherd.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BluShepherd/Pods-BluShepherd.debug.xcconfig"; sourceTree = "<group>"; };
 		8763B75C1E79B4B4997CCAEF /* Pods-BluShepherd.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluShepherd.release.xcconfig"; path = "Pods/Target Support Files/Pods-BluShepherd/Pods-BluShepherd.release.xcconfig"; sourceTree = "<group>"; };
 		BD4B00C2B18922CD4A98B00D /* libPods-BluShepherd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BluShepherd.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4296DDD1DF538B10073834A /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = "Base.lproj/play_album m.png"; sourceTree = "<group>"; };
 		F43FB82F1DF4C5BD002BBCAC /* CoverArtCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverArtCache.h; sourceTree = "<group>"; };
 		F43FB8301DF4C5BD002BBCAC /* CoverArtCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverArtCache.m; sourceTree = "<group>"; };
 		F43FB8331DF50CEA002BBCAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/play_album_h.png; sourceTree = "<group>"; };
@@ -37,6 +40,8 @@
 		F4821AE31DEBC13300B322B9 /* LibraryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryDataSource.h; sourceTree = "<group>"; };
 		F4821AE41DEBC13300B322B9 /* LibraryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryDataSource.m; sourceTree = "<group>"; };
 		F4821AE71DEBC2B500B322B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Album.xib; sourceTree = "<group>"; };
+		F4C601051DF52F4B00CA2177 /* HighlightButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightButton.h; sourceTree = "<group>"; };
+		F4C601061DF52F4B00CA2177 /* HighlightButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightButton.m; sourceTree = "<group>"; };
 		F4D56F8D1DEA47DF00E81BA4 /* BluShepherd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BluShepherd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4D56F901DEA47DF00E81BA4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F4D56F911DEA47DF00E81BA4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -126,6 +131,8 @@
 				F4821AE61DEBC2B500B322B9 /* Album.xib */,
 				F43FB82F1DF4C5BD002BBCAC /* CoverArtCache.h */,
 				F43FB8301DF4C5BD002BBCAC /* CoverArtCache.m */,
+				F4C601051DF52F4B00CA2177 /* HighlightButton.h */,
+				F4C601061DF52F4B00CA2177 /* HighlightButton.m */,
 			);
 			path = BluShepherd;
 			sourceTree = "<group>";
@@ -133,6 +140,7 @@
 		F4D56F931DEA47DF00E81BA4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F4296DDC1DF538B10073834A /* play_album m.png */,
 				F43FB8321DF50CEA002BBCAC /* play_album_h.png */,
 				F43FB8341DF50CEA002BBCAC /* play_album.png */,
 				F4D56FB51DEB71D800E81BA4 /* pause.png */,
@@ -203,6 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4296DDE1DF538B10073834A /* play_album m.png in Resources */,
 				F43FB8361DF50CEA002BBCAC /* play_album_h.png in Resources */,
 				F4D56FAF1DEA6A4500E81BA4 /* Player.xib in Resources */,
 				F4D56F971DEA47DF00E81BA4 /* Assets.xcassets in Resources */,
@@ -270,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4C601071DF52F4B00CA2177 /* HighlightButton.m in Sources */,
 				F4821AE51DEBC13300B322B9 /* LibraryDataSource.m in Sources */,
 				F4D56FA31DEA48FD00E81BA4 /* PlayerList.m in Sources */,
 				F4D56F951DEA47DF00E81BA4 /* main.m in Sources */,
@@ -283,6 +293,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		F4296DDC1DF538B10073834A /* play_album m.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4296DDD1DF538B10073834A /* Base */,
+			);
+			name = "play_album m.png";
+			sourceTree = "<group>";
+		};
 		F43FB8321DF50CEA002BBCAC /* play_album_h.png */ = {
 			isa = PBXVariantGroup;
 			children = (
