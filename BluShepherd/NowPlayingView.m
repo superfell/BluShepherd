@@ -8,6 +8,8 @@
 
 #import "NowPlayingView.h"
 #import "PlayerList.h"
+#import "AppDelegate.h"
+#import "CoverArtCache.h"
 
 @interface NowPlayingView ()
 
@@ -53,16 +55,12 @@
         [self.selectedPlayer urlWithPath:@"" block:^(NSURL *url) {
             NSURL *art = [NSURL URLWithString:[self.nowPlaying objectForKey:@"image"] relativeToURL:url];
             if (![art isEqual:lastURL]) {
-                NSURLSession *s =[NSURLSession sharedSession];
-                NSURLSessionTask *t = [s dataTaskWithURL:art
-                                       completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                           NSImage *i = [[NSImage alloc] initWithData:data];
-                                           dispatch_async(dispatch_get_main_queue(), ^() {
-                                               lastURL = art;
-                                               self.coverArt = i;
-                                           });
-                                       }];
-                [t resume];
+                [[AppDelegate delegate].coverCache loadImage:art completionHandler:^(NSImage *i) {
+                       dispatch_async(dispatch_get_main_queue(), ^() {
+                           lastURL = art;
+                           self.coverArt = i;
+                       });
+                   }];
             }
         }];
     }

@@ -7,6 +7,8 @@
 //
 
 #import "PlayerList.h"
+#import "AppDelegate.h"
+#import "CoverArtCache.h"
 #import "NSNetService-Util.h"
 #import <XMLDictionary/XMLDictionary.h>
 
@@ -71,14 +73,12 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 
 -(void)fetchSyncStatus {
     NSURL *url = [self urlWithPath:@"SyncStatus"];
-    NSURLSessionTask *t = [[NSURLSession sharedSession] dataTaskWithURL:url
-                                                      completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLSession *s = [AppDelegate delegate].session;
+    NSURLSessionTask *t = [s dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error == nil) {
             NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
             NSURL *iconUrl = [NSURL URLWithString:[d objectForKey:@"_icon"] relativeToURL:url];
-            NSURLSessionTask *ticon = [[NSURLSession sharedSession] dataTaskWithURL:iconUrl
-                                                                  completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                NSImage *i = [[NSImage alloc] initWithData:data];
+            [[AppDelegate delegate].coverCache loadImage:iconUrl completionHandler:^(NSImage *i) {
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     self.type = [d objectForKey:@"_modelName"];
                     self.icon = i;
@@ -89,10 +89,8 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
                        }
                     }
                     self.toUpdate = nil;
-                    NSLog(@"Loaded icon %@", self.icon);
                 });
             }];
-            [ticon resume];
         } else {
             NSLog(@"result %@ %@", error, response);
         }
@@ -107,33 +105,34 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
         }];
         return;
     }
+    NSURLSession *s = [AppDelegate delegate].session;
     NSURL *url = [self urlWithPath:@"Status"];
-    NSURLSessionTask *t = [[NSURLSession sharedSession] dataTaskWithURL:url
-                                                      completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                          NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
-                                                          BOOL playing = [[d objectForKey:@"state"] isEqual:@"play"];
-                                                          dispatch_async(dispatch_get_main_queue(), ^() {
-                                                              self.lastStatus = d;
-                                                              self.playing = playing;
-                                                          });
-                                                          block(d);
-                                                      }];
+    NSURLSessionTask *t = [s dataTaskWithURL:url
+                          completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                              NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
+                              BOOL playing = [[d objectForKey:@"state"] isEqual:@"play"];
+                              dispatch_async(dispatch_get_main_queue(), ^() {
+                                  self.lastStatus = d;
+                                  self.playing = playing;
+                              });
+                              block(d);
+                          }];
     [t resume];
 }
 
 -(void)playPause:(NSString *)newState block:(void(^)(NSString *state))block {
     NSURL *url = [self urlWithPath:newState];
-    NSURLSessionTask *t = [[NSURLSession sharedSession] dataTaskWithURL:url
-                                                      completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                          NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
-                                                          NSLog(@"%@", d);
-                                                          NSString *state =[d objectForKey:@"__text"];
-                                                          BOOL playing = [state isEqualToString:@"play"];
-                                                          dispatch_async(dispatch_get_main_queue(), ^() {
-                                                              self.playing = playing;
-                                                          });
-                                                          block(state);
-                                                      }];
+    NSURLSession *s = [AppDelegate delegate].session;
+    NSURLSessionTask *t = [s dataTaskWithURL:url
+                              completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                                  NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
+                                  NSString *state =[d objectForKey:@"__text"];
+                                  BOOL playing = [state isEqualToString:@"play"];
+                                  dispatch_async(dispatch_get_main_queue(), ^() {
+                                      self.playing = playing;
+                                  });
+                                  block(state);
+                              }];
     [t resume];
 }
 
@@ -146,7 +145,6 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 }
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
-    NSLog(@"didResolve %@ %ld %@ %@", sender, sender.port, sender.hostName, sender.addresses);
     void (^b)();
     for (b in self.onResolved) {
         b();
@@ -257,7 +255,6 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 
 -(void)awakeFromNib {
     self.wantsLayer = true;
-//    self.layer.backgroundColor = CGColorGetConstantColor(kCGColorBlack);
 }
 
 @end

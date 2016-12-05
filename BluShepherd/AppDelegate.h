@@ -10,16 +10,19 @@
 
 @class Player;
 @class LibraryDataSource;
-
+@class CoverArtCache;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
-@property (retain) NSURLSession *cachingSession;
+@property (retain) NSURLSession *session;
+@property (retain) CoverArtCache *coverCache;
+
 @property (retain) Player *selectedPlayer;
 @property (retain) IBOutlet LibraryDataSource *library;
 
 -(IBAction)play:(id)sender;
 -(IBAction)pause:(id)sender;
 
++(AppDelegate *) delegate;
 @end
 

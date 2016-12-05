@@ -9,6 +9,7 @@
 #import "LibraryDataSource.h"
 #import "PlayerList.h"
 #import "AppDelegate.h"
+#import "CoverArtCache.h"
 #import <XMLDictionary/XMLDictionary.h>
 
 @interface LibraryAlbum()
@@ -17,7 +18,16 @@
 @property (assign) BOOL needsArt;
 @end
 
+static NSCharacterSet *queryChars;
+
 @implementation LibraryAlbum
+
++(void)initialize {
+    NSMutableCharacterSet *cs = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
+    // sigh, URLQueryAllowedCharacterSet doesn't actually seem to be correct.
+    [cs removeCharactersInString:@"&+"];
+    queryChars = cs;
+}
 
 -(id)initWithDictionary:(NSDictionary *)v {
     self = [super init];
@@ -34,22 +44,15 @@
     if (self.needsArt) {
         self.needsArt = NO;
         [p urlWithPath:[NSString stringWithFormat:@"Artwork?service=LocalMusic&album=%@&artist=%@",
-                        [self.title stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]],
-                        [self.artist stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]
+                        [self.title stringByAddingPercentEncodingWithAllowedCharacters:queryChars],
+                        [self.artist stringByAddingPercentEncodingWithAllowedCharacters:queryChars]]
                  block:^(NSURL *url) {
-                     NSURLSession *s = ((AppDelegate *)(NSApp.delegate)).cachingSession;
-                     NSURLSessionTask *t = [s dataTaskWithURL:url
-                                            completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                                NSHTTPURLResponse *r = (NSHTTPURLResponse *)response;
-                                                if ([r statusCode] != 200) {
-                                                    NSLog(@"Got error reading artwork %ld \\ %@", [r statusCode], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-                                                }
-                                                NSImage *i = [[NSImage alloc] initWithData:data];
-                                                dispatch_async(dispatch_get_main_queue(), ^() {
-                                                    self.coverArt = i;
-                                                });
-                                            }];
-                     [t resume];
+                     CoverArtCache *s = [AppDelegate delegate].coverCache;
+                     [s loadImage:url completionHandler:^(NSImage *i) {
+                         dispatch_async(dispatch_get_main_queue(), ^() {
+                             self.coverArt = i;
+                         });
+                     }];
                  }];
     }
 }
@@ -85,8 +88,6 @@
     LibraryAlbum *a = self.albums[[indexPath item]];
     [a fetchCoverArt:selectedPlayer];
     [item setRepresentedObject:a];
-    
-//    NSLog(@"itemForObject at %ld returning %@/%@ %@", [indexPath item], a.artist, a.title, item);
     return item;
 }
 

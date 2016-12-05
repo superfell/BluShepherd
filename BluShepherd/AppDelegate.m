@@ -10,20 +10,26 @@
 #import "PlayerList.h"
 #import "NowPlayingView.h"
 #import "LibraryDataSource.h"
+#import "CoverArtCache.h"
 
 @interface AppDelegate ()
 
 @property (weak) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSView *nowPlayingView;
 
--(NSURLSession *)createCachingSession;
+-(NSURLSession *)createSession;
 @end
 
 @implementation AppDelegate
 
++(AppDelegate *) delegate {
+    return [NSApp delegate];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    self.cachingSession = [self createCachingSession];
-    // Insert code here to initialize your application
+    self.session = [self createSession];
+    self.coverCache = [[CoverArtCache alloc] initWithSession:self.session];
+
     NowPlayingView *npv = [[NowPlayingView alloc] initWithNibName:nil bundle:nil];
     [self.nowPlayingView addSubview:[npv view]];
     
@@ -40,7 +46,7 @@
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // Insert code here to tear down your application
+    [self.coverCache flush];
 }
 
 -(IBAction)play:(id)sender {
@@ -55,22 +61,13 @@
     }];
 }
 
--(NSURLSession *)createCachingSession {
-    // Configuring caching behavior
-    NSString *cachesDirectory = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
-    NSString *cachePath = [[cachesDirectory stringByAppendingPathComponent:@"ArtworkCache"] stringByStandardizingPath];
-    NSInteger oneMB = 1024 * 1024;
-    NSURLCache *cache = [[NSURLCache alloc] initWithMemoryCapacity:16 * oneMB  diskCapacity:2048 * oneMB diskPath:cachePath];
-    NSLog(@"Cache is at %@", cachePath);
-    
+-(NSURLSession *)createSession {
+    // Configuring NSURLSession
     NSURLSessionConfiguration *cfg = [[NSURLSessionConfiguration defaultSessionConfiguration] copy];
-    cfg.URLCache = cache;
-    cfg.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
     cfg.HTTPMaximumConnectionsPerHost = 4;
     cfg.HTTPShouldSetCookies = NO;
-    
-    NSURLSession *s = [NSURLSession sessionWithConfiguration:cfg];
-    return s;
+    cfg.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    return [NSURLSession sessionWithConfiguration:cfg];
 }
 
 @end
