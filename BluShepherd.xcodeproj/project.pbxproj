@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		EFAE8D44689888A45F64C954 /* libPods-BluShepherd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4B00C2B18922CD4A98B00D /* libPods-BluShepherd.a */; };
 		F43FB8311DF4C5BD002BBCAC /* CoverArtCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F43FB8301DF4C5BD002BBCAC /* CoverArtCache.m */; };
+		F43FB8361DF50CEA002BBCAC /* play_album_h.png in Resources */ = {isa = PBXBuildFile; fileRef = F43FB8321DF50CEA002BBCAC /* play_album_h.png */; };
+		F43FB8371DF50CEA002BBCAC /* play_album.png in Resources */ = {isa = PBXBuildFile; fileRef = F43FB8341DF50CEA002BBCAC /* play_album.png */; };
 		F4821AE51DEBC13300B322B9 /* LibraryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = F4821AE41DEBC13300B322B9 /* LibraryDataSource.m */; };
 		F4821AE81DEBC2B500B322B9 /* Album.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4821AE61DEBC2B500B322B9 /* Album.xib */; };
 		F4D56F921DEA47DF00E81BA4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D56F911DEA47DF00E81BA4 /* AppDelegate.m */; };
@@ -30,6 +32,8 @@
 		BD4B00C2B18922CD4A98B00D /* libPods-BluShepherd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BluShepherd.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F43FB82F1DF4C5BD002BBCAC /* CoverArtCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverArtCache.h; sourceTree = "<group>"; };
 		F43FB8301DF4C5BD002BBCAC /* CoverArtCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverArtCache.m; sourceTree = "<group>"; };
+		F43FB8331DF50CEA002BBCAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/play_album_h.png; sourceTree = "<group>"; };
+		F43FB8351DF50CEA002BBCAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/play_album.png; sourceTree = "<group>"; };
 		F4821AE31DEBC13300B322B9 /* LibraryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryDataSource.h; sourceTree = "<group>"; };
 		F4821AE41DEBC13300B322B9 /* LibraryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryDataSource.m; sourceTree = "<group>"; };
 		F4821AE71DEBC2B500B322B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Album.xib; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 		F4D56F931DEA47DF00E81BA4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F43FB8321DF50CEA002BBCAC /* play_album_h.png */,
+				F43FB8341DF50CEA002BBCAC /* play_album.png */,
 				F4D56FB51DEB71D800E81BA4 /* pause.png */,
 				F4D56FB71DEB71D800E81BA4 /* play.png */,
 				F4D56FA71DEA5FE900E81BA4 /* blushepherd.pch */,
@@ -197,6 +203,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F43FB8361DF50CEA002BBCAC /* play_album_h.png in Resources */,
 				F4D56FAF1DEA6A4500E81BA4 /* Player.xib in Resources */,
 				F4D56F971DEA47DF00E81BA4 /* Assets.xcassets in Resources */,
 				F4821AE81DEBC2B500B322B9 /* Album.xib in Resources */,
@@ -204,6 +211,7 @@
 				F4D56FB41DEAB62E00E81BA4 /* NowPlayingView.xib in Resources */,
 				F4D56F9A1DEA47DF00E81BA4 /* MainMenu.xib in Resources */,
 				F4D56FBA1DEB71D800E81BA4 /* play.png in Resources */,
+				F43FB8371DF50CEA002BBCAC /* play_album.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +283,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		F43FB8321DF50CEA002BBCAC /* play_album_h.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F43FB8331DF50CEA002BBCAC /* Base */,
+			);
+			name = play_album_h.png;
+			sourceTree = "<group>";
+		};
+		F43FB8341DF50CEA002BBCAC /* play_album.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F43FB8351DF50CEA002BBCAC /* Base */,
+			);
+			name = play_album.png;
+			sourceTree = "<group>";
+		};
 		F4821AE61DEBC2B500B322B9 /* Album.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

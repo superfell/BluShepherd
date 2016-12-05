@@ -27,7 +27,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4he-IX-OWL" userLabel="artist">
                     <rect key="frame" x="-2" y="6" width="238" height="14"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="jXC-AC-bi1">
-                        <font key="font" metaFont="system" size="11"/>
+                        <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -46,6 +46,24 @@
                         <binding destination="Ewi-tv-Bar" name="value" keyPath="representedObject.title" id="If2-up-mKn"/>
                     </connections>
                 </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="RBh-Yk-jae">
+                    <rect key="frame" x="179" y="53" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="C3g-yX-Xc3"/>
+                        <constraint firstAttribute="width" constant="48" id="lLC-L4-FWN"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play_album" imagePosition="only" alignment="center" alternateImage="play_album_h" imageScaling="proportionallyUpOrDown" inset="2" id="h3l-WO-uWh">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="Ewi-tv-Bar" name="target" keyPath="representedObject" id="e1f-jv-6kD">
+                            <dictionary key="options">
+                                <string key="NSSelectorName">play:</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="4he-IX-OWL" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="7Xi-wT-sPR"/>
@@ -54,7 +72,9 @@
                 <constraint firstAttribute="trailing" secondItem="fy3-70-MI0" secondAttribute="trailing" constant="7" id="aPd-x6-LyE"/>
                 <constraint firstAttribute="trailing" secondItem="fy3-70-MI0" secondAttribute="trailing" constant="7" id="k0e-Ij-TgG"/>
                 <constraint firstItem="fy3-70-MI0" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="7" id="kc3-kk-b98"/>
+                <constraint firstItem="RBh-Yk-jae" firstAttribute="bottom" secondItem="fy3-70-MI0" secondAttribute="bottom" id="lck-nf-2PX"/>
                 <constraint firstItem="Bu7-8K-msg" firstAttribute="top" secondItem="fy3-70-MI0" secondAttribute="bottom" constant="8" id="nZS-6S-Mh0"/>
+                <constraint firstItem="RBh-Yk-jae" firstAttribute="trailing" secondItem="fy3-70-MI0" secondAttribute="trailing" id="qPS-q3-ONQ"/>
                 <constraint firstAttribute="trailing" secondItem="Bu7-8K-msg" secondAttribute="trailing" id="rBx-kD-5wp"/>
                 <constraint firstItem="4he-IX-OWL" firstAttribute="top" secondItem="Bu7-8K-msg" secondAttribute="bottom" constant="8" id="sW9-YG-i6d"/>
                 <constraint firstAttribute="trailing" secondItem="4he-IX-OWL" secondAttribute="trailing" id="vI9-u1-WUJ"/>
@@ -76,4 +96,8 @@
             </connections>
         </collectionViewItem>
     </objects>
+    <resources>
+        <image name="play_album" width="128" height="128"/>
+        <image name="play_album_h" width="128" height="128"/>
+    </resources>
 </document>

@@ -29,13 +29,14 @@ static NSCharacterSet *queryChars;
     queryChars = cs;
 }
 
--(id)initWithDictionary:(NSDictionary *)v {
+-(id)initWithDictionary:(NSDictionary *)v player:(Player *)p {
     self = [super init];
     if (![v isKindOfClass:[NSDictionary class]]) {
         NSLog(@"initWithDict called with %@", v);
     }
     self.title = [v objectForKey:@"title"];
     self.artist = [v objectForKey:@"art"];
+    self.player = p;
     self.needsArt = YES;
     return self;
 }
@@ -55,6 +56,14 @@ static NSCharacterSet *queryChars;
                      }];
                  }];
     }
+}
+
+-(void)play:(id)sender {
+    NSLog(@"Play: %@", self.title);
+    NSString *path = [NSString stringWithFormat:@"Add?playnow=1&where=nextAlbum&service=LocalMusic&album=%@&artist=%@",
+                        [self.title stringByAddingPercentEncodingWithAllowedCharacters:queryChars],
+                        [self.artist stringByAddingPercentEncodingWithAllowedCharacters:queryChars]];
+    [self.player playItems:path];
 }
 
 @end
@@ -88,6 +97,7 @@ static NSCharacterSet *queryChars;
     LibraryAlbum *a = self.albums[[indexPath item]];
     [a fetchCoverArt:selectedPlayer];
     [item setRepresentedObject:a];
+    [item setHighlightState:[collectionView.selectionIndexPaths containsObject:indexPath] ? NSCollectionViewItemHighlightForSelection: NSCollectionViewItemHighlightNone];
     return item;
 }
 
@@ -104,10 +114,10 @@ static NSCharacterSet *queryChars;
                                                               // or a dictionary of the one album in the section.
                                                               if ([album isKindOfClass:[NSArray class]]) {
                                                                   for(NSDictionary *a in album) {
-                                                                      [albums addObject:[[LibraryAlbum alloc] initWithDictionary:a]];
+                                                                      [albums addObject:[[LibraryAlbum alloc] initWithDictionary:a player:selectedPlayer]];
                                                                   }
                                                               } else {
-                                                                  [albums addObject:[[LibraryAlbum alloc] initWithDictionary:album]];
+                                                                  [albums addObject:[[LibraryAlbum alloc] initWithDictionary:album player:selectedPlayer]];
                                                               }
                                                           }
                                                           

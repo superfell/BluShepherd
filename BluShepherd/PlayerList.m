@@ -144,6 +144,12 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
     [self playPause:@"Pause" block:block];
 }
 
+-(void)playItems:(NSString *)urlPath {
+    [self playPause:urlPath block:^(NSString *state) {
+        NSLog(@"newState: %@", state);
+    }];
+}
+
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
     void (^b)();
     for (b in self.onResolved) {

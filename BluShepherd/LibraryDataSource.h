@@ -13,11 +13,14 @@
 @interface LibraryAlbum : NSObject {
 }
 
--(id)initWithDictionary:(NSDictionary *)v;
+-(id)initWithDictionary:(NSDictionary *)v player:(Player *)p;
 
 @property (retain) NSString *artist;
 @property (retain) NSString *title;
 @property (retain) NSImage *coverArt;
+@property (retain) Player *player;
+
+-(IBAction)play:(id)sender;
 
 @end
 
