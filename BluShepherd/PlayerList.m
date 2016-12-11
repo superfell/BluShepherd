@@ -16,43 +16,38 @@ NSString *notificationPlayerSelection = @"PlayerSelection";
 
 static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 
-@interface Player()
--(NSURL *)urlWithPath:(NSString *)path;
+@interface PlayerStatus()
+-(void)startStatus;
 @end
 
-@implementation Player
-
-@synthesize icon, name, type, service;
+@implementation PlayerStatus
 
 -(id)initWithService:(NSNetService *)s {
     self = [super init];
-    Player *p = self;
+    PlayerStatus *ps = self;
+    self.toUpdate = [NSMutableArray arrayWithCapacity:4];
     self.onResolved = [NSMutableArray arrayWithCapacity:4];
     [self.onResolved addObject:^(void) {
-        [p fetchSyncStatus];
+        [ps startSyncStatus];
     }];
-    self.name = s.name;
     self.service = s;
     self.service.delegate = self;
     [self.service resolveWithTimeout:5];
     return self;
 }
 
-- (id)copyWithZone:(nullable NSZone *)zone {
-    Player *c = [[Player alloc] init];
-    c.name = self.name;
-    c.service = self.service;
-    if (self.icon == nil) {
-        if (self.toUpdate == nil) {
-            self.toUpdate = [NSArray arrayWithObject:c];
-        } else {
-            self.toUpdate = [self.toUpdate arrayByAddingObject:c];
-        }
-    } else {
-        c.type = self.type;
-        c.icon = self.icon;
+-(void)netServiceDidResolveAddress:(NSNetService *)sender {
+    void (^b)();
+    for (b in self.onResolved) {
+        b();
     }
-    return c;
+    [self.onResolved removeAllObjects];
+}
+
+/* Sent to the NSNetService instance's delegate when an error in resolving the instance occurs. The error dictionary will contain two key/value pairs representing the error domain and code (see the NSNetServicesError enumeration above for error code constants).
+ */
+-(void)netService:(NSNetService *)sender didNotResolve:(NSDictionary<NSString *, NSNumber *> *)errorDict {
+    NSLog(@"didNotResolve %@ %@", sender, errorDict);
 }
 
 -(NSURL *)urlWithPath:(NSString *)path {
@@ -71,52 +66,60 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
     block([self urlWithPath:path]);
 }
 
--(void)fetchSyncStatus {
-    NSURL *url = [self urlWithPath:@"SyncStatus"];
+typedef void (^SessionCallback)(NSData *data, NSURLResponse *resp, NSError *error);
+
+-(void)startSyncStatus {
     NSURLSession *s = [AppDelegate delegate].session;
-    NSURLSessionTask *t = [s dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURL *url = [self urlWithPath:@"SyncStatus"];
+    __block __weak SessionCallback statusHandler;
+    SessionCallback syncStatusHandler = ^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error == nil) {
             NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
+            NSString *type = [d objectForKey:@"_modelName"];
             NSURL *iconUrl = [NSURL URLWithString:[d objectForKey:@"_icon"] relativeToURL:url];
             [[AppDelegate delegate].coverCache loadImage:iconUrl completionHandler:^(NSImage *i) {
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                    self.type = [d objectForKey:@"_modelName"];
-                    self.icon = i;
                     if (self.toUpdate != nil) {
                         for (Player *c in self.toUpdate) {
-                            c.type = self.type;
-                            c.icon = self.icon;
-                       }
+                            c.type = type;
+                            c.icon = i;
+                        }
                     }
-                    self.toUpdate = nil;
+                    [self.toUpdate removeAllObjects];
                 });
             }];
+            NSURL *nextUrl = [NSURL URLWithString:[NSString stringWithFormat:@"SyncStatus?etag=%@&timeout=60", [d objectForKey:@"_etag"]] relativeToURL:url];
+            NSLog(@"got SyncStatus update, starting next request to %@", [nextUrl absoluteString]);
+            NSURLSessionTask *t = [s dataTaskWithURL:nextUrl completionHandler:statusHandler];
+            [t resume];
         } else {
             NSLog(@"result %@ %@", error, response);
         }
-    }];
+    };
+    statusHandler = syncStatusHandler;
+    NSURLSessionTask *t = [s dataTaskWithURL:url completionHandler:syncStatusHandler];
     [t resume];
+    [self startStatus];
 }
 
--(void)fetchStatus:(void(^)(NSDictionary *s))block {
-    if (self.service.addresses.count == 0) {
-        [self.onResolved addObject:^() {
-            [self fetchStatus:block];
-        }];
-        return;
-    }
+-(void)startStatus {
     NSURLSession *s = [AppDelegate delegate].session;
     NSURL *url = [self urlWithPath:@"Status"];
-    NSURLSessionTask *t = [s dataTaskWithURL:url
-                          completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                              NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
-                              BOOL playing = [[d objectForKey:@"state"] isEqual:@"play"];
-                              dispatch_async(dispatch_get_main_queue(), ^() {
-                                  self.lastStatus = d;
-                                  self.playing = playing;
-                              });
-                              block(d);
-                          }];
+    __block __weak SessionCallback statusHandler;
+    SessionCallback myStatusHandler = ^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
+        BOOL playing = [[d objectForKey:@"state"] isEqual:@"play"];
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            self.lastStatus = d;
+            self.playing = playing;
+        });
+        NSURL *nextUrl = [NSURL URLWithString:[NSString stringWithFormat:@"Status?etag=%@&timeout=60", [d objectForKey:@"_etag"]] relativeToURL:url];
+        NSLog(@"got status update, starting next request to %@", [nextUrl absoluteString]);
+        NSURLSessionTask *t = [s dataTaskWithURL:nextUrl completionHandler:statusHandler];
+        [t resume];
+    };
+    statusHandler = myStatusHandler;
+    NSURLSessionTask *t = [s dataTaskWithURL:url completionHandler:myStatusHandler];
     [t resume];
 }
 
@@ -124,44 +127,54 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
     NSURL *url = [self urlWithPath:newState];
     NSURLSession *s = [AppDelegate delegate].session;
     NSURLSessionTask *t = [s dataTaskWithURL:url
-                              completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                  NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
-                                  NSString *state =[d objectForKey:@"__text"];
-                                  BOOL playing = [state isEqualToString:@"play"];
-                                  dispatch_async(dispatch_get_main_queue(), ^() {
-                                      self.playing = playing;
-                                  });
-                                  block(state);
-                              }];
+                           completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                               NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
+                               NSString *state =[d objectForKey:@"__text"];
+                               BOOL playing = [state isEqualToString:@"play"];
+                               dispatch_async(dispatch_get_main_queue(), ^() {
+                                   self.playing = playing;
+                               });
+                               block(state);
+                           }];
     [t resume];
 }
 
+@end
+
+@implementation Player
+
+-(id)initWithService:(NSNetService *)s {
+    self = [super init];
+    self.status = [[PlayerStatus alloc] initWithService:s];
+    [self.status.toUpdate addObject:self];
+    self.name = s.name;
+    return self;
+}
+
+- (id)copyWithZone:(nullable NSZone *)zone {
+    Player *c = [[Player alloc] init];
+    c.name = self.name;
+    c.status = self.status;
+    c.icon = self.icon;
+    c.type = self.type;
+    if (self.icon == nil) {
+        [c.status.toUpdate addObject:c];
+    }
+    return c;
+}
+
 -(void)play:(void(^)(NSString *state))block {
-    [self playPause:@"Play" block:block];
+    [self.status playPause:@"Play" block:block];
 }
 
 -(void)pause:(void(^)(NSString *state))block {
-    [self playPause:@"Pause" block:block];
+    [self.status playPause:@"Pause" block:block];
 }
 
 -(void)playItems:(NSString *)urlPath {
-    [self playPause:urlPath block:^(NSString *state) {
+    [self.status playPause:urlPath block:^(NSString *state) {
         NSLog(@"newState: %@", state);
     }];
-}
-
-- (void)netServiceDidResolveAddress:(NSNetService *)sender {
-    void (^b)();
-    for (b in self.onResolved) {
-        b();
-    }
-    [self.onResolved removeAllObjects];
-}
-
-/* Sent to the NSNetService instance's delegate when an error in resolving the instance occurs. The error dictionary will contain two key/value pairs representing the error domain and code (see the NSNetServicesError enumeration above for error code constants).
- */
-- (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary<NSString *, NSNumber *> *)errorDict {
-    NSLog(@"didNotResolve %@ %@", sender, errorDict);
 }
 
 @end

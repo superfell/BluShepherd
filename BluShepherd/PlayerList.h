@@ -10,29 +10,32 @@
 
 extern NSString *notificationPlayerSelection;
 
-@interface Player : NSObject<NSNetServiceDelegate, NSCopying>
+@interface PlayerStatus : NSObject<NSNetServiceDelegate>
 
-@property (retain) NSImage *icon;
-@property (retain) NSString *type;
-@property (retain) NSString *name;
 @property (retain) NSNetService *service;
-@property (retain) NSArray *toUpdate;
+@property (retain) NSMutableArray *toUpdate;
 @property (retain) NSMutableArray *onResolved;
 
 @property (retain) NSDictionary *lastStatus;
 @property (retain) NSDictionary *lastSyncStatus;
 
+@property (assign) BOOL playing;
+
 -(void)urlWithPath:(NSString *)path block:(void(^)(NSURL *url))block;
 
--(void)fetchSyncStatus;
--(void)fetchStatus:(void(^)(NSDictionary *s))block;
+@end
+
+@interface Player : NSObject<NSCopying>
+
+@property (retain) NSImage *icon;
+@property (retain) NSString *type;
+@property (retain) NSString *name;
+
+@property (retain) PlayerStatus *status;
 
 -(void)play:(void(^)(NSString *state))block;
 -(void)pause:(void(^)(NSString *state))block;
-
 -(void)playItems:(NSString *)urlPath;
-
-@property (assign) BOOL playing;
 
 @end
 

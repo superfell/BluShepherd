@@ -14,6 +14,7 @@
     NSURL   *lastURL;
     NSImage *lastCoverArt;
     NSDictionary *nowPlaying;
+    Player *player;
 }
 
 @property (retain) NSDictionary *nowPlaying;

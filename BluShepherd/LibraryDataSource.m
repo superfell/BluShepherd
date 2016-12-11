@@ -44,7 +44,7 @@ static NSCharacterSet *queryChars;
 -(void)fetchCoverArt:(Player *)p {
     if (self.needsArt) {
         self.needsArt = NO;
-        [p urlWithPath:[NSString stringWithFormat:@"Artwork?service=LocalMusic&album=%@&artist=%@",
+        [p.status urlWithPath:[NSString stringWithFormat:@"Artwork?service=LocalMusic&album=%@&artist=%@",
                         [self.title stringByAddingPercentEncodingWithAllowedCharacters:queryChars],
                         [self.artist stringByAddingPercentEncodingWithAllowedCharacters:queryChars]]
                  block:^(NSURL *url) {
@@ -102,7 +102,7 @@ static NSCharacterSet *queryChars;
 }
 
 -(void)fetchAlbums {
-    [selectedPlayer urlWithPath:@"Albums?service=LocalMusic" block:^(NSURL *url) {
+    [selectedPlayer.status urlWithPath:@"Albums?service=LocalMusic" block:^(NSURL *url) {
         NSURLSessionTask *t = [[NSURLSession sharedSession] dataTaskWithURL:url
                                                       completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                                           NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];

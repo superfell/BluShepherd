@@ -38,10 +38,6 @@
         npv.selectedPlayer = p;
         self.selectedPlayer = p;
         self.library.selectedPlayer = p;
-        [p fetchStatus:^(NSDictionary *s) {
-            NSLog(@"Player Status %@", s);
-            npv.nowPlaying = s;
-        }];
     }];
 }
 
@@ -64,8 +60,9 @@
 -(NSURLSession *)createSession {
     // Configuring NSURLSession
     NSURLSessionConfiguration *cfg = [[NSURLSessionConfiguration defaultSessionConfiguration] copy];
-    cfg.HTTPMaximumConnectionsPerHost = 4;
+    cfg.HTTPMaximumConnectionsPerHost = 6;
     cfg.HTTPShouldSetCookies = NO;
+    cfg.timeoutIntervalForRequest = 70;
     cfg.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
     return [NSURLSession sessionWithConfiguration:cfg];
 }

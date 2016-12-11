@@ -709,7 +709,7 @@
                                         </buttonCell>
                                         <connections>
                                             <action selector="play:" target="-1" id="fH8-sU-ZBo"/>
-                                            <binding destination="Voe-Tx-rLC" name="hidden" keyPath="selectedPlayer.playing" id="QfG-qw-ULb"/>
+                                            <binding destination="Voe-Tx-rLC" name="hidden" keyPath="selectedPlayer.status.playing" id="yba-wu-qCq"/>
                                         </connections>
                                     </button>
                                     <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMe-OP-Nxw">
@@ -724,7 +724,7 @@
                                         </buttonCell>
                                         <connections>
                                             <action selector="pause:" target="-1" id="MWS-Y5-zKA"/>
-                                            <binding destination="Voe-Tx-rLC" name="hidden" keyPath="selectedPlayer.playing" id="xbn-cQ-6kp">
+                                            <binding destination="Voe-Tx-rLC" name="hidden" keyPath="selectedPlayer.status.playing" id="ZTT-Yd-EqI">
                                                 <dictionary key="options">
                                                     <string key="NSValueTransformerName">NSNegateBoolean</string>
                                                 </dictionary>
@@ -808,7 +808,7 @@
                                                     <splitView ambiguous="YES" misplaced="YES" arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="oXC-8N-WnG">
                                                         <rect key="frame" x="0.0" y="0.0" width="380.5" height="593"/>
                                                         <subviews>
-                                                            <customView ambiguous="YES" id="5CK-P2-Zfw">
+                                                            <customView ambiguous="YES" misplaced="YES" id="5CK-P2-Zfw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="380.5" height="319"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
@@ -849,7 +849,7 @@
                                                                     <constraint firstItem="tbi-yI-Okv" firstAttribute="top" secondItem="5CK-P2-Zfw" secondAttribute="top" id="u5f-Fp-lv0"/>
                                                                 </constraints>
                                                             </customView>
-                                                            <customView ambiguous="YES" id="CaO-in-2SV">
+                                                            <customView ambiguous="YES" misplaced="YES" id="CaO-in-2SV">
                                                                 <rect key="frame" x="0.0" y="320" width="380.5" height="273"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <constraints>
