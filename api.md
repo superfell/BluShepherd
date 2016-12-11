@@ -92,6 +92,28 @@ Discovery returns a service on port 11100, a look at the node 2 diagnostic outpu
  
  * /Delete?id=x deletes an entry from the play queue, id is the zero offset into the play queue.
  
+ * /Songs returns more detailed information about an album e.g.
+ 
+        /Songs?service=LocalMusic&album=Waiting%20for%20the%20Sirens%27%20Call&artist=New%20Order
+	
+returns
+
+	<?xml version="1.0" encoding="UTF-8" standalone="yes"?><songs service="LocalMusic" id="13">
+	<album time="3804" quality="cd">
+	<song>
+	<track>1</track>
+	<discno>1/1</discno>
+	<title>Who's Joe?</title>
+	<art>New Order</art>
+	<alb>Waiting for the Sirens' Call</alb>
+	<composer>New Order</composer>
+	<fn>/var/mnt/ANDROMEDA-music/iTunes/Music/New Order/Waiting For The Sirens' Call/01 Who's Joe_.m4a</fn>
+	<time>344</time>
+	<date>2005</date>
+	<quality>cd</quality>
+	</song>
+	<song>....
+	
  * /Add adds items to the play queue and starts them, e.g.
  	
 	     /Add?playnow=1&where=nextAlbum&service=LocalMusic&album=%2A%2A%2Ak%20the%20Millenium&artist=The%20KLF
