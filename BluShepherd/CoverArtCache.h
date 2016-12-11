@@ -11,6 +11,7 @@
 @interface CoverArtCache : NSObject {
     int32_t cacheHit;
     int32_t cacheAdd;
+    int32_t fetching;
 }
 
 @property (retain) NSURLSession *session;

@@ -50,6 +50,16 @@ static NSString *keyLength = @"len";
 
 @end
 
+@interface LoadRequest : NSObject
+@property (retain) NSURL *url;
+@property (copy) void(^callback)(NSImage *);
+@property (retain) CacheItem *item;
+@property (retain) NSData *cachedData;
+@end
+
+@implementation LoadRequest
+@end
+
 @interface CoverArtCache()
 
 @property (retain) NSTimer *metaWriterTimer;
@@ -57,8 +67,9 @@ static NSString *keyLength = @"len";
 
 @property (retain) NSLock *lock;
 @property (assign) BOOL dirty;
-@property (retain) NSMutableDictionary *meta;   // url -> dictionary persistable version
+@property (retain) NSMutableDictionary *meta;       // url -> dictionary persistable version
 @property (retain) NSMutableDictionary *metaItems;  // url -> cacheItem
+@property (retain) NSMutableArray *queue;           // items waiting to be loaded.
 
 -(CacheItem *)cached:(NSURL *)url;
 -(NSData *)load:(CacheItem *)item;
@@ -95,6 +106,7 @@ static NSString *keyLength = @"len";
         self.meta = [d mutableCopy];
     }
     self.metaItems = [[NSMutableDictionary alloc] init];
+    self.queue = [NSMutableArray arrayWithCapacity:64];
     self.metaWriterTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(writeMeta) userInfo:nil repeats:YES];
     return self;
 }
@@ -130,6 +142,37 @@ static NSString *keyLength = @"len";
     });
 }
 
+-(void)fetchImage:(NSURL *)url cacheItem:(CacheItem *)cached cachedData:(NSData *)cachedData handler:(void(^)(NSImage *))handler {
+    NSURLSessionTask *t = [self.session dataTaskWithURL:url
+                                      completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        OSAtomicAdd32(-1, &fetching);
+        NSHTTPURLResponse *r = (NSHTTPURLResponse *)response;
+        if ([r statusCode] != 200) {
+            NSLog(@"Got error reading artwork %ld %@ \\ %@", [r statusCode], error, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        } else {
+            if ([data length] < 128) {
+                NSLog(@"got %ld bytes for %@", [data length], url);
+            }
+            if ((cachedData == nil) ||(![data isEqualToData:cachedData])) {
+                OSAtomicIncrement32(&cacheAdd);
+                NSImage *i = [[NSImage alloc] initWithData:data];
+                handler(i);
+                [self add:data withKey:url replacing:cached];
+            }
+        }
+        [self.lock lock];
+        LoadRequest *next = [self.queue lastObject];
+        if (next != nil) {
+            [self.queue removeLastObject];
+        }
+        [self.lock unlock];
+        if (next != nil) {
+            [self fetchImage:next.url cacheItem:next.item cachedData:next.cachedData handler:next.callback];
+        }
+      }];
+    [t resume];
+}
+
 -(void)loadImage:(NSURL *)url completionHandler:(void (^)(NSImage *image))handler {
     CacheItem *cached = [self cached:url];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^() {
@@ -139,28 +182,21 @@ static NSString *keyLength = @"len";
             OSAtomicIncrement32(&cacheHit);
             handler(i);
         }
-        NSURLSessionTask *t = [self.session dataTaskWithURL:url
-                               completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                                   NSHTTPURLResponse *r = (NSHTTPURLResponse *)response;
-                                   if ([r statusCode] != 200) {
-                                       NSLog(@"Got error reading artwork %ld %@ \\ %@", [r statusCode], error, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-                                   }
-                                   else {
-                                       if ([data length] < 128) {
-                                           NSLog(@"got %ld bytes for %@", [data length], url);
-                                       }
-                                       if ((cachedData == nil) ||(![data isEqualToData:cachedData])) {
-                                           OSAtomicIncrement32(&cacheAdd);
-                                           NSImage *i = [[NSImage alloc] initWithData:data];
-                                           handler(i);
-                                           [self add:data withKey:url replacing:cached];
-                                       }
-                                   }
-                               }];
-        if (cachedData != nil) {
-            t.priority = NSURLSessionTaskPriorityLow;
+        int32_t fetchCount = OSAtomicAdd32(1, &fetching);
+        if (fetchCount > 2) {
+            LoadRequest *r = [[LoadRequest alloc] init];
+            r.url = url;
+            r.callback = handler;
+            r.cachedData = cachedData;
+            r.item = cached;
+            [self.lock lock];
+            // jump to the head of the queue, newer requests for images are more likely to be
+            // shown to the user than older ones. [the queue is actioned in reverse order].
+            [self.queue addObject:r];
+            [self.lock unlock];
+            return;
         }
-        [t resume];
+        [self fetchImage:url cacheItem:cached cachedData:cachedData handler:handler];
     });
 }
 
