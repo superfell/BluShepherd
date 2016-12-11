@@ -28,7 +28,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     self.session = [self createSession];
-    self.coverCache = [[CoverArtCache alloc] initWithSession:self.session];
+    self.coverCache = [[CoverArtCache alloc] init];
 
     NowPlayingView *npv = [[NowPlayingView alloc] initWithNibName:nil bundle:nil];
     [self.nowPlayingView addSubview:[npv view]];
@@ -46,21 +46,17 @@
 }
 
 -(IBAction)play:(id)sender {
-    [self.selectedPlayer play:^(NSString *s) {
-        NSLog(@"new state: %@", s);
-    }];
+    [self.selectedPlayer play:^(NSString *s) { }];
 }
 
 -(IBAction)pause:(id)sender {
-    [self.selectedPlayer pause:^(NSString *s) {
-        NSLog(@"new state: %@", s);
-    }];
+    [self.selectedPlayer pause:^(NSString *s) {} ];
 }
 
 -(NSURLSession *)createSession {
     // Configuring NSURLSession
     NSURLSessionConfiguration *cfg = [[NSURLSessionConfiguration defaultSessionConfiguration] copy];
-    cfg.HTTPMaximumConnectionsPerHost = 6;
+    cfg.HTTPMaximumConnectionsPerHost = 5;
     cfg.HTTPShouldSetCookies = NO;
     cfg.timeoutIntervalForRequest = 70;
     cfg.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;

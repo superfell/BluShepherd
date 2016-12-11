@@ -7,6 +7,7 @@
 //
 
 #import "CoverArtCache.h"
+#include <sys/stat.h>
 
 static NSString *metaFilename = @"meta.dict";
 
@@ -15,6 +16,8 @@ static NSString *keyLength = @"len";
 
 @interface CacheItem()
 -(id)initFromDictionary:(NSDictionary *)d;
+
+@property (readwrite,atomic) NSDate *cachedLastAccess;
 @end
 
 @implementation CacheItem
@@ -33,6 +36,18 @@ static NSString *keyLength = @"len";
             nil];
 }
 
+-(NSDate *)lastAccess {
+    if (self.cachedLastAccess != nil) {
+        return self.cachedLastAccess;
+    }
+    struct stat output;
+    stat([self.filename fileSystemRepresentation], &output);
+    struct timespec accessTime = output.st_atimespec;
+    NSDate *aDate = [NSDate dateWithTimeIntervalSince1970:accessTime.tv_sec];
+    self.cachedLastAccess = aDate;
+    return aDate;
+}
+
 @end
 
 @interface CoverArtCache()
@@ -42,7 +57,8 @@ static NSString *keyLength = @"len";
 
 @property (retain) NSLock *lock;
 @property (assign) BOOL dirty;
-@property (retain) NSMutableDictionary *meta;
+@property (retain) NSMutableDictionary *meta;   // url -> dictionary persistable version
+@property (retain) NSMutableDictionary *metaItems;  // url -> cacheItem
 
 -(CacheItem *)cached:(NSURL *)url;
 -(NSData *)load:(CacheItem *)item;
@@ -57,9 +73,15 @@ static NSString *keyLength = @"len";
 
 @implementation CoverArtCache
 
--(id)initWithSession:(NSURLSession *)s {
+-(id)init {
     self = [super init];
-    self.session = s;
+    // Configuring NSURLSession
+    NSURLSessionConfiguration *cfg = [[NSURLSessionConfiguration defaultSessionConfiguration] copy];
+    cfg.HTTPMaximumConnectionsPerHost = 2;
+    cfg.HTTPShouldSetCookies = NO;
+    cfg.timeoutIntervalForRequest = 15;
+    cfg.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    self.session = [NSURLSession sessionWithConfiguration:cfg];
     self.lock = [[NSLock alloc] init];
     NSArray *cacheDirs = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *bundleName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
@@ -72,6 +94,7 @@ static NSString *keyLength = @"len";
     } else {
         self.meta = [d mutableCopy];
     }
+    self.metaItems = [[NSMutableDictionary alloc] init];
     self.metaWriterTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(writeMeta) userInfo:nil repeats:YES];
     return self;
 }
@@ -102,6 +125,9 @@ static NSString *keyLength = @"len";
         OSAtomicAdd32(-hit, &cacheHit);
         OSAtomicAdd32(-add, &cacheAdd);
     }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^() {
+        [self expire];
+    });
 }
 
 -(void)loadImage:(NSURL *)url completionHandler:(void (^)(NSImage *image))handler {
@@ -138,16 +164,34 @@ static NSString *keyLength = @"len";
     });
 }
 
+-(CacheItem *)cachedWithKey:(NSString *)k {
+    if (k == nil) {
+        return nil;
+    }
+    [self.lock lock];
+    CacheItem *i = [self.metaItems objectForKey:k];
+    if (i == nil) {
+        NSDictionary *d  = [self.meta objectForKey:k];
+        if (d != nil) {
+            i = [[CacheItem alloc] initFromDictionary:d];
+            i.url = k;
+            [self.metaItems setObject:i forKey:k];
+        }
+    }
+    [self.lock unlock];
+    return i;
+}
+
 -(CacheItem *)cached:(NSURL *)url {
     NSString *k = [url absoluteString];
-    [self.lock lock];
-    NSDictionary *c  = [self.meta objectForKey:k];
-    [self.lock unlock];
-    return c == nil ? nil : [[CacheItem alloc] initFromDictionary:c];
+    return [self cachedWithKey:k];
 }
 
 -(NSData *)load:(CacheItem *)i {
     NSData *d = [[NSData alloc] initWithContentsOfFile:[self.dir stringByAppendingPathComponent:i.filename]];
+    if (d != nil) {
+        i.used = YES;
+    }
     return d;
 }
 
@@ -155,10 +199,13 @@ static NSString *keyLength = @"len";
     CacheItem *i = [[CacheItem alloc] init];
     i.filename = [self writeData:data];
     i.length = [data length];
+    i.used = YES;
+    i.url = [url absoluteString];
     NSDictionary *d = [i asDict];
     NSString *k = [url absoluteString];
     [self.lock lock];
     [self.meta setObject:d forKey:k];
+    [self.metaItems setObject:i forKey:k];
     self.dirty = YES;
     [self.lock unlock];
     if (existing != nil) {
@@ -181,6 +228,66 @@ static NSString *keyLength = @"len";
     [tempFileHandle writeData:data];
     [tempFileHandle closeFile];
     return fn;
+}
+
+-(void)expire {
+    NSNumber *ms = [[NSUserDefaults standardUserDefaults] objectForKey:@"Covers_MaxCacheSize"];
+    if ([ms unsignedLongValue] == 0) {
+        ms = [NSNumber numberWithUnsignedLong:1024L * 1024 * 1024 * 4];  // 4 Gb.
+    }
+    NSNumber *me = [[NSUserDefaults standardUserDefaults] objectForKey:@"Covers_MaxCacheEntries"];
+    if ([me integerValue] == 0) {
+        me = [NSNumber numberWithInteger:1024 * 8];
+    }
+    [self.lock lock];
+    NSMutableDictionary *metaCopy = [self.meta mutableCopy];
+    NSMutableDictionary *metaItemsCopy = [self.metaItems mutableCopy];
+    [self.lock unlock];
+    __block unsigned long totalBytes = 0;
+    for (NSDictionary *i in [metaCopy allValues]) {
+        totalBytes += [[i objectForKey:keyLength] longValue];
+    }
+    bool(^needsExpiry)(float factor) = ^bool(float factor) {
+        return ([metaCopy count] > (factor *[me integerValue])) || (totalBytes > (factor *[ms unsignedLongValue]));
+    };
+    if (!needsExpiry(1.0f)) {
+        return;
+    }
+    NSLog(@"enties %ld / %ld, size %ld / %ld", [metaCopy count], [me integerValue], totalBytes / 1024 / 1024, [ms unsignedLongValue] / 1024 / 1024);
+    NSMutableArray *expirable = [NSMutableArray array];
+    for (NSString *k in metaCopy) {
+        CacheItem *ci = [metaItemsCopy objectForKey:k];
+        if (ci == nil || !ci.used) {
+            if (ci == nil) {
+                ci = [self cachedWithKey:k];
+            }
+            [expirable addObject:ci];
+        }
+    }
+    // if we're going to expire stuff, lets get some headroom
+    const float expireFactory = 0.95f;
+    void(^expireFrom)(NSMutableArray *a) = ^(NSMutableArray *a) {
+        [a sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"lastAccess" ascending:NO]]];
+        while (needsExpiry(expireFactory) && a.count > 0) {
+            CacheItem *toExpire = [a lastObject];
+            [self.lock lock];
+            [self.meta removeObjectForKey:toExpire.url];
+            [self.metaItems removeObjectForKey:toExpire.url];
+            [self.lock unlock];
+            [[NSFileManager defaultManager] removeItemAtPath:[self.dir stringByAppendingPathComponent:toExpire.filename] error:nil];
+            [metaCopy removeObjectForKey:toExpire.url];
+            [metaItemsCopy removeObjectForKey:toExpire.url];
+            totalBytes -= toExpire.length;
+            [a removeLastObject];
+            NSLog(@"removing expired item %@ size %ld", toExpire.filename, toExpire.length);
+        }
+    };
+    expireFrom(expirable);
+    if (!needsExpiry(expireFactory)) {
+        return;
+    }
+    expirable = [[metaItemsCopy allValues] mutableCopy];
+    expireFrom(expirable);
 }
 
 @end
