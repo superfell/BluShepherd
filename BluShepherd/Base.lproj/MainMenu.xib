@@ -44,7 +44,11 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                            <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                            <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                <connections>
+                                    <action selector="makeKeyAndOrderFront:" target="eei-Ul-nxw" id="sna-fy-IHe"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                             <menuItem title="Services" id="NMo-om-nkz">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -805,10 +809,10 @@
                                                 <rect key="frame" x="479.5" y="0.0" width="384.5" height="578"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
-                                                    <splitView ambiguous="YES" misplaced="YES" arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="oXC-8N-WnG">
+                                                    <splitView wantsLayer="YES" ambiguous="YES" misplaced="YES" arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="oXC-8N-WnG">
                                                         <rect key="frame" x="0.0" y="0.0" width="380.5" height="593"/>
                                                         <subviews>
-                                                            <customView ambiguous="YES" misplaced="YES" id="5CK-P2-Zfw">
+                                                            <customView ambiguous="YES" id="5CK-P2-Zfw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="380.5" height="319"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
@@ -849,7 +853,7 @@
                                                                     <constraint firstItem="tbi-yI-Okv" firstAttribute="top" secondItem="5CK-P2-Zfw" secondAttribute="top" id="u5f-Fp-lv0"/>
                                                                 </constraints>
                                                             </customView>
-                                                            <customView ambiguous="YES" misplaced="YES" id="CaO-in-2SV">
+                                                            <customView ambiguous="YES" id="CaO-in-2SV">
                                                                 <rect key="frame" x="0.0" y="320" width="380.5" height="273"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <constraints>
@@ -906,6 +910,49 @@
             <contentBorderThickness minY="22"/>
             <point key="canvasLocation" x="380" y="498.5"/>
         </window>
+        <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="Preferences" animationBehavior="default" id="eei-Ul-nxw">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="283" y="305" width="480" height="124"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <view key="contentView" id="Iy4-Gv-pNn">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="124"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aLj-aQ-7NX">
+                        <rect key="frame" x="18" y="88" width="444" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Clear playlist when selecting Play Now" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wmf-Nc-bLB">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="lZu-c7-i78" name="value" keyPath="values.clearOnPlayNow" id="2fK-eb-h7p">
+                                <dictionary key="options">
+                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ukA-8z-bIx">
+                        <rect key="frame" x="391" y="13" width="75" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yX1-To-1no">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="orderOut:" target="eei-Ul-nxw" id="qJE-Zc-fTO"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="214" y="1064"/>
+        </window>
+        <userDefaultsController representsSharedInstance="YES" id="lZu-c7-i78"/>
     </objects>
     <resources>
         <image name="pause" width="128" height="128"/>

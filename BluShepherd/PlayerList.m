@@ -13,11 +13,13 @@
 #import <XMLDictionary/XMLDictionary.h>
 
 NSString *notificationPlayerSelection = @"PlayerSelection";
+NSString *prefClearOnPlayNow = @"clearOnPlayNow";
 
 static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 
 @interface PlayerStatus()
 -(void)startStatus;
+-(void)clearPlaylist:(void(^)())completionHandler;
 @end
 
 @implementation PlayerStatus
@@ -139,6 +141,15 @@ typedef void (^SessionCallback)(NSData *data, NSURLResponse *resp, NSError *erro
     [t resume];
 }
 
+-(void)clearPlaylist:(void(^)())completionHandler {
+    NSURL *url = [self urlWithPath:@"Clear"];
+    NSURLSession *s = [AppDelegate delegate].session;
+    NSURLSessionTask *t = [s dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        completionHandler();
+    }];
+    [t resume];
+}
+
 @end
 
 @implementation Player
@@ -171,10 +182,14 @@ typedef void (^SessionCallback)(NSData *data, NSURLResponse *resp, NSError *erro
     [self.status playPause:@"Pause" block:block];
 }
 
--(void)playItems:(NSString *)urlPath {
-    [self.status playPause:urlPath block:^(NSString *state) {
-        NSLog(@"newState: %@", state);
-    }];
+-(void)playItems:(NSString *)urlPath clearPlaylist:(BOOL)clear {
+    if (clear) {
+        [self.status clearPlaylist:^() {
+            [self.status playPause:urlPath block:^(NSString *state) {}];
+        }];
+    } else {
+        [self.status playPause:urlPath block:^(NSString *state) {}];
+    }
 }
 
 @end

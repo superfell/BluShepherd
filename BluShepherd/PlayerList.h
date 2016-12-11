@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *notificationPlayerSelection;
+extern NSString *prefClearOnPlayNow;
+
 
 @interface PlayerStatus : NSObject<NSNetServiceDelegate>
 
@@ -35,7 +37,7 @@ extern NSString *notificationPlayerSelection;
 
 -(void)play:(void(^)(NSString *state))block;
 -(void)pause:(void(^)(NSString *state))block;
--(void)playItems:(NSString *)urlPath;
+-(void)playItems:(NSString *)urlPath clearPlaylist:(BOOL)clear;
 
 @end
 

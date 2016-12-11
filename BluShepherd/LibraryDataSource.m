@@ -63,7 +63,7 @@ static NSCharacterSet *queryChars;
     NSString *path = [NSString stringWithFormat:@"Add?playnow=1&where=nextAlbum&service=LocalMusic&album=%@&artist=%@",
                         [self.title stringByAddingPercentEncodingWithAllowedCharacters:queryChars],
                         [self.artist stringByAddingPercentEncodingWithAllowedCharacters:queryChars]];
-    [self.player playItems:path];
+    [self.player playItems:path clearPlaylist:[[NSUserDefaults standardUserDefaults] boolForKey:prefClearOnPlayNow]];
 }
 
 @end
