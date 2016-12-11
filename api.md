@@ -115,10 +115,17 @@ returns
 	<song>....
 	
  * /Add adds items to the play queue and starts them, e.g.
- 	
+ 
+ 		 Play Now
 	     /Add?playnow=1&where=nextAlbum&service=LocalMusic&album=%2A%2A%2Ak%20the%20Millenium&artist=The%20KLF
  
- 
+ 		 Add Next
+		 /Add?playnow=-1&where=nextAlbum&service=LocalMusic&album=Vs.%20T-World%20-%202000&artist=GusGus
+		 
+		 Play Last
+		 /Add?playnow=-1&where=last&service=LocalMusic&album=Waiting%20for%20the%20Rights%20of%20Mu&artist=The%20KLF 
+		 		 
+		 
  * /Artwork returns the cover artwork for a specified album/artist,
  
 		 GET /Artwork?service=LocalMusic&album=10%20Years%20%5BDisc%202%5D&artist=Banco%20De%20Gaia HTTP/1.1

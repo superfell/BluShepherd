@@ -908,7 +908,7 @@
                 </constraints>
             </view>
             <contentBorderThickness minY="22"/>
-            <point key="canvasLocation" x="380" y="498.5"/>
+            <point key="canvasLocation" x="-203" y="502"/>
         </window>
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="Preferences" animationBehavior="default" id="eei-Ul-nxw">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>

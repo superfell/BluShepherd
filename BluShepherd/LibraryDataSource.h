@@ -20,7 +20,9 @@
 @property (retain) NSImage *coverArt;
 @property (retain) Player *player;
 
--(IBAction)play:(id)sender;
+-(IBAction)playNow:(id)sender;
+-(IBAction)playNext:(id)sender;
+-(IBAction)playLast:(id)sender;
 
 @end
 

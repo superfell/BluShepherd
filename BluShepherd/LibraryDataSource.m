@@ -41,12 +41,20 @@ static NSCharacterSet *queryChars;
     return self;
 }
 
+-(NSString *)encodedTitle {
+    return [self.title stringByAddingPercentEncodingWithAllowedCharacters:queryChars];
+}
+
+-(NSString *)encodedArtist {
+    return [self.artist stringByAddingPercentEncodingWithAllowedCharacters:queryChars];
+}
+
 -(void)fetchCoverArt:(Player *)p {
     if (self.needsArt) {
         self.needsArt = NO;
         [p.status urlWithPath:[NSString stringWithFormat:@"Artwork?service=LocalMusic&album=%@&artist=%@",
-                        [self.title stringByAddingPercentEncodingWithAllowedCharacters:queryChars],
-                        [self.artist stringByAddingPercentEncodingWithAllowedCharacters:queryChars]]
+                        [self encodedTitle],
+                        [self encodedArtist]]
                  block:^(NSURL *url) {
                      CoverArtCache *s = [AppDelegate delegate].coverCache;
                      [s loadImage:url completionHandler:^(NSImage *i) {
@@ -58,12 +66,25 @@ static NSCharacterSet *queryChars;
     }
 }
 
--(void)play:(id)sender {
-    NSLog(@"Play: %@", self.title);
+-(void)playNow:(id)sender {
     NSString *path = [NSString stringWithFormat:@"Add?playnow=1&where=nextAlbum&service=LocalMusic&album=%@&artist=%@",
-                        [self.title stringByAddingPercentEncodingWithAllowedCharacters:queryChars],
-                        [self.artist stringByAddingPercentEncodingWithAllowedCharacters:queryChars]];
+                        [self encodedTitle],
+                        [self encodedArtist]];
     [self.player playItems:path clearPlaylist:[[NSUserDefaults standardUserDefaults] boolForKey:prefClearOnPlayNow]];
+}
+
+-(void)playNext:(id)sender {
+    NSString *path = [NSString stringWithFormat:@"Add?playnow=-1&where=nextAlbum&service=LocalMusic&album=%@&artist=%@",
+                      [self encodedTitle],
+                      [self encodedArtist]];
+    [self.player playItems:path clearPlaylist:NO];
+}
+
+-(void)playLast:(id)sender {
+    NSString *path = [NSString stringWithFormat:@"Add?playnow=-1&where=last&service=LocalMusic&album=%@&artist=%@",
+                      [self encodedTitle],
+                      [self encodedArtist]];
+    [self.player playItems:path clearPlaylist:NO];
 }
 
 @end

@@ -57,11 +57,12 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="Ewi-tv-Bar" name="target" keyPath="representedObject" id="e1f-jv-6kD">
+                        <binding destination="Ewi-tv-Bar" name="target" keyPath="representedObject" id="Gkd-qP-aaF">
                             <dictionary key="options">
-                                <string key="NSSelectorName">play:</string>
+                                <string key="NSSelectorName">playNow:</string>
                             </dictionary>
                         </binding>
+                        <outlet property="menu" destination="hR6-r4-G4Q" id="Wjb-LR-fOD"/>
                     </connections>
                 </button>
             </subviews>
@@ -95,6 +96,41 @@
                 <outlet property="view" destination="c22-O7-iKe" id="z6F-jA-yTA"/>
             </connections>
         </collectionViewItem>
+        <menu id="hR6-r4-G4Q">
+            <items>
+                <menuItem title="Play Now" id="3wv-id-UeR">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="Ewi-tv-Bar" name="target" keyPath="representedObject" id="B73-ey-58b">
+                            <dictionary key="options">
+                                <string key="NSSelectorName">playNow:</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem title="Add Next" id="8HK-jx-TCG">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="Ewi-tv-Bar" name="target" keyPath="representedObject" id="5NA-2d-1ln">
+                            <dictionary key="options">
+                                <string key="NSSelectorName">playNext:</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem title="Add Last" id="jEb-pf-h7e">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="Ewi-tv-Bar" name="target" keyPath="representedObject" id="Ahf-kx-LKU">
+                            <dictionary key="options">
+                                <string key="NSSelectorName">playLast:</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="12" y="394"/>
+        </menu>
     </objects>
     <resources>
         <image name="play_album" width="128" height="128"/>
