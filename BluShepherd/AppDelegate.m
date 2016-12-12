@@ -37,7 +37,9 @@
         Player *p = [n object];
         npv.selectedPlayer = p;
         self.selectedPlayer = p;
-        self.library.selectedPlayer = p;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10), dispatch_get_main_queue(), ^{
+            self.library.selectedPlayer = p;
+        });
     }];
 }
 

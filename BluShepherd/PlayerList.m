@@ -30,6 +30,7 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
     self.toUpdate = [NSMutableArray arrayWithCapacity:4];
     self.onResolved = [NSMutableArray arrayWithCapacity:4];
     [self.onResolved addObject:^(void) {
+        [ps startStatus];
         [ps startSyncStatus];
     }];
     self.service = s;
@@ -87,7 +88,6 @@ typedef void (^SessionCallback)(NSData *data, NSURLResponse *resp, NSError *erro
                             c.icon = i;
                         }
                     }
-                    [self.toUpdate removeAllObjects];
                 });
             }];
             NSURL *nextUrl = [NSURL URLWithString:[NSString stringWithFormat:@"SyncStatus?etag=%@&timeout=60", [d objectForKey:@"_etag"]] relativeToURL:url];
@@ -101,7 +101,6 @@ typedef void (^SessionCallback)(NSData *data, NSURLResponse *resp, NSError *erro
     statusHandler = syncStatusHandler;
     NSURLSessionTask *t = [s dataTaskWithURL:url completionHandler:syncStatusHandler];
     [t resume];
-    [self startStatus];
 }
 
 -(void)startStatus {
