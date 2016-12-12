@@ -18,7 +18,10 @@
 @property (retain) NSString *artist;
 @property (retain) NSString *title;
 @property (retain) NSImage *coverArt;
+
+@property (assign) BOOL fetchingSongs;
 @property (readonly) NSArray *songs;
+
 @property (retain) Player *player;
 
 -(IBAction)playNow:(id)sender;

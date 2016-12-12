@@ -16,7 +16,6 @@
 -(void)fetchCoverArt:(Player *)p;
 
 @property (assign) BOOL needsArt;
-@property (assign) BOOL fetchingSongs;
 @property (retain) NSArray *theSongs;
 
 @end
@@ -137,7 +136,7 @@ static NSCharacterSet *queryChars;
     vc.representedObject = self.representedObject;
 
     NSPopover *p = [[NSPopover alloc] init];
-    p.contentSize = NSMakeSize(300,300);
+    p.contentSize = NSMakeSize(350 ,400);
     p.behavior = NSPopoverBehaviorTransient;
     p.animates = YES;
     p.contentViewController = vc;
