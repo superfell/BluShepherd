@@ -74,7 +74,14 @@
     self->nowPlaying = np;
     if (self.selectedPlayer != nil && np != nil) {
         [self.selectedPlayer.status urlWithPath:@"" block:^(NSURL *url) {
-            NSURL *art = [NSURL URLWithString:[self->nowPlaying objectForKey:@"image"] relativeToURL:url];
+            NSString *image = [self->nowPlaying objectForKey:@"image"];
+            if ([image length] == 0) {
+                dispatch_async(dispatch_get_main_queue(), ^() {
+                    self.coverArt = nil;
+                });
+                return;
+            }
+            NSURL *art = [NSURL URLWithString:image relativeToURL:url];
             if (![art isEqual:lastURL]) {
                 [[AppDelegate delegate].coverCache loadImage:art completionHandler:^(NSImage *i) {
                        dispatch_async(dispatch_get_main_queue(), ^() {
