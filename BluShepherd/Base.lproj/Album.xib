@@ -13,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="234" height="280"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fy3-70-MI0">
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fy3-70-MI0" customClass="ClickableView">
                     <rect key="frame" x="7" y="53" width="220" height="220"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="220" id="J4e-NK-ARU"/>
@@ -21,6 +21,7 @@
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="8X4-W6-OSP"/>
                     <connections>
+                        <action selector="showDetails:" target="Ewi-tv-Bar" id="yqd-ka-7El"/>
                         <binding destination="Ewi-tv-Bar" name="value" keyPath="representedObject.coverArt" id="X0J-gN-Mx2"/>
                     </connections>
                 </imageView>

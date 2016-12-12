@@ -100,7 +100,7 @@ static NSCharacterSet *queryChars;
 -(IBAction)showDetails:(id)sender {
     NSLog(@"showDetails %@ %@", self, sender);
 
-    NSViewController *vc = [[NSViewController alloc] initWithNibName:@"AlbumPopover" bundle:nil];
+    NSViewController *vc = [[NSViewController alloc] initWithNibName:@"AlbumPopup" bundle:nil];
     NSPopover *p = [[NSPopover alloc] init];
     p.contentSize = NSMakeSize(300,300);
     p.behavior = NSPopoverBehaviorTransient;

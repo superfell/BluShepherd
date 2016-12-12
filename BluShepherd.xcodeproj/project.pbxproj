@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		EFAE8D44689888A45F64C954 /* libPods-BluShepherd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4B00C2B18922CD4A98B00D /* libPods-BluShepherd.a */; };
+		F41327961DFE569600BAABCD /* ClickableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F41327951DFE569600BAABCD /* ClickableView.m */; };
 		F4296DDE1DF538B10073834A /* play_album m.png in Resources */ = {isa = PBXBuildFile; fileRef = F4296DDC1DF538B10073834A /* play_album m.png */; };
+		F4307D011DFE3D800010473B /* AlbumPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4307CFF1DFE3D800010473B /* AlbumPopup.xib */; };
 		F43FB8311DF4C5BD002BBCAC /* CoverArtCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F43FB8301DF4C5BD002BBCAC /* CoverArtCache.m */; };
 		F43FB8361DF50CEA002BBCAC /* play_album_h.png in Resources */ = {isa = PBXBuildFile; fileRef = F43FB8321DF50CEA002BBCAC /* play_album_h.png */; };
 		F43FB8371DF50CEA002BBCAC /* play_album.png in Resources */ = {isa = PBXBuildFile; fileRef = F43FB8341DF50CEA002BBCAC /* play_album.png */; };
@@ -32,7 +34,10 @@
 		20C352302C60A4D8E37E3CB2 /* Pods-BluShepherd.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluShepherd.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BluShepherd/Pods-BluShepherd.debug.xcconfig"; sourceTree = "<group>"; };
 		8763B75C1E79B4B4997CCAEF /* Pods-BluShepherd.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BluShepherd.release.xcconfig"; path = "Pods/Target Support Files/Pods-BluShepherd/Pods-BluShepherd.release.xcconfig"; sourceTree = "<group>"; };
 		BD4B00C2B18922CD4A98B00D /* libPods-BluShepherd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BluShepherd.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F41327941DFE569600BAABCD /* ClickableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableView.h; sourceTree = "<group>"; };
+		F41327951DFE569600BAABCD /* ClickableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickableView.m; sourceTree = "<group>"; };
 		F4296DDD1DF538B10073834A /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = "Base.lproj/play_album m.png"; sourceTree = "<group>"; };
+		F4307D001DFE3D800010473B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AlbumPopup.xib; sourceTree = "<group>"; };
 		F43FB82F1DF4C5BD002BBCAC /* CoverArtCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverArtCache.h; sourceTree = "<group>"; };
 		F43FB8301DF4C5BD002BBCAC /* CoverArtCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverArtCache.m; sourceTree = "<group>"; };
 		F43FB8331DF50CEA002BBCAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/play_album_h.png; sourceTree = "<group>"; };
@@ -129,10 +134,13 @@
 				F4821AE31DEBC13300B322B9 /* LibraryDataSource.h */,
 				F4821AE41DEBC13300B322B9 /* LibraryDataSource.m */,
 				F4821AE61DEBC2B500B322B9 /* Album.xib */,
+				F4307CFF1DFE3D800010473B /* AlbumPopup.xib */,
 				F43FB82F1DF4C5BD002BBCAC /* CoverArtCache.h */,
 				F43FB8301DF4C5BD002BBCAC /* CoverArtCache.m */,
 				F4C601051DF52F4B00CA2177 /* HighlightButton.h */,
 				F4C601061DF52F4B00CA2177 /* HighlightButton.m */,
+				F41327941DFE569600BAABCD /* ClickableView.h */,
+				F41327951DFE569600BAABCD /* ClickableView.m */,
 			);
 			path = BluShepherd;
 			sourceTree = "<group>";
@@ -221,6 +229,7 @@
 				F4D56F9A1DEA47DF00E81BA4 /* MainMenu.xib in Resources */,
 				F4D56FBA1DEB71D800E81BA4 /* play.png in Resources */,
 				F43FB8371DF50CEA002BBCAC /* play_album.png in Resources */,
+				F4307D011DFE3D800010473B /* AlbumPopup.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F41327961DFE569600BAABCD /* ClickableView.m in Sources */,
 				F4C601071DF52F4B00CA2177 /* HighlightButton.m in Sources */,
 				F4821AE51DEBC13300B322B9 /* LibraryDataSource.m in Sources */,
 				F4D56FA31DEA48FD00E81BA4 /* PlayerList.m in Sources */,
@@ -299,6 +309,14 @@
 				F4296DDD1DF538B10073834A /* Base */,
 			);
 			name = "play_album m.png";
+			sourceTree = "<group>";
+		};
+		F4307CFF1DFE3D800010473B /* AlbumPopup.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4307D001DFE3D800010473B /* Base */,
+			);
+			name = AlbumPopup.xib;
 			sourceTree = "<group>";
 		};
 		F43FB8321DF50CEA002BBCAC /* play_album_h.png */ = {
