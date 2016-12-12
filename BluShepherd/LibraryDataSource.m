@@ -103,22 +103,36 @@ static NSCharacterSet *queryChars;
     if (selectedPlayer != p) {
         selectedPlayer = p;
         self.albums = @[];
+        self.filteredAlbums = @[];
         [self fetchAlbums];
     }
 }
 
+-(void)applyFilter {
+    if (self.filterText.length == 0) {
+        self.filteredAlbums = self.albums;
+    } else {
+        NSPredicate *p = [NSPredicate predicateWithFormat:@"title CONTAINS[c] %@ OR artist CONTAINS[c] %@", self.filterText, self.filterText];
+        self.filteredAlbums = [self.albums filteredArrayUsingPredicate:p];
+    }
+    [self.collectionView reloadData];
+}
+
+-(IBAction)search:(id)sender {
+    self.filterText = [[sender stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    [self applyFilter];
+}
+
 - (NSInteger)collectionView:(NSCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSInteger c = self.albums.count;
-    NSLog(@"numberOfItems returning %ld", c);
+    NSInteger c = self.filteredAlbums.count;
     return c;
 }
 
 - (NSCollectionViewItem *)collectionView:(NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath {
     NSCollectionViewItem *item = [collectionView makeItemWithIdentifier:@"Album" forIndexPath:indexPath];
-    LibraryAlbum *a = self.albums[[indexPath item]];
+    LibraryAlbum *a = self.filteredAlbums[[indexPath item]];
     [a fetchCoverArt:selectedPlayer];
     [item setRepresentedObject:a];
-    [item setHighlightState:[collectionView.selectionIndexPaths containsObject:indexPath] ? NSCollectionViewItemHighlightForSelection: NSCollectionViewItemHighlightNone];
     return item;
 }
 
@@ -152,7 +166,8 @@ static NSCharacterSet *queryChars;
                                                           dispatch_async(dispatch_get_main_queue(), ^() {
                                                               NSLog(@"Updating library albums to %ld items", sorted.count);
                                                               self.albums = sorted;
-                                                              [self.collectionView reloadData];
+                                                              [self applyFilter];
+                                                              
                                                           });
                                                       }];
         [t resume];

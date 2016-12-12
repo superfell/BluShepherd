@@ -32,7 +32,11 @@
 
 @property (retain) Player *selectedPlayer;
 @property (weak) IBOutlet NSCollectionView *collectionView;
+@property (retain) NSArray *filteredAlbums;
 @property (retain) NSArray *albums;
+@property (retain) NSString *filterText;
+
+-(IBAction)search:(id)sender;
 
 @end
 

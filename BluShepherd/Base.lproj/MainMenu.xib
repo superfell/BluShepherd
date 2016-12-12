@@ -735,9 +735,24 @@
                                             </binding>
                                         </connections>
                                     </button>
+                                    <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BIj-qR-Rya">
+                                        <rect key="frame" x="569" y="38" width="275" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="275" id="KTT-NZ-awp"/>
+                                        </constraints>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="UAf-FE-dd1">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </searchFieldCell>
+                                        <connections>
+                                            <action selector="search:" target="OLs-hf-Arw" id="1We-Te-464"/>
+                                        </connections>
+                                    </searchField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="zN6-WE-VaY" firstAttribute="leading" secondItem="O6H-wM-dRR" secondAttribute="leading" constant="20" symbolic="YES" id="JLK-ax-dvH"/>
+                                    <constraint firstAttribute="trailing" secondItem="BIj-qR-Rya" secondAttribute="trailing" constant="20" symbolic="YES" id="MxR-Ik-Hvy"/>
                                     <constraint firstAttribute="height" constant="98" id="Nqm-Xj-dUo"/>
                                     <constraint firstItem="nMe-OP-Nxw" firstAttribute="top" secondItem="zN6-WE-VaY" secondAttribute="top" id="QZL-Ge-ndk"/>
                                     <constraint firstItem="zN6-WE-VaY" firstAttribute="centerY" secondItem="O6H-wM-dRR" secondAttribute="centerY" id="ZXb-C4-8xw"/>
@@ -745,6 +760,7 @@
                                     <constraint firstItem="nMe-OP-Nxw" firstAttribute="height" secondItem="zN6-WE-VaY" secondAttribute="height" id="goY-CE-0DG"/>
                                     <constraint firstItem="nMe-OP-Nxw" firstAttribute="leading" secondItem="zN6-WE-VaY" secondAttribute="leading" id="oeR-3R-iWq"/>
                                     <constraint firstItem="nMe-OP-Nxw" firstAttribute="centerY" secondItem="O6H-wM-dRR" secondAttribute="centerY" id="pzh-Lj-rBf"/>
+                                    <constraint firstItem="BIj-qR-Rya" firstAttribute="centerY" secondItem="O6H-wM-dRR" secondAttribute="centerY" id="xDQ-u3-FVq"/>
                                 </constraints>
                             </customView>
                             <customView id="XpD-Ss-5Q8">
@@ -758,17 +774,17 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="478.5" height="578"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZvV-Nc-iDY">
-                                                        <rect key="frame" x="18" y="561" width="47" height="17"/>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZvV-Nc-iDY">
+                                                        <rect key="frame" x="18" y="553" width="47" height="25"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Library" id="r3k-58-cIW">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
-                                                    <scrollView wantsLayer="YES" ambiguous="YES" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozK-Aj-tDf">
+                                                    <scrollView ambiguous="YES" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozK-Aj-tDf">
                                                         <rect key="frame" x="0.0" y="0.0" width="479" height="545"/>
-                                                        <clipView key="contentView" ambiguous="YES" id="SFB-7b-7sg">
+                                                        <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="SFB-7b-7sg">
                                                             <rect key="frame" x="1" y="1" width="477" height="543"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -787,7 +803,7 @@
                                                             <color key="backgroundColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         </clipView>
                                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="mz9-vt-KrW">
-                                                            <rect key="frame" x="1" y="144" width="233" height="15"/>
+                                                            <rect key="frame" x="-100" y="-100" width="233" height="15"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
                                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="WZM-6U-2B2">
@@ -908,7 +924,7 @@
                 </constraints>
             </view>
             <contentBorderThickness minY="22"/>
-            <point key="canvasLocation" x="-203" y="502"/>
+            <point key="canvasLocation" x="-203" y="501.5"/>
         </window>
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="Preferences" animationBehavior="default" id="eei-Ul-nxw">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
