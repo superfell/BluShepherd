@@ -28,5 +28,10 @@
             </subviews>
             <point key="canvasLocation" x="-3.5" y="47.5"/>
         </customView>
+        <arrayController id="4gA-1f-Kac">
+            <connections>
+                <binding destination="-2" name="contentArray" keyPath="representedObject.songs" id="fep-BU-gYE"/>
+            </connections>
+        </arrayController>
     </objects>
 </document>

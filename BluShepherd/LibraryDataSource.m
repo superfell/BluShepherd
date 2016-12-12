@@ -16,11 +16,18 @@
 -(void)fetchCoverArt:(Player *)p;
 
 @property (assign) BOOL needsArt;
+@property (assign) BOOL fetchingSongs;
+@property (retain) NSArray *theSongs;
+
 @end
 
 static NSCharacterSet *queryChars;
 
 @implementation LibraryAlbum
+
++(NSSet *)keyPathsForValuesAffectingSongs {
+    return [NSSet setWithObject:@"theSongs"];
+}
 
 +(void)initialize {
     NSMutableCharacterSet *cs = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
@@ -87,6 +94,34 @@ static NSCharacterSet *queryChars;
     [self.player playItems:path clearPlaylist:NO];
 }
 
+-(void)fetchSongs {
+    NSURLSession *s = [AppDelegate delegate].session;
+    NSString *path = [NSString stringWithFormat:@"Songs?service=LocalMusic&album=%@&artist=%@", [self encodedTitle], [self encodedArtist]];
+    [self.player.status urlWithPath:path block:^(NSURL *url) {
+        NSURLSessionTask *t = [s dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
+            id songs = [d valueForKeyPath:@"album.song"];
+            if ([songs isKindOfClass:[NSDictionary class]]) {
+                songs = [NSArray arrayWithObject:songs];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^() {
+                self.theSongs = songs;
+                self.fetchingSongs = NO;
+            });
+        }];
+        [t resume];
+    }];
+}
+
+-(NSArray *)songs {
+    if (self.theSongs == nil && !self.fetchingSongs) {
+        self.fetchingSongs = YES;
+        [self fetchSongs];
+    }
+    return self.theSongs;
+}
+
+
 @end
 
 @interface LibraryCollectionViewItem : NSCollectionViewItem
@@ -98,9 +133,9 @@ static NSCharacterSet *queryChars;
 @implementation LibraryCollectionViewItem
 
 -(IBAction)showDetails:(id)sender {
-    NSLog(@"showDetails %@ %@", self, sender);
-
     NSViewController *vc = [[NSViewController alloc] initWithNibName:@"AlbumPopup" bundle:nil];
+    vc.representedObject = self.representedObject;
+
     NSPopover *p = [[NSPopover alloc] init];
     p.contentSize = NSMakeSize(300,300);
     p.behavior = NSPopoverBehaviorTransient;
