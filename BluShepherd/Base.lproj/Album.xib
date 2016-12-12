@@ -91,7 +91,7 @@
             </backgroundFilters>
             <point key="canvasLocation" x="-43" y="92"/>
         </customView>
-        <collectionViewItem id="Ewi-tv-Bar">
+        <collectionViewItem id="Ewi-tv-Bar" customClass="LibraryCollectionViewItem">
             <connections>
                 <outlet property="view" destination="c22-O7-iKe" id="z6F-jA-yTA"/>
             </connections>

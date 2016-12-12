@@ -89,6 +89,31 @@ static NSCharacterSet *queryChars;
 
 @end
 
+@interface LibraryCollectionViewItem : NSCollectionViewItem
+
+-(IBAction)showDetails:(id)sender;
+
+@end
+
+@implementation LibraryCollectionViewItem
+
+-(IBAction)showDetails:(id)sender {
+    NSLog(@"showDetails %@ %@", self, sender);
+
+    NSViewController *vc = [[NSViewController alloc] initWithNibName:@"AlbumPopover" bundle:nil];
+    NSPopover *p = [[NSPopover alloc] init];
+    p.contentSize = NSMakeSize(300,300);
+    p.behavior = NSPopoverBehaviorTransient;
+    p.animates = YES;
+    p.contentViewController = vc;
+    
+    // Convert point to main window coordinates
+    NSRect entryRect = [sender convertRect:[sender bounds] toView:[[NSApp mainWindow] contentView]];
+    [p showRelativeToRect:entryRect ofView:[[NSApp mainWindow] contentView] preferredEdge:NSMaxXEdge];
+}
+
+@end
+
 @interface LibraryDataSource()
 -(void)fetchAlbums;
 @end
