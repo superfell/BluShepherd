@@ -16,6 +16,7 @@
 -(id)initWithDictionary:(NSDictionary *)v player:(Player *)p;
 
 @property (retain) NSString *artist;
+@property (retain) NSString *artistSort;
 @property (retain) NSString *title;
 @property (retain) NSImage *coverArt;
 

@@ -44,6 +44,13 @@ static NSCharacterSet *queryChars;
     self.artist = [v objectForKey:@"art"];
     self.player = p;
     self.needsArt = YES;
+    self.artistSort = self.artist;
+    if (self.artist.length > 4) {
+        NSString *prefix = [[self.artist substringWithRange:NSMakeRange(0,4)] lowercaseString];
+        if ([prefix isEqualToString:@"the "]) {
+            self.artistSort = [self.artist substringFromIndex:4];
+        }
+    }
     return self;
 }
 
@@ -222,9 +229,9 @@ static NSCharacterSet *queryChars;
                                                           }
                                                           
                                                           NSArray *sorted = [albums sortedArrayUsingComparator:^NSComparisonResult(LibraryAlbum *a, LibraryAlbum *b) {
-                                                              NSComparisonResult r = [a.artist compare:b.artist];
+                                                              NSComparisonResult r = [a.artistSort compare:b.artistSort options:NSCaseInsensitiveSearch];
                                                               if (r == NSOrderedSame) {
-                                                                  r = [a.title compare:b.title];
+                                                                  r = [a.title compare:b.title options:NSCaseInsensitiveSearch];
                                                               }
                                                               return r;
                                                           }];
