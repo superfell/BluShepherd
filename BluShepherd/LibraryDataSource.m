@@ -93,6 +93,12 @@ static NSCharacterSet *queryChars;
     [self.player playItems:path clearPlaylist:NO];
 }
 
+-(IBAction)openInBliss:(id)sender {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"/album/%@/%@", [self encodedArtist], [self encodedTitle]]
+                        relativeToURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] stringForKey:@"BlissURL"]]];
+    [[NSWorkspace sharedWorkspace] openURL:url];
+}
+
 -(void)fetchSongs {
     NSURLSession *s = [AppDelegate delegate].session;
     NSString *path = [NSString stringWithFormat:@"Songs?service=LocalMusic&album=%@&artist=%@", [self encodedTitle], [self encodedArtist]];

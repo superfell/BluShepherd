@@ -27,6 +27,7 @@
 -(IBAction)playNow:(id)sender;
 -(IBAction)playNext:(id)sender;
 -(IBAction)playLast:(id)sender;
+-(IBAction)openInBliss:(id)sender;
 
 @end
 

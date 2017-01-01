@@ -26,7 +26,16 @@
     return [NSApp delegate];
 }
 
+-(void)registerDefaults {
+    NSDictionary *d = @{
+                        @"BlissURL" : @"http://localhost:3220/",
+                        @"hasBlissEnabled" : [NSNumber numberWithBool:YES]
+                        };
+    [[NSUserDefaults standardUserDefaults] registerDefaults:d];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [self registerDefaults];
     self.session = [self createSession];
     self.coverCache = [[CoverArtCache alloc] init];
 

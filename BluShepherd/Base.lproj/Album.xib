@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -129,9 +129,26 @@
                         </binding>
                     </connections>
                 </menuItem>
+                <menuItem isSeparatorItem="YES" id="XmI-bw-z72"/>
+                <menuItem title="Open in Bliss" id="mcR-Hn-WBD">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="ZPT-UW-KVV" name="hidden" keyPath="values.hasBlissEnabled" id="Biy-JH-wcc">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="Ewi-tv-Bar" name="target" keyPath="representedObject" id="ApQ-so-1n2">
+                            <dictionary key="options">
+                                <string key="NSSelectorName">openInBliss:</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
             </items>
-            <point key="canvasLocation" x="12" y="394"/>
+            <point key="canvasLocation" x="12" y="403.5"/>
         </menu>
+        <userDefaultsController representsSharedInstance="YES" id="ZPT-UW-KVV"/>
     </objects>
     <resources>
         <image name="play_album" width="128" height="128"/>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -828,7 +828,7 @@
                                                     <splitView wantsLayer="YES" ambiguous="YES" misplaced="YES" arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="oXC-8N-WnG">
                                                         <rect key="frame" x="0.0" y="0.0" width="380.5" height="593"/>
                                                         <subviews>
-                                                            <customView ambiguous="YES" id="5CK-P2-Zfw">
+                                                            <customView ambiguous="YES" misplaced="YES" id="5CK-P2-Zfw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="380.5" height="319"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
@@ -869,7 +869,7 @@
                                                                     <constraint firstItem="tbi-yI-Okv" firstAttribute="top" secondItem="5CK-P2-Zfw" secondAttribute="top" id="u5f-Fp-lv0"/>
                                                                 </constraints>
                                                             </customView>
-                                                            <customView ambiguous="YES" id="CaO-in-2SV">
+                                                            <customView ambiguous="YES" misplaced="YES" id="CaO-in-2SV">
                                                                 <rect key="frame" x="0.0" y="320" width="380.5" height="273"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <constraints>
@@ -929,14 +929,14 @@
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="Preferences" animationBehavior="default" id="eei-Ul-nxw">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="283" y="305" width="480" height="124"/>
+            <rect key="contentRect" x="283" y="305" width="480" height="143"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="Iy4-Gv-pNn">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="124"/>
+                <rect key="frame" x="0.0" y="0.0" width="480" height="143"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aLj-aQ-7NX">
-                        <rect key="frame" x="18" y="88" width="444" height="18"/>
+                        <rect key="frame" x="18" y="107" width="444" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Clear playlist when selecting Play Now" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wmf-Nc-bLB">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -950,6 +950,36 @@
                             </binding>
                         </connections>
                     </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8p-FZ-kJ1">
+                        <rect key="frame" x="18" y="77" width="444" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Enable Bliss Integration" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="99y-S2-4eR">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="lZu-c7-i78" name="value" keyPath="values.hasBlissEnabled" id="vZs-4Z-Md3">
+                                <dictionary key="options">
+                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                </dictionary>
+                            </binding>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="un3-wF-JEj">
+                        <rect key="frame" x="20" y="49" width="440" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="tJj-1S-h2e">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <connections>
+                                <binding destination="lZu-c7-i78" name="value" keyPath="values.BlissURL" id="If5-fo-Rli"/>
+                            </connections>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="lZu-c7-i78" name="value" keyPath="values.blissURL" id="6YG-jP-IfY"/>
+                        </connections>
+                    </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ukA-8z-bIx">
                         <rect key="frame" x="391" y="13" width="75" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -966,7 +996,7 @@ Gw
                     </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="214" y="1064"/>
+            <point key="canvasLocation" x="214" y="1073.5"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="lZu-c7-i78"/>
     </objects>
