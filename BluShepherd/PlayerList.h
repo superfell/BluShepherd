@@ -32,12 +32,14 @@ extern NSString *prefClearOnPlayNow;
 @property (retain) NSImage *icon;
 @property (retain) NSString *type;
 @property (retain) NSString *name;
+@property (readonly) NSNetService *service;
 
 @property (retain) PlayerStatus *status;
 
 -(void)play:(void(^)(NSString *state))block;
 -(void)pause:(void(^)(NSString *state))block;
 -(void)playItems:(NSString *)urlPath clearPlaylist:(BOOL)clear;
+
 
 @end
 

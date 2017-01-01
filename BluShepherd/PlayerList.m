@@ -179,6 +179,10 @@ typedef void (^SessionCallback)(NSData *data, NSURLResponse *resp, NSError *erro
     return c;
 }
 
+-(NSNetService *)service {
+    return self.status.service;
+}
+            
 -(void)play:(void(^)(NSString *state))block {
     [self.status playPause:@"Play" block:block];
 }
@@ -261,6 +265,9 @@ typedef void (^SessionCallback)(NSData *data, NSURLResponse *resp, NSError *erro
  */
 - (void)netServiceBrowser:(NSNetServiceBrowser *)browser didRemoveService:(NSNetService *)service moreComing:(BOOL)moreComing {
     NSLog(@"didRemoveService %@ %hhd", service, moreComing);
+    NSArray *playersLeft = [self.players filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"service!=%@", service]];
+    self.players = playersLeft;
+    [self.collectionView reloadData];
 }
 
 - (NSInteger)collectionView:(NSCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
