@@ -108,16 +108,22 @@ typedef void (^SessionCallback)(NSData *data, NSURLResponse *resp, NSError *erro
     NSURL *url = [self urlWithPath:@"Status"];
     __block __weak SessionCallback statusHandler;
     SessionCallback myStatusHandler = ^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
-        BOOL playing = [[d objectForKey:@"state"] isEqual:@"play"];
-        dispatch_async(dispatch_get_main_queue(), ^() {
-            self.lastStatus = d;
-            self.playing = playing;
-        });
-        NSURL *nextUrl = [NSURL URLWithString:[NSString stringWithFormat:@"Status?etag=%@&timeout=60", [d objectForKey:@"_etag"]] relativeToURL:url];
-        NSLog(@"got status update, starting next request to %@", [nextUrl absoluteString]);
-        NSURLSessionTask *t = [s dataTaskWithURL:nextUrl completionHandler:statusHandler];
-        [t resume];
+        if (error == nil) {
+            NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
+            BOOL playing = [[d objectForKey:@"state"] isEqual:@"play"];
+            dispatch_async(dispatch_get_main_queue(), ^() {
+                self.lastStatus = d;
+                self.playing = playing;
+            });
+            NSURL *nextUrl = [NSURL URLWithString:[NSString stringWithFormat:@"Status?etag=%@&timeout=60", [d objectForKey:@"_etag"]] relativeToURL:url];
+            NSLog(@"got status update, starting next request to %@", [nextUrl absoluteString]);
+            NSURLSessionTask *t = [s dataTaskWithURL:nextUrl completionHandler:statusHandler];
+            [t resume];
+        } else {
+            NSLog(@"got error from status Update, restarting long poll: %@", error);
+            NSURLSessionTask *t = [s dataTaskWithURL:url completionHandler:statusHandler];
+            [t resume];
+        }
     };
     statusHandler = myStatusHandler;
     NSURLSessionTask *t = [s dataTaskWithURL:url completionHandler:myStatusHandler];

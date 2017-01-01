@@ -74,7 +74,7 @@
     self->nowPlaying = np;
     if (self.selectedPlayer != nil && np != nil) {
         [self.selectedPlayer.status urlWithPath:@"" block:^(NSURL *url) {
-            NSString *image = [self->nowPlaying objectForKey:@"image"];
+            NSString *image = ((self->nowPlaying != nil) && (self->nowPlaying != [NSNull null])) ? [self->nowPlaying objectForKey:@"image"] : nil;
             if ([image length] == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^() {
                     self.coverArt = nil;
