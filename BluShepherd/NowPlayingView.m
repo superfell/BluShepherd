@@ -29,10 +29,6 @@
     return [NSSet setWithObject:@"nowPlaying"];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
 -(NSString *)title1 {
     return [self.nowPlaying objectForKey:@"title1"];
 }
@@ -45,33 +41,9 @@
     return [self.nowPlaying objectForKey:@"title3"];
 }
 
--(Player *)selectedPlayer {
-    return player;
-}
-
--(void)setSelectedPlayer:(Player *)selectedPlayer {
-    if (player != selectedPlayer) {
-        [player.status removeObserver:self forKeyPath:@"lastStatus" context:nil];
-        player = selectedPlayer;
-        [player.status addObserver:self forKeyPath:@"lastStatus" options:NSKeyValueObservingOptionNew context:nil];
-    }
-}
-
-- (void)observeValueForKeyPath:(nullable NSString *)keyPath
-                      ofObject:(nullable id)object
-                        change:(nullable NSDictionary<NSKeyValueChangeKey, id> *)change
-                       context:(nullable void *)context {
-    if ([keyPath isEqualToString:@"lastStatus"]) {
-        [self setNowPlaying:[change objectForKey:NSKeyValueChangeNewKey]];
-    }
-}
-
--(NSDictionary *)nowPlaying {
-    return self->nowPlaying;
-}
-
--(void)setNowPlaying:(NSDictionary *)np {
-    self->nowPlaying = np;
+-(void)onNowPlayingUpdated {
+    NSDictionary *np = self->nowPlaying;
+    
     if (self.selectedPlayer != nil && np != nil) {
         [self.selectedPlayer.status urlWithPath:@"" block:^(NSURL *url) {
             NSString *image = ((self->nowPlaying != nil) && (self->nowPlaying != [NSNull null])) ? [self->nowPlaying objectForKey:@"image"] : nil;

@@ -6,19 +6,13 @@
 //  Copyright © 2016 Simon Fell. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "StatusWatcherView.h"
 
-@class Player;
 
-@interface NowPlayingView : NSViewController {
+@interface NowPlayingView : StatusWatcherView {
     NSURL   *lastURL;
     NSImage *lastCoverArt;
-    NSDictionary *nowPlaying;
-    Player *player;
 }
-
-@property (retain) NSDictionary *nowPlaying;
-@property (retain) Player *selectedPlayer;
 
 @property (readonly) NSString *title1;
 @property (readonly) NSString *title2;

@@ -25,6 +25,8 @@ extern NSString *prefClearOnPlayNow;
 
 -(void)urlWithPath:(NSString *)path block:(void(^)(NSURL *url))block;
 
+-(void)sendRequest:(NSString *)path completionHandler:(void(^)(NSData *data, NSURLResponse * response, NSError *error))block;
+
 @end
 
 @interface Player : NSObject<NSCopying>
@@ -40,6 +42,11 @@ extern NSString *prefClearOnPlayNow;
 -(void)pause:(void(^)(NSString *state))block;
 -(void)playItems:(NSString *)urlPath clearPlaylist:(BOOL)clear;
 
+-(IBAction)startPlay:(id)sender;
+-(IBAction)pausePlay:(id)sender;
+
+-(IBAction)backOneTrack:(id)sender;
+-(IBAction)forwardOneTrack:(id)sender;
 
 @end
 

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ControlsView">
+            <connections>
+                <outlet property="view" destination="c22-O7-iKe" id="Na4-88-TuS"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe" userLabel="View">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="EFT-bT-2DB" userLabel="Back">
+                    <rect key="frame" x="20" y="1" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="TCL-Cd-uKz"/>
+                        <constraint firstAttribute="height" constant="48" id="qcc-Ec-0Um"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="bwd" imagePosition="only" alignment="center" alternateImage="bwd_pressed" imageScaling="proportionallyUpOrDown" inset="2" id="JU8-iT-Vgb">
+                        <behavior key="behavior" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="-2" name="target" keyPath="selectedPlayer" id="NTj-Ar-vkn">
+                            <dictionary key="options">
+                                <string key="NSSelectorName">backOneTrack:</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="E6s-47-fv8" userLabel="Play">
+                    <rect key="frame" x="78" y="1" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="HLU-Hl-uQr"/>
+                        <constraint firstAttribute="width" constant="48" id="oJZ-Ks-FMd"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" alternateImage="play_pressed" imageScaling="proportionallyUpOrDown" inset="2" id="lAj-HM-T4M">
+                        <behavior key="behavior" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <string key="keyEquivalent" base64-UTF8="YES">
+IA
+</string>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="-2" name="hidden" keyPath="playing" id="9x7-TF-EG0"/>
+                        <binding destination="-2" name="target" keyPath="selectedPlayer" id="bfn-F6-Oi1">
+                            <dictionary key="options">
+                                <string key="NSSelectorName">startPlay:</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="n1k-hY-ACe" userLabel="Fwd">
+                    <rect key="frame" x="136" y="1" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="YSX-2t-Xrl"/>
+                        <constraint firstAttribute="width" constant="48" id="Z9J-ie-grT"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="fwd" imagePosition="only" alignment="center" alternateImage="fwd_pressed" imageScaling="proportionallyUpOrDown" inset="2" id="3IB-Gl-zX7">
+                        <behavior key="behavior" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="-2" name="target" keyPath="selectedPlayer" id="GZt-UB-CWS">
+                            <dictionary key="options">
+                                <string key="NSSelectorName">forwardOneTrack:</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="I5b-ye-qsE" userLabel="Shuffle">
+                    <rect key="frame" x="194" y="1" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="48" id="NCh-MH-99F"/>
+                        <constraint firstAttribute="height" constant="48" id="SPA-OH-sGZ"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="48" id="Xfn-uc-ns2"/>
+                        <constraint firstAttribute="width" constant="48" id="hKV-M3-FeI"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="48" id="rOb-2n-tHW"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="shuffle" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="MyG-JR-VA2">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="TR9-1X-70S" userLabel="Repeat">
+                    <rect key="frame" x="252" y="1" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="48" id="UJm-sD-IRO"/>
+                        <constraint firstAttribute="width" constant="48" id="afD-xa-gxm"/>
+                        <constraint firstAttribute="height" constant="48" id="nSS-dm-UlG"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="repeat" imagePosition="only" alignment="center" alternateImage="repeat_on" imageScaling="proportionallyUpOrDown" inset="2" id="0o5-xc-sbS">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dcs-22-i5h" userLabel="Pause">
+                    <rect key="frame" x="96" y="1" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="653-Im-FDe"/>
+                        <constraint firstAttribute="width" constant="48" id="Qdg-Sf-5dC"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="pause" imagePosition="only" alignment="center" alternateImage="pause_pressed" imageScaling="proportionallyUpOrDown" inset="2" id="vwD-2F-Fgc">
+                        <behavior key="behavior" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <string key="keyEquivalent" base64-UTF8="YES">
+IA
+</string>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="-2" name="hidden" keyPath="playing" id="CoE-Vv-vQA">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="-2" name="target" keyPath="selectedPlayer" id="Cpb-Ey-1dW">
+                            <dictionary key="options">
+                                <string key="NSSelectorName">pausePlay:</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="n1k-hY-ACe" firstAttribute="leading" secondItem="E6s-47-fv8" secondAttribute="trailing" constant="10" id="5hm-aV-5e1"/>
+                <constraint firstItem="TR9-1X-70S" firstAttribute="leading" secondItem="I5b-ye-qsE" secondAttribute="trailing" constant="10" id="ALJ-5s-zer"/>
+                <constraint firstItem="I5b-ye-qsE" firstAttribute="leading" secondItem="n1k-hY-ACe" secondAttribute="trailing" constant="10" id="DCu-Vs-t95"/>
+                <constraint firstItem="E6s-47-fv8" firstAttribute="leading" secondItem="EFT-bT-2DB" secondAttribute="trailing" constant="10" id="EqW-jC-gPD"/>
+                <constraint firstItem="dcs-22-i5h" firstAttribute="leading" secondItem="E6s-47-fv8" secondAttribute="leading" id="IaY-Hx-Cbf"/>
+                <constraint firstItem="EFT-bT-2DB" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="b7a-WI-03Y"/>
+                <constraint firstItem="n1k-hY-ACe" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="chf-bs-vx1"/>
+                <constraint firstItem="I5b-ye-qsE" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="ohp-tu-Qdf"/>
+                <constraint firstItem="EFT-bT-2DB" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="rXh-WQ-4wL"/>
+                <constraint firstItem="dcs-22-i5h" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="rdA-py-dFI"/>
+                <constraint firstItem="E6s-47-fv8" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="soa-Rs-pj6"/>
+                <constraint firstItem="TR9-1X-70S" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="uCy-Mo-Q8L"/>
+            </constraints>
+            <point key="canvasLocation" x="51" y="75"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="bwd" width="128" height="128"/>
+        <image name="bwd_pressed" width="128" height="128"/>
+        <image name="fwd" width="128" height="128"/>
+        <image name="fwd_pressed" width="128" height="128"/>
+        <image name="pause" width="128" height="128"/>
+        <image name="pause_pressed" width="128" height="128"/>
+        <image name="play" width="128" height="128"/>
+        <image name="play_pressed" width="128" height="128"/>
+        <image name="repeat" width="128" height="128"/>
+        <image name="repeat_on" width="128" height="128"/>
+        <image name="shuffle" width="128" height="128"/>
+    </resources>
+</document>

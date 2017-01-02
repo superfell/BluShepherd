@@ -11,11 +11,13 @@
 #import "NowPlayingView.h"
 #import "LibraryDataSource.h"
 #import "CoverArtCache.h"
+#import "ControlsView.h"
 
 @interface AppDelegate ()
 
 @property (weak) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSView *nowPlayingView;
+@property (weak) IBOutlet NSView *controlsView;
 
 -(NSURLSession *)createSession;
 @end
@@ -42,11 +44,15 @@
     NowPlayingView *npv = [[NowPlayingView alloc] initWithNibName:nil bundle:nil];
     [self.nowPlayingView addSubview:[npv view]];
     
+    ControlsView *cv = [[ControlsView alloc] initWithNibName:nil bundle:nil];
+    [self.controlsView addSubview:[cv view]];
+    
     [[NSNotificationCenter defaultCenter] addObserverForName:notificationPlayerSelection object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *n) {
         Player *p = [n object];
         npv.selectedPlayer = p;
+        cv.selectedPlayer = p;
         self.selectedPlayer = p;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 100), dispatch_get_main_queue(), ^{
             self.library.selectedPlayer = p;
         });
     }];
@@ -57,11 +63,11 @@
 }
 
 -(IBAction)play:(id)sender {
-    [self.selectedPlayer play:^(NSString *s) { }];
+    [self.selectedPlayer play:sender];
 }
 
 -(IBAction)pause:(id)sender {
-    [self.selectedPlayer pause:^(NSString *s) {} ];
+    [self.selectedPlayer pause:sender];
 }
 
 -(NSURLSession *)createSession {

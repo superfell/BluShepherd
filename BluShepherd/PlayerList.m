@@ -130,6 +130,14 @@ typedef void (^SessionCallback)(NSData *data, NSURLResponse *resp, NSError *erro
     [t resume];
 }
 
+-(void)sendRequest:(NSString *)path completionHandler:(void(^)(NSData *data, NSURLResponse *response, NSError *berror))block {
+    [self urlWithPath:path block:^(NSURL *url) {
+        NSURLSession *s = [AppDelegate delegate].session;
+        NSURLSessionTask *t = [s dataTaskWithURL:url completionHandler:block];
+        [t resume];
+    }];
+}
+
 -(void)playPause:(NSString *)newState block:(void(^)(NSString *state))block {
     NSURL *url = [self urlWithPath:newState];
     NSURLSession *s = [AppDelegate delegate].session;
@@ -199,6 +207,24 @@ typedef void (^SessionCallback)(NSData *data, NSURLResponse *resp, NSError *erro
     } else {
         [self.status playPause:urlPath block:^(NSString *state) {}];
     }
+}
+
+-(IBAction)startPlay:(id)sender {
+    [self play:^(NSString *s) {}];
+}
+
+-(IBAction)pausePlay:(id)sender {
+    [self pause:^(NSString *s) {}];
+}
+
+-(IBAction)backOneTrack:(id)sender {
+    [self.status sendRequest:@"Back" completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    }];
+}
+
+-(IBAction)forwardOneTrack:(id)sender {
+    [self.status sendRequest:@"Skip" completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    }];
 }
 
 @end

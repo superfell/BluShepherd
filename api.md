@@ -79,7 +79,9 @@ Discovery returns a service on port 11100, a look at the node 2 diagnostic outpu
     specifying an ID parameter will change the song being played, id appears to be a zero based index into the play queue.
 	
 	curl http://192.168.1.45:11000/Play?id=2
-	
+
+ * /Back and /Skip will go backward or forward one track.
+ 
  * /Services returns details about the available sources for node, local library, internet radio services etc, this would seem to drive the main part of the UI.
 
  * /Presets

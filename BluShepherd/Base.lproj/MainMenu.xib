@@ -25,6 +25,7 @@
         </customObject>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
+                <outlet property="controlsView" destination="HIO-bO-IaO" id="wkq-GR-IF5"/>
                 <outlet property="library" destination="OLs-hf-Arw" id="OaA-gk-neR"/>
                 <outlet property="nowPlayingView" destination="CaO-in-2SV" id="Pju-Tp-uNv"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
@@ -697,46 +698,12 @@
                     <splitView arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="Ayc-Ou-78e">
                         <rect key="frame" x="0.0" y="20" width="864" height="677"/>
                         <subviews>
-                            <customView id="O6H-wM-dRR">
+                            <customView misplaced="YES" id="O6H-wM-dRR">
                                 <rect key="frame" x="0.0" y="0.0" width="864" height="98"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="zN6-WE-VaY">
-                                        <rect key="frame" x="20" y="25" width="48" height="48"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="48" id="g4x-u7-QOT"/>
-                                            <constraint firstAttribute="height" constant="48" id="ziQ-CC-Jxu"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="VVb-r2-YXl">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="play:" target="-1" id="fH8-sU-ZBo"/>
-                                            <binding destination="Voe-Tx-rLC" name="hidden" keyPath="selectedPlayer.status.playing" id="yba-wu-qCq"/>
-                                        </connections>
-                                    </button>
-                                    <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMe-OP-Nxw">
-                                        <rect key="frame" x="78" y="26" width="48" height="48"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="48" id="fUU-x8-Th2"/>
-                                            <constraint firstAttribute="height" constant="48" id="gZI-el-k0Z"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="pause" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="pqF-b7-3M4">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="pause:" target="-1" id="MWS-Y5-zKA"/>
-                                            <binding destination="Voe-Tx-rLC" name="hidden" keyPath="selectedPlayer.status.playing" id="ZTT-Yd-EqI">
-                                                <dictionary key="options">
-                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                                </dictionary>
-                                            </binding>
-                                        </connections>
-                                    </button>
                                     <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BIj-qR-Rya">
-                                        <rect key="frame" x="569" y="38" width="275" height="22"/>
+                                        <rect key="frame" x="569" y="19" width="275" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="275" id="KTT-NZ-awp"/>
                                         </constraints>
@@ -749,33 +716,35 @@
                                             <action selector="search:" target="OLs-hf-Arw" id="1We-Te-464"/>
                                         </connections>
                                     </searchField>
+                                    <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HIO-bO-IaO">
+                                        <rect key="frame" x="20" y="33" width="320" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="320" id="1Yz-Af-Kre"/>
+                                            <constraint firstAttribute="height" constant="50" id="APM-CB-B8d"/>
+                                        </constraints>
+                                    </customView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="zN6-WE-VaY" firstAttribute="leading" secondItem="O6H-wM-dRR" secondAttribute="leading" constant="20" symbolic="YES" id="JLK-ax-dvH"/>
+                                    <constraint firstItem="HIO-bO-IaO" firstAttribute="centerY" secondItem="O6H-wM-dRR" secondAttribute="centerY" id="7z9-D8-a0m"/>
                                     <constraint firstAttribute="trailing" secondItem="BIj-qR-Rya" secondAttribute="trailing" constant="20" symbolic="YES" id="MxR-Ik-Hvy"/>
-                                    <constraint firstAttribute="height" constant="98" id="Nqm-Xj-dUo"/>
-                                    <constraint firstItem="nMe-OP-Nxw" firstAttribute="top" secondItem="zN6-WE-VaY" secondAttribute="top" id="QZL-Ge-ndk"/>
-                                    <constraint firstItem="zN6-WE-VaY" firstAttribute="centerY" secondItem="O6H-wM-dRR" secondAttribute="centerY" id="ZXb-C4-8xw"/>
-                                    <constraint firstItem="nMe-OP-Nxw" firstAttribute="width" secondItem="zN6-WE-VaY" secondAttribute="width" id="ed2-hB-8aq"/>
-                                    <constraint firstItem="nMe-OP-Nxw" firstAttribute="height" secondItem="zN6-WE-VaY" secondAttribute="height" id="goY-CE-0DG"/>
-                                    <constraint firstItem="nMe-OP-Nxw" firstAttribute="leading" secondItem="zN6-WE-VaY" secondAttribute="leading" id="oeR-3R-iWq"/>
-                                    <constraint firstItem="nMe-OP-Nxw" firstAttribute="centerY" secondItem="O6H-wM-dRR" secondAttribute="centerY" id="pzh-Lj-rBf"/>
+                                    <constraint firstAttribute="height" constant="60" id="Nqm-Xj-dUo" userLabel="height = 60"/>
+                                    <constraint firstItem="HIO-bO-IaO" firstAttribute="leading" secondItem="O6H-wM-dRR" secondAttribute="leading" id="qhT-BB-2vN"/>
                                     <constraint firstItem="BIj-qR-Rya" firstAttribute="centerY" secondItem="O6H-wM-dRR" secondAttribute="centerY" id="xDQ-u3-FVq"/>
                                 </constraints>
                             </customView>
-                            <customView id="XpD-Ss-5Q8">
+                            <customView misplaced="YES" id="XpD-Ss-5Q8">
                                 <rect key="frame" x="0.0" y="99" width="864" height="578"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <splitView arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVc-5A-06w">
-                                        <rect key="frame" x="0.0" y="0.0" width="864" height="578"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="864" height="616"/>
                                         <subviews>
                                             <customView ambiguous="YES" id="fs9-ye-YkK">
-                                                <rect key="frame" x="0.0" y="0.0" width="478.5" height="578"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="478.5" height="616"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZvV-Nc-iDY">
-                                                        <rect key="frame" x="18" y="553" width="47" height="25"/>
+                                                        <rect key="frame" x="18" y="591" width="47" height="25"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Library" id="r3k-58-cIW">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -783,7 +752,7 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <scrollView ambiguous="YES" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozK-Aj-tDf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="479" height="545"/>
+                                                        <rect key="frame" x="0.0" y="38" width="479" height="545"/>
                                                         <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="SFB-7b-7sg">
                                                             <rect key="frame" x="1" y="1" width="477" height="543"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -822,13 +791,13 @@
                                                 </constraints>
                                             </customView>
                                             <customView ambiguous="YES" id="h9I-7C-J4Z">
-                                                <rect key="frame" x="479.5" y="0.0" width="384.5" height="578"/>
+                                                <rect key="frame" x="479.5" y="0.0" width="384.5" height="616"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <splitView wantsLayer="YES" ambiguous="YES" misplaced="YES" arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="oXC-8N-WnG">
-                                                        <rect key="frame" x="0.0" y="0.0" width="380.5" height="593"/>
+                                                        <rect key="frame" x="0.0" y="38" width="380.5" height="593"/>
                                                         <subviews>
-                                                            <customView ambiguous="YES" misplaced="YES" id="5CK-P2-Zfw">
+                                                            <customView ambiguous="YES" id="5CK-P2-Zfw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="380.5" height="319"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
@@ -869,7 +838,7 @@
                                                                     <constraint firstItem="tbi-yI-Okv" firstAttribute="top" secondItem="5CK-P2-Zfw" secondAttribute="top" id="u5f-Fp-lv0"/>
                                                                 </constraints>
                                                             </customView>
-                                                            <customView ambiguous="YES" misplaced="YES" id="CaO-in-2SV">
+                                                            <customView ambiguous="YES" id="CaO-in-2SV">
                                                                 <rect key="frame" x="0.0" y="320" width="380.5" height="273"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <constraints>
@@ -1000,8 +969,4 @@ Gw
         </window>
         <userDefaultsController representsSharedInstance="YES" id="lZu-c7-i78"/>
     </objects>
-    <resources>
-        <image name="pause" width="128" height="128"/>
-        <image name="play" width="128" height="128"/>
-    </resources>
 </document>
