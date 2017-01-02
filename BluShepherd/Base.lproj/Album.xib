@@ -53,7 +53,7 @@
                         <constraint firstAttribute="height" constant="48" id="C3g-yX-Xc3"/>
                         <constraint firstAttribute="width" constant="48" id="lLC-L4-FWN"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play_album" imagePosition="only" alignment="center" alternateImage="play_album_h" imageScaling="proportionallyUpOrDown" inset="2" id="h3l-WO-uWh">
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play_album_def" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="h3l-WO-uWh">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -151,7 +151,6 @@
         <userDefaultsController representsSharedInstance="YES" id="ZPT-UW-KVV"/>
     </objects>
     <resources>
-        <image name="play_album" width="128" height="128"/>
-        <image name="play_album_h" width="128" height="128"/>
+        <image name="play_album_def" width="128" height="128"/>
     </resources>
 </document>

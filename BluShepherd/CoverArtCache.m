@@ -108,6 +108,7 @@ static NSString *keyLength = @"len";
     self.metaItems = [[NSMutableDictionary alloc] init];
     self.queue = [NSMutableArray arrayWithCapacity:64];
     self.metaWriterTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(writeMeta) userInfo:nil repeats:YES];
+    NSLog(@"Finished loading coverArt cache");
     return self;
 }
 

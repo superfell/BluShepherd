@@ -11,7 +11,7 @@
 @implementation HighlightButton
 
 -(void)awakeFromNib {
-    NSImage *i = [NSImage imageNamed:@"play_album m"];
+    NSImage *i = [NSImage imageNamed:@"play_album_hover"];
     self.highlightImage =i;
     self.regularImage = self.image;
 }
