@@ -41,6 +41,7 @@ extern NSString *prefClearOnPlayNow;
 -(void)play:(void(^)(NSString *state))block;
 -(void)pause:(void(^)(NSString *state))block;
 -(void)playItems:(NSString *)urlPath clearPlaylist:(BOOL)clear;
+-(void)repeatMode:(NSInteger)mode;
 
 -(IBAction)startPlay:(id)sender;
 -(IBAction)pausePlay:(id)sender;

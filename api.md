@@ -84,6 +84,8 @@ Discovery returns a service on port 11100, a look at the node 2 diagnostic outpu
  
  * /Shuffle?state=1 turns shuffle on, state=0 turns it off.
  
+ * /Repeat?state=0|1|2	where 2 = no repeat, 1= repeat 1, 0 = repeat all
+ 
  * /Services returns details about the available sources for node, local library, internet radio services etc, this would seem to drive the main part of the UI.
 
  * /Presets

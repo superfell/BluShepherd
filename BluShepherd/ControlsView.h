@@ -14,4 +14,7 @@
 @property (readonly) BOOL playing;
 @property (readonly) BOOL shuffling;
 
+@property (readonly) NSImage *repeatImage;
+-(IBAction)nextRepeatMode:(id)sender;
+
 @end

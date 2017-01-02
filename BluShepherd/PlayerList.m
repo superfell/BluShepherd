@@ -237,6 +237,12 @@ typedef void (^SessionCallback)(NSData *data, NSURLResponse *resp, NSError *erro
     }];
 }
 
+-(void)repeatMode:(NSInteger)mode {
+    [self.status sendRequest:[NSString stringWithFormat:@"Repeat?state=%ld", (long)mode]
+           completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    }];
+}
+
 @end
 
 @implementation PlayerList

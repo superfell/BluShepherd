@@ -130,10 +130,14 @@ IA
                         <constraint firstAttribute="width" constant="48" id="afD-xa-gxm"/>
                         <constraint firstAttribute="height" constant="48" id="nSS-dm-UlG"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="repeat" imagePosition="only" alignment="center" alternateImage="repeat_on" imageScaling="proportionallyUpOrDown" inset="2" id="0o5-xc-sbS">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="repeat" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="0o5-xc-sbS">
+                        <behavior key="behavior" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="nextRepeatMode:" target="-2" id="5Zu-ao-J6g"/>
+                        <binding destination="-2" name="image" keyPath="repeatImage" id="62V-XS-YZu"/>
+                    </connections>
                 </button>
                 <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dcs-22-i5h" userLabel="Pause">
                     <rect key="frame" x="96" y="1" width="48" height="48"/>
@@ -191,7 +195,6 @@ IA
         <image name="play" width="128" height="128"/>
         <image name="play_pressed" width="128" height="128"/>
         <image name="repeat" width="128" height="128"/>
-        <image name="repeat_on" width="128" height="128"/>
         <image name="shuffle" width="128" height="128"/>
         <image name="shuffle_on" width="128" height="128"/>
     </resources>
