@@ -24,6 +24,10 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 
 @implementation PlayerStatus
 
++(NSSet *)keyPathsForValuesAffectingTitle {
+    return [NSSet setWithObjects:@"lastStatus", @"lastSyncStatus", nil];
+}
+
 -(id)initWithService:(NSNetService *)s {
     self = [super init];
     PlayerStatus *ps = self;
@@ -53,6 +57,15 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
     NSLog(@"didNotResolve %@ %@", sender, errorDict);
 }
 
+-(NSString *)title {
+    int idx = [[self.lastStatus objectForKey:@"indexing"] intValue];
+    NSLog(@"in title: idx %d\n%@\%@", idx, self.lastStatus, self.lastSyncStatus);
+    if (idx > 0) {
+        return [NSString stringWithFormat:@"%@ (indexing %d)", [self.lastSyncStatus objectForKey:@"_name"], idx];
+    }
+    return [self.lastSyncStatus objectForKey:@"_name"];
+}
+
 -(NSURL *)urlWithPath:(NSString *)path {
     NSArray *addr = [self.service addressesAndPorts];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%ld/%@", [addr[0] address], (long)self.service.port, path]];
@@ -80,6 +93,9 @@ typedef void (^SessionCallback)(NSData *data, NSURLResponse *resp, NSError *erro
             NSDictionary *d = [NSDictionary dictionaryWithXMLData:data];
             NSString *type = [d objectForKey:@"_modelName"];
             NSURL *iconUrl = [NSURL URLWithString:[d objectForKey:@"_icon"] relativeToURL:url];
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                self.lastSyncStatus = d;
+            });
             [[AppDelegate delegate].coverCache loadImage:iconUrl completionHandler:^(NSImage *i) {
                 dispatch_async(dispatch_get_main_queue(), ^(void) {
                     if (self.toUpdate != nil) {

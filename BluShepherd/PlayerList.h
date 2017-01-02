@@ -21,6 +21,8 @@ extern NSString *prefClearOnPlayNow;
 @property (retain) NSDictionary *lastStatus;
 @property (retain) NSDictionary *lastSyncStatus;
 
+@property (readonly) NSString *title;
+
 @property (assign) BOOL playing;
 
 -(void)urlWithPath:(NSString *)path block:(void(^)(NSURL *url))block;

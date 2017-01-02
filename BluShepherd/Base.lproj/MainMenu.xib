@@ -811,9 +811,10 @@
                                                                                     <rect key="frame" x="0.0" y="0.0" width="378.5" height="312"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="p1O-24-btW">
-                                                                                        <size key="itemSize" width="200" height="90"/>
+                                                                                        <size key="itemSize" width="320" height="70"/>
                                                                                     </collectionViewFlowLayout>
                                                                                     <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="secondaryBackgroundColor" name="controlAlternatingRowColor" catalog="System" colorSpace="catalog"/>
                                                                                 </collectionView>
                                                                             </subviews>
                                                                         </clipView>

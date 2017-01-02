@@ -31,10 +31,6 @@ static const NSInteger repeat_All = 0;
     return [NSSet setWithObject:@"nowPlaying"];
 }
 
--(void)onNowPlayingUpdated {
-    NSLog(@"status\n%@\n", self->nowPlaying);
-}
-
 -(BOOL)playing {
     return [[self->nowPlaying objectForKey:@"state"] isEqualToString:@"play"];
 }

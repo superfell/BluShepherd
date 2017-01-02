@@ -1,33 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner"/>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView wantsLayer="YES" id="c22-O7-iKe" customClass="PlayerView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
+        <customView wantsLayer="YES" focusRingType="exterior" id="c22-O7-iKe" customClass="PlayerView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iGd-oL-chV">
-                    <rect key="frame" x="65" y="29" width="170" height="27"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="OJw-jR-tkI">
-                        <font key="font" metaFont="systemBold" size="14"/>
-                        <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="Uvt-bm-1M1" name="value" keyPath="representedObject.name" id="eAy-iD-nC4"/>
-                    </connections>
-                </textField>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n3d-rc-cjJ">
-                    <rect key="frame" x="3" y="0.0" width="73" height="63"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n3d-rc-cjJ">
+                    <rect key="frame" x="6" y="3" width="64" height="64"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="64" id="EHe-pM-Tq1"/>
+                        <constraint firstAttribute="height" constant="64" id="wf9-Jj-gB9"/>
+                    </constraints>
                     <contentFilters>
                         <ciFilter name="CIColorInvert">
                             <configuration>
@@ -40,11 +31,27 @@
                         <binding destination="Uvt-bm-1M1" name="value" keyPath="representedObject.icon" id="C4C-55-XFA"/>
                     </connections>
                 </imageView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oYe-2u-Vjd">
-                    <rect key="frame" x="65" y="8" width="170" height="27"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iGd-oL-chV">
+                    <rect key="frame" x="68" y="32" width="254" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="27" id="8c3-52-kdX"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="OJw-jR-tkI">
+                        <font key="font" metaFont="systemBold" size="15"/>
+                        <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="Uvt-bm-1M1" name="value" keyPath="representedObject.status.title" id="UYW-b0-UyI"/>
+                    </connections>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oYe-2u-Vjd">
+                    <rect key="frame" x="68" y="11" width="254" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="27" id="Qbb-Qj-CW5"/>
+                    </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="xJL-yE-QKY">
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="system" size="12"/>
                         <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -53,6 +60,16 @@
                     </connections>
                 </textField>
             </subviews>
+            <constraints>
+                <constraint firstItem="oYe-2u-Vjd" firstAttribute="leading" secondItem="n3d-rc-cjJ" secondAttribute="trailing" id="3fr-Q4-Ss6"/>
+                <constraint firstItem="n3d-rc-cjJ" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="6" id="9wv-PE-1QI"/>
+                <constraint firstAttribute="trailing" secondItem="oYe-2u-Vjd" secondAttribute="trailing" id="AnJ-2x-eP6"/>
+                <constraint firstItem="iGd-oL-chV" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="11" id="I6Q-hS-Bes"/>
+                <constraint firstItem="iGd-oL-chV" firstAttribute="leading" secondItem="n3d-rc-cjJ" secondAttribute="trailing" id="Wq6-kv-0f4"/>
+                <constraint firstItem="n3d-rc-cjJ" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="lbI-F1-pff"/>
+                <constraint firstAttribute="trailing" secondItem="iGd-oL-chV" secondAttribute="trailing" id="moy-bc-3Ax"/>
+                <constraint firstItem="oYe-2u-Vjd" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="32" id="oeU-hO-6cX"/>
+            </constraints>
             <point key="canvasLocation" x="-68" y="65.5"/>
         </customView>
         <collectionViewItem id="Uvt-bm-1M1">
