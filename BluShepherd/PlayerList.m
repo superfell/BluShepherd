@@ -59,7 +59,6 @@ static NSString *selectionIndexPathsKey = @"selectionIndexPaths";
 
 -(NSString *)title {
     int idx = [[self.lastStatus objectForKey:@"indexing"] intValue];
-    NSLog(@"in title: idx %d\n%@\%@", idx, self.lastStatus, self.lastSyncStatus);
     if (idx > 0) {
         return [NSString stringWithFormat:@"%@ (indexing %d)", [self.lastSyncStatus objectForKey:@"_name"], idx];
     }

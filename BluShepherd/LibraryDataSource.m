@@ -173,10 +173,30 @@ static NSCharacterSet *queryChars;
 
 - (void)setSelectedPlayer:(Player *)p {
     if (selectedPlayer != p) {
+        [selectedPlayer.status removeObserver:self forKeyPath:@"lastStatus"];
         selectedPlayer = p;
         self.albums = @[];
         self.filteredAlbums = @[];
         [self fetchAlbums];
+        [selectedPlayer.status addObserver:self forKeyPath:@"lastStatus" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+    }
+}
+
+- (void)observeValueForKeyPath:(nullable NSString *)keyPath
+                      ofObject:(nullable id)object
+                        change:(nullable NSDictionary<NSKeyValueChangeKey, id> *)change
+                       context:(nullable void *)context {
+    if ([keyPath isEqualToString:@"lastStatus"]) {
+        id n = [change objectForKey:NSKeyValueChangeNewKey];
+        id o = [change objectForKey:NSKeyValueChangeOldKey];
+        if (!((o == [NSNull null]) || (n == [NSNull null]))) {
+            NSInteger nIdx = [[n objectForKey:@"indexing"] integerValue];
+            NSInteger oIdx = [[o objectForKey:@"indexing"] integerValue];
+            if ((nIdx == 0) && (oIdx > 0)) {
+                // just finished indexing, reload library data
+                [self fetchAlbums];
+            }
+        }
     }
 }
 
