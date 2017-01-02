@@ -82,6 +82,8 @@ Discovery returns a service on port 11100, a look at the node 2 diagnostic outpu
 
  * /Back and /Skip will go backward or forward one track.
  
+ * /Shuffle?state=1 turns shuffle on, state=0 turns it off.
+ 
  * /Services returns details about the available sources for node, local library, internet radio services etc, this would seem to drive the main part of the UI.
 
  * /Presets

@@ -75,7 +75,29 @@ IA
                         </binding>
                     </connections>
                 </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="I5b-ye-qsE" userLabel="Shuffle">
+                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lXv-gN-tAv" userLabel="Shuffle_On">
+                    <rect key="frame" x="136" y="1" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="6tf-5d-iH6"/>
+                        <constraint firstAttribute="width" constant="48" id="Ws0-OT-b61"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="48" id="m99-RV-nJs"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="48" id="oWI-mD-FbA"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="48" id="zDF-3b-LJf"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="shuffle" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="iUg-Ia-Zl2">
+                        <behavior key="behavior" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="-2" name="hidden" keyPath="shuffling" id="1WK-L6-g56"/>
+                        <binding destination="-2" name="target" keyPath="selectedPlayer" id="LJn-av-bOy">
+                            <dictionary key="options">
+                                <string key="NSSelectorName">shuffleOn:</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="I5b-ye-qsE" userLabel="Shuffle_Off">
                     <rect key="frame" x="194" y="1" width="48" height="48"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="48" id="NCh-MH-99F"/>
@@ -84,10 +106,22 @@ IA
                         <constraint firstAttribute="width" constant="48" id="hKV-M3-FeI"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="48" id="rOb-2n-tHW"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="shuffle" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="MyG-JR-VA2">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="shuffle_on" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="MyG-JR-VA2">
+                        <behavior key="behavior" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <binding destination="-2" name="hidden" keyPath="shuffling" id="5xn-Z5-gTJ">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="-2" name="target" keyPath="selectedPlayer" id="DFe-yp-39M">
+                            <dictionary key="options">
+                                <string key="NSSelectorName">shuffleOff:</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="TR9-1X-70S" userLabel="Repeat">
                     <rect key="frame" x="252" y="1" width="48" height="48"/>
@@ -137,9 +171,11 @@ IA
                 <constraint firstItem="EFT-bT-2DB" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="b7a-WI-03Y"/>
                 <constraint firstItem="n1k-hY-ACe" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="chf-bs-vx1"/>
                 <constraint firstItem="I5b-ye-qsE" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="ohp-tu-Qdf"/>
+                <constraint firstItem="I5b-ye-qsE" firstAttribute="leading" secondItem="lXv-gN-tAv" secondAttribute="leading" id="rDu-Vw-piy"/>
                 <constraint firstItem="EFT-bT-2DB" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="rXh-WQ-4wL"/>
                 <constraint firstItem="dcs-22-i5h" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="rdA-py-dFI"/>
                 <constraint firstItem="E6s-47-fv8" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="soa-Rs-pj6"/>
+                <constraint firstItem="lXv-gN-tAv" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="ssh-mx-Pc7"/>
                 <constraint firstItem="TR9-1X-70S" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="uCy-Mo-Q8L"/>
             </constraints>
             <point key="canvasLocation" x="51" y="75"/>
@@ -157,5 +193,6 @@ IA
         <image name="repeat" width="128" height="128"/>
         <image name="repeat_on" width="128" height="128"/>
         <image name="shuffle" width="128" height="128"/>
+        <image name="shuffle_on" width="128" height="128"/>
     </resources>
 </document>

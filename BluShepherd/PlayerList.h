@@ -47,6 +47,8 @@ extern NSString *prefClearOnPlayNow;
 
 -(IBAction)backOneTrack:(id)sender;
 -(IBAction)forwardOneTrack:(id)sender;
+-(IBAction)shuffleOn:(id)sender;
+-(IBAction)shuffleOff:(id)sender;
 
 @end
 

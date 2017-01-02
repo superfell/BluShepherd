@@ -227,6 +227,16 @@ typedef void (^SessionCallback)(NSData *data, NSURLResponse *resp, NSError *erro
     }];
 }
 
+-(IBAction)shuffleOn:(id)sender {
+    [self.status sendRequest:@"Shuffle?state=1" completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    }];
+}
+
+-(IBAction)shuffleOff:(id)sender {
+    [self.status sendRequest:@"Shuffle?state=0" completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    }];
+}
+
 @end
 
 @implementation PlayerList
