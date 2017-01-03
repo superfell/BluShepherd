@@ -49,6 +49,9 @@ static const NSInteger repeat_All = 0;
 }
 
 -(NSInteger)repeatMode {
+    if (self->nowPlaying == nil) {
+        return repeat_None;
+    }
     NSInteger rm = [[self->nowPlaying objectForKey:@"repeat"] integerValue];
     return rm;
 }
