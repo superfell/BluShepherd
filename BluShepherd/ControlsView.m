@@ -31,6 +31,15 @@ static const NSInteger repeat_All = 0;
     return [NSSet setWithObject:@"nowPlaying"];
 }
 
+-(void)awakeFromNib {
+    self.overlayView.wantsLayer = YES;
+    self.overlayView.layer.backgroundColor = CGColorCreateCopyWithAlpha([NSColor controlColor].CGColor, 0.75);
+}
+
+-(void)onNowPlayingUpdated {
+    self.overlayView.hidden = TRUE;
+}
+
 -(BOOL)playing {
     return [[self->nowPlaying objectForKey:@"state"] isEqualToString:@"play"];
 }

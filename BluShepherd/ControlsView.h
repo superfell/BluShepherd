@@ -11,6 +11,8 @@
 
 @interface ControlsView : StatusWatcherView
 
+@property (retain) IBOutlet NSView *overlayView;
+
 @property (readonly) BOOL playing;
 @property (readonly) BOOL shuffling;
 
@@ -18,3 +20,4 @@
 -(IBAction)nextRepeatMode:(id)sender;
 
 @end
+

@@ -8,12 +8,13 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ControlsView">
             <connections>
+                <outlet property="overlayView" destination="nkx-AJ-gsH" id="oe7-Cl-1ZQ"/>
                 <outlet property="view" destination="c22-O7-iKe" id="Na4-88-TuS"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="c22-O7-iKe" userLabel="View">
+        <customView wantsLayer="YES" id="c22-O7-iKe" userLabel="View">
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
@@ -89,12 +90,12 @@ IA
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="-2" name="hidden" keyPath="shuffling" id="1WK-L6-g56"/>
                         <binding destination="-2" name="target" keyPath="selectedPlayer" id="LJn-av-bOy">
                             <dictionary key="options">
                                 <string key="NSSelectorName">shuffleOn:</string>
                             </dictionary>
                         </binding>
+                        <binding destination="-2" name="hidden" keyPath="shuffling" id="1WK-L6-g56"/>
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="I5b-ye-qsE" userLabel="Shuffle_Off">
@@ -111,14 +112,14 @@ IA
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="-2" name="hidden" keyPath="shuffling" id="5xn-Z5-gTJ">
-                            <dictionary key="options">
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
                         <binding destination="-2" name="target" keyPath="selectedPlayer" id="DFe-yp-39M">
                             <dictionary key="options">
                                 <string key="NSSelectorName">shuffleOff:</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="-2" name="hidden" keyPath="shuffling" id="5xn-Z5-gTJ">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
                     </connections>
@@ -165,6 +166,9 @@ IA
                         </binding>
                     </connections>
                 </button>
+                <customView wantsLayer="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nkx-AJ-gsH">
+                    <rect key="frame" x="0.0" y="0.0" width="326" height="50"/>
+                </customView>
             </subviews>
             <constraints>
                 <constraint firstItem="n1k-hY-ACe" firstAttribute="leading" secondItem="E6s-47-fv8" secondAttribute="trailing" constant="10" id="5hm-aV-5e1"/>
@@ -173,7 +177,9 @@ IA
                 <constraint firstItem="E6s-47-fv8" firstAttribute="leading" secondItem="EFT-bT-2DB" secondAttribute="trailing" constant="10" id="EqW-jC-gPD"/>
                 <constraint firstItem="dcs-22-i5h" firstAttribute="leading" secondItem="E6s-47-fv8" secondAttribute="leading" id="IaY-Hx-Cbf"/>
                 <constraint firstItem="EFT-bT-2DB" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="b7a-WI-03Y"/>
+                <constraint firstAttribute="bottom" secondItem="nkx-AJ-gsH" secondAttribute="bottom" id="bQk-gP-SYi"/>
                 <constraint firstItem="n1k-hY-ACe" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="chf-bs-vx1"/>
+                <constraint firstItem="nkx-AJ-gsH" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="k7N-66-XVM"/>
                 <constraint firstItem="I5b-ye-qsE" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="ohp-tu-Qdf"/>
                 <constraint firstItem="I5b-ye-qsE" firstAttribute="leading" secondItem="lXv-gN-tAv" secondAttribute="leading" id="rDu-Vw-piy"/>
                 <constraint firstItem="EFT-bT-2DB" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="rXh-WQ-4wL"/>
@@ -181,6 +187,8 @@ IA
                 <constraint firstItem="E6s-47-fv8" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="soa-Rs-pj6"/>
                 <constraint firstItem="lXv-gN-tAv" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="ssh-mx-Pc7"/>
                 <constraint firstItem="TR9-1X-70S" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="uCy-Mo-Q8L"/>
+                <constraint firstItem="nkx-AJ-gsH" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="uRd-6O-g6N"/>
+                <constraint firstAttribute="trailing" secondItem="nkx-AJ-gsH" secondAttribute="trailing" id="zhJ-qB-EHE"/>
             </constraints>
             <point key="canvasLocation" x="51" y="75"/>
         </customView>
