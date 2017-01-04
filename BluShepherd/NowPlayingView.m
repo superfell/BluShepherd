@@ -29,6 +29,17 @@
     return [NSSet setWithObject:@"nowPlaying"];
 }
 
++ (NSSet *)keyPathsForValuesAffectingWidgetTitle {
+    return [NSSet setWithObject:@"nowPlaying"];
+}
+
+-(NSString *)widgetTitle {
+    if ([[self.nowPlaying objectForKey:@"state"] isEqualToString:@"play"]) {
+        return @"Now Playing";
+    }
+    return @"Paused";
+}
+
 -(NSString *)title1 {
     return [self.nowPlaying objectForKey:@"title1"];
 }

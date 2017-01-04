@@ -14,6 +14,7 @@
     NSImage *lastCoverArt;
 }
 
+@property (readonly) NSString *widgetTitle;
 @property (readonly) NSString *title1;
 @property (readonly) NSString *title2;
 @property (readonly) NSString *title3;
